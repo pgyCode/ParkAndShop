@@ -25,7 +25,6 @@
 <script>
 import Loading from '@/components/common/Loading'
 export default {
-  name: 'Owner',
   components: {Loading},
   data () {
     return {
