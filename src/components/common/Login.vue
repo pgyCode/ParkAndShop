@@ -17,7 +17,7 @@
             </div>
 
             <div class="input">
-              <span>UserName:&nbsp;&nbsp;</span><input/>
+              <span>UserName:&nbsp;&nbsp;</span><input v-model="username"/>
             </div>
 
             <div class="input">
@@ -44,7 +44,8 @@ export default {
   data () {
     return {
       name: 'sds',
-      isLoad: false
+      isLoad: false,
+      username: ''
     }
   },
 
@@ -53,7 +54,14 @@ export default {
       this.isLoad = true
       this.$http.get('http://jsonplaceholder.typicode.com/users')
         .then((data) => {
-          this.$router.push('/customer/main')
+          if (this.username === '0') {
+            this.$router.push('/manager/main')
+          } else if (this.username === '1') {
+            this.$router.push('/customer/main')
+          } else {
+            alert('0-->管理员页面，1->用户界面')
+          }
+          this.isLoad = false
         })
         .catch(() => {
           this.isLoad = false

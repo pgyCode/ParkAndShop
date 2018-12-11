@@ -34,7 +34,6 @@
 <script>
 import Loading from '@/components/common/Loading'
 export default {
-  name: 'Favourite  ',
   components: {Loading},
   data () {
     return {

@@ -31,7 +31,6 @@
 <script>
 import Loading from '@/components/common/Loading'
 export default {
-  name: 'Customer',
   components: {Loading},
   data () {
     return {
