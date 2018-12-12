@@ -1,3 +1,6 @@
+# introduce
+软件项目管理课作业
+
 # park_and_shop
 
 > A Vue.js project
