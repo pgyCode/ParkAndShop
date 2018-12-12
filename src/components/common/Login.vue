@@ -58,8 +58,10 @@ export default {
             this.$router.push('/manager/main')
           } else if (this.username === '1') {
             this.$router.push('/customer/main')
+          } else if (this.username === '2') {
+            this.$router.push('/saler/main')
           } else {
-            alert('0-->管理员页面，1->用户界面')
+            alert('0-->管理员页面，1->用户界面,2-->商家界面')
           }
           this.isLoad = false
         })
