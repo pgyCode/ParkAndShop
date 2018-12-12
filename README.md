@@ -1,6 +1,11 @@
 # introduce
 软件项目管理课作业
 
+# 小组
+|姓名|部分|
+|---|---|
+|1|1|
+
 # park_and_shop
 
 > A Vue.js project
