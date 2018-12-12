@@ -7,6 +7,9 @@ import CustomerFavourite from '@/components/customer/Favourite'
 import CustomerOrder from '@/components/customer/Order'
 import CustomerCart from '@/components/customer/Cart'
 
+import Saler from '@/components/saler/Saler'
+import SalerOwner from '@/components/saler/Owner'
+
 import Manager from '@/components/manager/Manager'
 import ManagerSaler from '@/components/manager/Saler'
 import ManagerCustomer from '@/components/manager/Customer'
@@ -39,6 +42,14 @@ export default new Router({
     {
       path: '/customer/Cart',
       component: CustomerCart
+    },
+    {
+      path: '/saler/main',
+      component: Saler
+    },
+    {
+      path: '/saler/owner',
+      component: SalerOwner
     },
     {
       path: '/manager/main',

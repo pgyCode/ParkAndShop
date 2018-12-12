@@ -16,8 +16,14 @@
 
     <div id="containerBody">
       <ul>
-        <li v-bind:key="user" v-for="user in users">
-          <h2>{{ user.name }}</h2>
+        <li v-bind:key="data" v-for="data in datas">
+          <div style="text-align: center; width: 200px">
+            <img style="width: 100px; height: 100px; " v-bind:src="data.url"/>
+            <div>
+              <h3 style="display: block; margin: 20px;">{{ data.name }}</h3>
+              <p style="display: block; margin: 20px;">商品介绍：{{ data.description }}</p>
+            </div>
+          </div>
         </li>
       </ul>
     </div>
@@ -35,12 +41,13 @@
 import Loading from '@/components/common/Loading'
 export default {
   components: {Loading},
-  data () {
+  data: function () {
     return {
       isLoad: false,
       currentPage: 1,
       name: 'sds',
-      users: []
+      users: [],
+      datas: []
     }
   },
 
@@ -53,6 +60,59 @@ export default {
     this.$http.get('http://jsonplaceholder.typicode.com/users')
       .then((data) => {
         this.users = data.body
+
+        this.datas = [
+          {
+            url: 'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3197537752,2095789724&fm=27&gp=0.jpg',
+            name: '商品code111',
+            description: 'i am only a good, i can do nothing ,so so  sooso'
+          },
+          {
+            url: 'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3197537752,2095789724&fm=27&gp=0.jpg',
+            name: '商品code111',
+            description: 'i am only a good, i can do nothing ,so so  sooso'
+          },
+          {
+            url: 'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3859421672,511986628&fm=200&gp=0.jpg',
+            name: '商品code111',
+            description: 'i am only a good, i can do nothing ,so so  sooso'
+          },
+          {
+            url: 'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1788562038,3472846301&fm=27&gp=0.jpg',
+            name: '商品code111',
+            description: 'i am only a good, i can do nothing ,so so  sooso'
+          },
+          {
+            url: 'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3677979722,2022079017&fm=27&gp=0.jpg',
+            name: '商品code111',
+            description: 'i am only a good, i can do nothing ,so so  sooso'
+          },
+          {
+            url: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3969814012,482639741&fm=27&gp=0.jpg',
+            name: '商品code111',
+            description: 'i am only a good, i can do nothing ,so so  sooso'
+          },
+          {
+            url: 'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=412121078,3966575157&fm=27&gp=0.jpg',
+            name: '商品code111',
+            description: 'i am only a good, i can do nothing ,so so  sooso'
+          },
+          {
+            url: 'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1788562038,3472846301&fm=27&gp=0.jpg',
+            name: '商品code111',
+            description: 'i am only a good, i can do nothing ,so so  sooso'
+          },
+          {
+            url: 'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3677979722,2022079017&fm=27&gp=0.jpg',
+            name: '商品code111',
+            description: 'i am only a good, i can do nothing ,so so  sooso'
+          },
+          {
+            url: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3969814012,482639741&fm=27&gp=0.jpg',
+            name: '商品code111',
+            description: 'i am only a good, i can do nothing ,so so  sooso'
+          }
+        ]
         this.isLoad = false
       })
       .catch(() => {
@@ -125,15 +185,15 @@ export default {
   }
 
   ul{
-    display: flex;
-    flex-wrap: wrap;
     list-style-type: none;
+    display: inline-block;
+    text-align: center;
   }
 
   li{
-    flex-grow: 1;
-    flex-basis: 200px;
+    display: inline-block;
     padding: 30px;
+    float: left;
     border: 1px solid #222;
     margin: 10px;
   }
