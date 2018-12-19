@@ -1,38 +1,17 @@
 <template>
   <div>
-    <div id="containerHeader">
-      <span id="txtUser">welcome: {{ name }}</span>
-      <span id="title" style="clear: both; position: relative;">Owner Favourite</span>
+    <div style="height: 48px; width: 850px; margin: 0px auto; margin-top: 10px">
+      <p style="height: 48px; width: 100%; line-height: 48px; margin-left: 10px; padding-left: 10px; border-bottom: 2px solid #f40; color: #f40; font-weight: 600">All My Favourite</p>
     </div>
-
-    <div id="containerOpreator">
-      <div id="btnTabLogin">
-        <span>Good</span>
-      </div>
-      <div id="btnTabRegist">
-        <span>Shop</span>
-      </div>
-    </div>
-
     <div id="containerBody">
       <ul>
         <li v-bind:key="data" v-for="data in datas">
-          <div style="text-align: center; width: 200px">
-            <img style="width: 100px; height: 100px; " v-bind:src="data.url"/>
-            <div>
-              <h3 style="display: block; margin: 20px;">{{ data.name }}</h3>
-              <p style="display: block; margin: 20px;">商品介绍：{{ data.description }}</p>
-            </div>
-          </div>
+          <img v-bind:src="data.url" style="width: 148px; height: 148px; border: 1px solid #dfdfdf;"/>
+          <p style="height: 30px; text-align: center; line-height: 30px; font-weight: 500; font-size: 12px; color: rgb(60, 60, 60);">{{ data.name }}</p>
+          <p style="height: 20px; text-align: center; line-height: 20px; font-weight: 900; font-size: 14px; color: #f40;">💰¥{{ data.price }}</p>
         </li>
       </ul>
     </div>
-    <div id="containerFooter" v-show="users.length > 0">
-      <span>第{{ currentPage }}页</span>
-      <button class="btnPage" v-on:click="onClickSearch()">上一页</button>
-      <button class="btnPage" v-on:click="onClickSearch()">下一页</button>
-    </div>
-
     <Loading v-show="isLoad"/>
   </div>
 </template>
@@ -61,54 +40,19 @@ export default {
         this.users = data.body
         this.datas = [
           {
-            url: 'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3197537752,2095789724&fm=27&gp=0.jpg',
-            name: '商品code111',
-            description: 'i am only a good, i can do nothing ,so so  sooso'
+            url: 'https://g-search2.alicdn.com/img/bao/uploaded/i4/TB1oAS6qzDpK1RjSZFrXXa78VXa.jpg_240x240Q90.jpg',
+            name: 'HuaShuo ROG PHONE',
+            price: '5999.00'
           },
           {
-            url: 'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3197537752,2095789724&fm=27&gp=0.jpg',
-            name: '商品code111',
-            description: 'i am only a good, i can do nothing ,so so  sooso'
+            url: 'https://g-search3.alicdn.com/img/bao/uploaded/i4/TB15ZaPjSzqK1RjSZFpXXakSXXa.jpg_240x240Q90.jpg',
+            name: 'Razer Phone 2',
+            price: '5990.99'
           },
           {
-            url: 'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3859421672,511986628&fm=200&gp=0.jpg',
-            name: '商品code111',
-            description: 'i am only a good, i can do nothing ,so so  sooso'
-          },
-          {
-            url: 'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1788562038,3472846301&fm=27&gp=0.jpg',
-            name: '商品code111',
-            description: 'i am only a good, i can do nothing ,so so  sooso'
-          },
-          {
-            url: 'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3677979722,2022079017&fm=27&gp=0.jpg',
-            name: '商品code111',
-            description: 'i am only a good, i can do nothing ,so so  sooso'
-          },
-          {
-            url: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3969814012,482639741&fm=27&gp=0.jpg',
-            name: '商品code111',
-            description: 'i am only a good, i can do nothing ,so so  sooso'
-          },
-          {
-            url: 'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=412121078,3966575157&fm=27&gp=0.jpg',
-            name: '商品code111',
-            description: 'i am only a good, i can do nothing ,so so  sooso'
-          },
-          {
-            url: 'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1788562038,3472846301&fm=27&gp=0.jpg',
-            name: '商品code111',
-            description: 'i am only a good, i can do nothing ,so so  sooso'
-          },
-          {
-            url: 'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3677979722,2022079017&fm=27&gp=0.jpg',
-            name: '商品code111',
-            description: 'i am only a good, i can do nothing ,so so  sooso'
-          },
-          {
-            url: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3969814012,482639741&fm=27&gp=0.jpg',
-            name: '商品code111',
-            description: 'i am only a good, i can do nothing ,so so  sooso'
+            url: 'https://g-search3.alicdn.com/img/bao/uploaded/i4/TB10zbvIFXXXXbKXFXXXXXXXXXX.jpg_240x240Q90.jpg',
+            name: 'Nokia Phone 1020',
+            price: '768.00'
           }
         ]
         this.isLoad = false
@@ -122,115 +66,23 @@ export default {
 
 <style scoped>
 
-  #containerHeader{
-    padding: 10px;
-    background: #d4d7dc;
-    text-align: center;
-  }
-
-  #title{
-    font-size: 40px;
-    font-family: "HanziPen TC";
-  }
-
-  #txtUser{
-    float: left;
-    font-weight: 600;
-    color: #000000;
-    margin-top: 6px;
-    line-height: 40px;
-    margin-right: 20px;
-  }
-
-  #containerSearch{
-    text-align: center;
-    padding: 30px;
-  }
-
-  #inputSearch{
-    width: 400px;
-    height: 40px;
-    padding-left: 10px;
-    color: #000000;
-    font-weight: 600;
-    font-size: 20px;
-    border-radius: 25px;
-    border: 2px solid #d4d7dc;
-  }
-
-  #btnSearch{
-    margin-left: 20px;
-    color: #000000;
-    font-weight: 600;
-    width: 120px;
-    font-size: 20px;
-    border-radius: 20px;
-    height: 50px;
-    background: #dfdfdf;
-    border: 2px solid #808285;
+  *{
+    padding: 0px;
+    margin: 0px;
+    display: block;
   }
 
   #containerBody{
-    width: 100%;
+    width: 850px;
+    margin: 0px auto;
     clear: both;
   }
 
-  #containerFooter{
-    text-align: center;
-    padding: 30px;
-    background: #d4d7dc;
-    font-size: 20px;
-  }
-
-  ul{
-    list-style-type: none;
-    display: inline-block;
-    text-align: center;
-  }
-
   li{
-    display: inline-block;
-    padding: 30px;
     float: left;
-    border: 1px solid #222;
+    width: 148px;
+    height: 218px;
     margin: 10px;
   }
 
-  .btnPage{
-    margin-left: 10px;
-    font-size: 17px;
-    font-weight: 600;
-    border: 1px solid #000;
-    padding: 0px 10px;
-    border-radius: 10px;
-  }
-
-  #containerOpreator{
-    position: center;
-    width: 400px;
-    border-radius: 25px;
-    text-align: center;
-  }
-
-  #btnTabLogin{
-    font-size: large;
-    width: 50%;
-    border-radius: 22px;
-    background-color: #acccdc;
-    padding: 15px 0px;
-    color: #000;
-    font-weight: 600;
-    float: left;
-  }
-
-  #btnTabRegist{
-    font-size: large;
-    width: 50%;
-    border-radius: 22px;
-    background-color: #acccdc;
-    padding: 15px 0px;
-    color: #000;
-    font-weight: 600;
-    float: left;
-  }
 </style>

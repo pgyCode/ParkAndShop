@@ -1,36 +1,37 @@
 <template>
   <div>
-    <div id="containerHeader">
-      <span id="txtUser">welcome: {{ name }}</span>
-      <span id="title" style="clear: both; position: relative;">Owner Order</span>
-    </div>
 
-    <div id="containerOpreator">
-      <div id="btnTabLogin">
-        <span>Good</span>
-      </div>
-      <div id="btnTabRegist">
-        <span>Shop</span>
-      </div>
+    <div style="height: 42px; width: 866px; margin: 20px auto;background: rgb(241, 241, 241); border: 1px solid #dfdfdf;">
+      <p style="float: left; width: 330px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; line-height: 42px">Good</p>
+      <p style="float: left; width: 100px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; line-height: 42px">Price</p>
+      <p style="float: left; width: 100px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; line-height: 42px">Number</p>
+      <p style="float: left; width: 100px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; line-height: 42px">Sum</p>
+      <p style="float: left; width: 100px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; line-height: 42px">Trading Status</p>
+      <p style="float: right; width: 80px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; line-height: 42px">Operate</p>
     </div>
-
     <div id="containerBody">
       <ul>
-        <li v-bind:key="data" v-for="data in datas">
-          <div style="text-align: center; width: 200px">
-            <img style="width: 100px; height: 100px; " v-bind:src="data.url"/>
-            <div>
-              <h3 style="display: block; margin: 20px;">{{ data.name }}</h3>
-              <p style="display: block; margin: 20px;">商品介绍：{{ data.description }}</p>
+        <li v-bind:key="order" v-for="order in orders">
+          <div style="height: 42px;background: rgb(241, 241, 241); border-bottom: 1px solid #dfdfdf">
+            <p style="float: left; color: rgb(60, 60, 60); font-size: 12px; width: 100px; text-align: center; font-weight: 800; line-height: 42px ">{{order.time}}</p>
+            <p style="float: left; color: rgb(60, 60, 60); font-size: 12px; width: 130px; text-align: center; font-weight: 400; line-height: 42px ">OrderNum: {{ order.orderNum}}</p>
+            <p style="float: left; color: rgb(60, 60, 60); font-size: 12px; width: 300px; text-align: center; font-weight: 400; line-height: 42px ">{{ order.shopName }}</p>
+            <p style="float: right; color: rgb(60, 60, 60); font-size: 12px; width: 90px; text-align: center; font-weight: 400; line-height: 42px ">{{ order.sellerName }}</p>
+          </div>
+          <div style="padding: 15px; clear: both;">
+            <img style="float: left; width: 80px; height: 80px; padding-right: 15px" v-bind:src="order.url"/>
+            <div style="width: 220px; float: left; height: 80px;">
+              <p style=" color: rgb(60, 60, 60); font-size: 13px; font-weight: 500; line-height: 25px; height: 55px; ">{{ order.goodName }}</p>
+              <span style="clear:both; width: 100px; text-align: center; display: block; color: #fff; background: #f40; font-size: 12px;padding: 1px 3px; margin-top: 3px">Authenticated</span>
             </div>
+            <p style="float: left; width: 100px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 400; line-height: 80px">¥{{ order.price }}</p>
+            <p style="float: left; width: 100px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 400; line-height: 80px">{{ a = 1 }}</p>
+            <p style="float: left; width: 100px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; line-height: 80px">¥{{ order.price }}</p>
+            <p style="float: left; width: 100px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; line-height: 80px">Succeed</p>
+            <button style="float: right; width: 100px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; height: 26px; width: 60px; border: 1px solid rgb(220, 220, 220); border-radius: 5px; margin-top: 27px; cursor: pointer">Refund</button>
           </div>
         </li>
       </ul>
-    </div>
-    <div id="containerFooter" v-show="users.length > 0">
-      <span>第{{ currentPage }}页</span>
-      <button class="btnPage" v-on:click="onClickSearch()">上一页</button>
-      <button class="btnPage" v-on:click="onClickSearch()">下一页</button>
     </div>
 
     <Loading v-show="isLoad"/>
@@ -46,8 +47,7 @@ export default {
       isLoad: false,
       currentPage: 1,
       name: 'sds',
-      users: [],
-      datas: []
+      orders: []
     }
   },
 
@@ -59,52 +59,51 @@ export default {
     this.isLoad = true
     this.$http.get('http://jsonplaceholder.typicode.com/users')
       .then((data) => {
-        this.users = data.body
-        this.datas = [
+        this.orders = [
           {
-            url: 'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3197537752,2095789724&fm=27&gp=0.jpg',
-            name: '商品code111',
-            description: 'i am only a good, i can do nothing ,so so  sooso'
+            time: '2018-12-19',
+            orderNum: '0',
+            url: 'https://g-search2.alicdn.com/img/bao/uploaded/i4/TB1oAS6qzDpK1RjSZFrXXa78VXa.jpg_240x240Q90.jpg',
+            shopName: 'HuaShuo',
+            sellerName: 'HuaShuo',
+            price: 5999.00,
+            goodName: 'HuaShuo ROG PHONE'
           },
           {
-            url: 'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3859421672,511986628&fm=200&gp=0.jpg',
-            name: '商品code111',
-            description: 'i am only a good, i can do nothing ,so so  sooso'
+            time: '2018-12-19',
+            orderNum: '1',
+            url: 'https://g-search3.alicdn.com/img/bao/uploaded/i4/TB15ZaPjSzqK1RjSZFpXXakSXXa.jpg_240x240Q90.jpg',
+            shopName: 'Razer',
+            sellerName: 'Razer',
+            price: 5990.99,
+            goodName: 'Razer Phone 2'
           },
           {
-            url: 'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1788562038,3472846301&fm=27&gp=0.jpg',
-            name: '商品code111',
-            description: 'i am only a good, i can do nothing ,so so  sooso'
+            time: '2018-12-19',
+            orderNum: '2',
+            url: 'https://g-search3.alicdn.com/img/bao/uploaded/i4/TB10zbvIFXXXXbKXFXXXXXXXXXX.jpg_240x240Q90.jpg',
+            shopName: 'Nokia',
+            sellerName: 'Nokia',
+            price: 768.00,
+            goodName: 'Nokia Phone 1020'
           },
           {
-            url: 'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3677979722,2022079017&fm=27&gp=0.jpg',
-            name: '商品code111',
-            description: 'i am only a good, i can do nothing ,so so  sooso'
+            time: '2018-12-19',
+            orderNum: '3',
+            url: 'https://g-search3.alicdn.com/img/bao/uploaded/i4/TB1NOxOHVXXXXXOXXXXXXXXXXXX.jpg_240x240Q90.jpg',
+            shopName: 'Nokia',
+            sellerName: 'Nokia',
+            price: 866.00,
+            goodName: 'Nokia Phone 1520'
           },
           {
-            url: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3969814012,482639741&fm=27&gp=0.jpg',
-            name: '商品code111',
-            description: 'i am only a good, i can do nothing ,so so  sooso'
-          },
-          {
-            url: 'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=412121078,3966575157&fm=27&gp=0.jpg',
-            name: '商品code111',
-            description: 'i am only a good, i can do nothing ,so so  sooso'
-          },
-          {
-            url: 'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1788562038,3472846301&fm=27&gp=0.jpg',
-            name: '商品code111',
-            description: 'i am only a good, i can do nothing ,so so  sooso'
-          },
-          {
-            url: 'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3677979722,2022079017&fm=27&gp=0.jpg',
-            name: '商品code111',
-            description: 'i am only a good, i can do nothing ,so so  sooso'
-          },
-          {
-            url: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3969814012,482639741&fm=27&gp=0.jpg',
-            name: '商品code111',
-            description: 'i am only a good, i can do nothing ,so so  sooso'
+            time: '2018-12-19',
+            orderNum: '4',
+            url: 'https://g-search2.alicdn.com/img/bao/uploaded/i4/TB1SkfgHFXXXXc8apXXXXXXXXXX.jpg_240x240Q90.jpg',
+            shopName: 'Nokia',
+            sellerName: 'Nokia',
+            price: 598.00,
+            goodName: 'Nokia Phone 930'
           }
         ]
         this.isLoad = false
@@ -118,114 +117,28 @@ export default {
 
 <style scoped>
 
-  #containerHeader{
-    padding: 10px;
-    background: #d4d7dc;
-    text-align: center;
-  }
-
-  #title{
-    font-size: 40px;
-    font-family: "HanziPen TC";
-  }
-
-  #txtUser{
-    float: left;
-    font-weight: 600;
-    margin-top: 6px;
-    line-height: 40px;
-    margin-right: 20px;
-  }
-
-  #containerSearch{
-    text-align: center;
-    padding: 30px;
-  }
-
-  #inputSearch{
-    width: 400px;
-    height: 40px;
-    padding-left: 10px;
-    color: #000000;
-    font-weight: 600;
-    font-size: 20px;
-    border-radius: 25px;
-    border: 2px solid #d4d7dc;
-  }
-
-  #btnSearch{
-    margin-left: 20px;
-    color: #000000;
-    font-weight: 600;
-    width: 120px;
-    font-size: 20px;
-    border-radius: 20px;
-    height: 50px;
-    background: #dfdfdf;
-    border: 2px solid #808285;
+  *{
+    margin: 0px;
+    padding: 0px;
+    display: block;
   }
 
   #containerBody{
-    width: 100%;
+    width: 866px;
+    margin: 0px auto;
     clear: both;
-  }
-
-  #containerFooter{
-    text-align: center;
-    padding: 30px;
-    background: #d4d7dc;
-    font-size: 20px;
   }
 
   ul{
     list-style-type: none;
-    display: inline-block;
-    text-align: center;
   }
 
   li{
-    display: inline-block;
-    padding: 30px;
-    float: left;
-    border: 1px solid #222;
-    margin: 10px;
+    width: 866px;
+    height: 150px;
+    display: block;
+    margin-top: 10px;
+    border: 1px solid #dfdfdf;
   }
 
-  .btnPage{
-    margin-left: 10px;
-    font-size: 17px;
-    font-weight: 600;
-    border: 1px solid #000;
-    padding: 0px 10px;
-    border-radius: 10px;
-  }
-
-  #containerOpreator{
-    position: center;
-    width: 400px;
-    border-radius: 25px;
-    text-align: center;
-  }
-
-  #btnTabLogin{
-    font-size: large;
-    width: 50%;
-    border-radius: 22px;
-    background-color: #acccdc;
-    padding: 15px 0px;
-    color: #000;
-    font-weight: 600;
-    float: left;
-  }
-
-  #btnTabRegist{
-    font-size: large;
-    width: 50%;
-    border-radius: 22px;
-    background-color: #acccdc;
-    padding: 15px 0px;
-    color: #000;
-    font-weight: 600;
-    float: left;
-  }
 </style>
