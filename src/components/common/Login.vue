@@ -1,35 +1,50 @@
 <template>
     <div>
-      <div id="containerBody">
-        <div id="containerHeader">
-          <span id="title">Park&&Shop</span>
+      <div>
+        <div id="containerHeader" style="height: 80px;">
+          <img id="imgLogo" src="../../assets/logo.png"/>
         </div>
-        <div id="containerLeft">
-          <img src="https://rescdn.qqmail.com/zh_CN/htmledition/images/webp/tg-mj1e9c5d.jpg"/>
-        </div>
-        <div id="containerRight">
-          <div id="containerOpreator">
-            <div id="btnTabLogin">
-              <span>Login</span>
-            </div>
-            <div id="btnTabRegist">
-              <span>Regist</span>
-            </div>
+        <div id="containerBody">
+          <div id="box">
+            <div id="innerBox">
+              <h4 style="margin-top: 9px; padding-bottom: 8px">Login By Passwrod</h4>
+              <select v-model="poiLogin" style="margin-top: 9px; height: 40px; border: 1px solid rgb(221, 221, 221); width: 300px;font-weight: 500;color: grey;font-size: 14px; outline: none;">
+                <option value="0">Customer</option>
+                <option value="1">Seller</option>
+                <option value="2">Manager</option>
+              </select>
 
-            <div class="input">
-              <span>UserName:&nbsp;&nbsp;</span><input v-model="username"/>
+              <div style="width: 300px; height: 42px; margin-top: 20px; border: 1px solid rgb(221, 221, 221);">
+                <span style="background:rgb(221, 221, 221);display: block; float: left; width: 20px; height: 24px; padding: 9px 10px;">👤</span>
+                <input placeholder="username" v-model="username"/>
+              </div>
+              <div style="clear: both;width: 300px; height: 42px; margin-top: 20px;border: 1px solid rgb(221, 221, 221);">
+                <span style="background:rgb(221, 221, 221); width: 20px;float: left; height: 24px; line-height: 24px; padding: 9px 10px;">🔒</span>
+                <input placeholder="password" v-model="password"/>
+              </div>
+              <button style="margin-top: 20px; width: 300px; height: 42px; border: none; background: #f40; border-radius: 5px; font-weight: 700; font-size: 16px; color: #fff;"
+                      v-on:click="onClickLogin">Login</button>
+              <router-link to="/register" style="color: #6c6c6c; text-decoration: none; font-size: 12px; font-weight: 600; float: right; margin-top: 20px">Register</router-link>
             </div>
-
-            <div class="input">
-              <span>PassWord:&nbsp;&nbsp;</span><input/>
-            </div>
-
-            <div id="opreator" v-on:click="onClickLogin()">Login</div>
           </div>
+          <!--<div class="dowebok">-->
+            <!--<div class="logo"></div>-->
+            <!--<div class="form-item">-->
+              <!--<input id="username" v-model="username" type="text" autocomplete="off" placeholder="UserName">-->
+            <!--</div>-->
+            <!--<div class="form-item">-->
+              <!--<input id="password" v-model="password" type="password" autocomplete="off" placeholder="PassWord">-->
+            <!--</div>-->
+            <!--<div class="form-item"><button id="submit" v-on:click="onClickLogin">Login</button></div>-->
+            <!--<div class="reg-bar">-->
+              <!--<a class="reg" href="javascript:">Register</a>-->
+              <!--<a class="forget" href="javascript:">Forgot PassWord</a>-->
+            <!--</div>-->
+          <!--</div>-->
         </div>
       </div>
       <div id="containerFooter">
-        <span id="copyright">@copyright group_nine 2018</span>
+        <span id="copyright">©copyright group_nine 2018</span>
       </div>
 
       <Loading v-show="isLoad"/>
@@ -39,35 +54,69 @@
 <script>
 import Loading from '@/components/common/Loading'
 export default {
-  name: 'Login',
   components: {Loading},
   data () {
     return {
       name: 'sds',
       isLoad: false,
-      username: ''
+      username: '',
+      password: '',
+      poiLogin: '0'
     }
   },
 
   methods: {
     onClickLogin: function () {
       this.isLoad = true
-      this.$http.get('http://jsonplaceholder.typicode.com/users')
-        .then((data) => {
-          if (this.username === '0') {
-            this.$router.push('/manager/main')
-          } else if (this.username === '1') {
-            this.$router.push('/customer/main')
-          } else if (this.username === '2') {
-            this.$router.push('/saler/main')
-          } else {
-            alert('0-->管理员页面，1->用户界面,2-->商家界面')
-          }
-          this.isLoad = false
-        })
-        .catch(() => {
-          this.isLoad = false
-        })
+      if (this.poiLogin === '0') {
+        this.$http.get('http://jsonplaceholder.typicode.com/users')
+        // ('http://192.168.43.16:8000/api/login?username=' + this.username + '&password=' + this.password)
+          .then((data) => {
+            // this.setCookie('userName', data.body.data.username, 7)
+            // this.setCookie('userId', data.body.data.userID, 7)
+            // this.setCookie('usertype', '1', 7)
+            this.setCookie('userName', 'James', 7)
+            this.setCookie('userId', '3', 7)
+            this.setCookie('userType', '0', 7)
+            this.$router.push('/')
+            this.isLoad = false
+          })
+          .catch(() => {
+            this.isLoad = false
+          })
+      } else if (this.poiLogin === '1') {
+        this.$http.get('http://jsonplaceholder.typicode.com/users')
+        // ('http://192.168.43.16:8000/api/login?username=' + this.username + '&password=' + this.password)
+          .then((data) => {
+            // this.setCookie('userName', data.body.data.username, 7)
+            // this.setCookie('userId', data.body.data.userID, 7)
+            // this.setCookie('usertype', '1', 7)
+            this.setCookie('userName', 'YiDianDian', 7)
+            this.setCookie('userId', '3', 7)
+            this.setCookie('userType', '1', 7)
+            this.$router.push('/')
+            this.isLoad = false
+          })
+          .catch(() => {
+            this.isLoad = false
+          })
+      } else if (this.poiLogin === '2') {
+        this.$http.get('http://jsonplaceholder.typicode.com/users')
+        // ('http://192.168.43.16:8000/api/login?username=' + this.username + '&password=' + this.password)
+          .then((data) => {
+            // this.setCookie('userName', data.body.data.username, 7)
+            // this.setCookie('userId', data.body.data.userID, 7)
+            // this.setCookie('usertype', '1', 7)
+            this.setCookie('userName', 'Admin', 7)
+            this.setCookie('userId', '3', 7)
+            this.setCookie('userType', '2', 7)
+            this.$router.push('/')
+            this.isLoad = false
+          })
+          .catch(() => {
+            this.isLoad = false
+          })
+      }
     }
   }
 }
@@ -75,107 +124,62 @@ export default {
 
 <style scoped>
 
-#containerLeft{
-  float: left;
-  width: 55%;
+#containerBody{
   height: 600px;
-  position: relative;
+  -webkit-background-size: 100%;
+  background-size: 100%;
+  background-image: url("../../assets/show.jpeg");
 }
 
-#containerRight{
-  float: left;
-  width: 45%;
-  height: 600px;
+#imgLogo{
+  width: 200px;
+  height: 80px;
 }
-
-#containerHeader{
-  padding: 30px;
-  background: #d4d7dc;
-}
-
-#title{
-  font-size: 40px;
-  font-family: "HanziPen TC";
-}
-
 #containerFooter{
+  border-top: 2px solid #000;
+  background: #f5f5f5;
   clear: both;
-  background-color: #d4d7dc;
+  padding-left: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+#copyright{
+  font-size: 12px;
+  font-weight: 400;
+  color: #666;
   text-align: center;
-  padding: 20px;
-  color: gray;
-}
-
-img{
-  position: relative;
-  top: 100px;
-  width: 100%;
-  height: 400px;
-}
-
-#containerOpreator{
-  position: center;
-  margin: 150px auto;
-  width: 400px;
-  height: 300px;
-  border: 2px solid #acccdc;
-  border-radius: 25px;
-  text-align: center;
-}
-
-#btnTabLogin{
-  font-size: large;
-  width: 50%;
-  border-radius: 22px 0px 0px 0px;
-  background-color: #acccdc;
-  padding: 20px 0px;
-  color: #000;
-  font-weight: 600;
-  float: left;
-}
-
-#btnTabRegist{
-  font-size: large;
-  width: 50%;
-  border-radius: 0px 22px 0px 0px;
-  background-color: #acccdc;
-  padding: 20px 0px;
-  color: #000;
-  font-weight: 600;
-  float: left;
-}
-
-.input{
-  clear: both;
-  top: 30px;
-  position: relative;
-  margin-top: 10px;
-  height: 50px;
-  color: #000000;
-  font-weight: 600;
-  font-size: 17px;
 }
 
 input{
-  border: 1px solid #000;
-  width: 200px;
-  height: 30px;
-  padding-left: 5px;
-  border-radius: 5px;
+  display: block;
+  width: 230px;
+  height: 40px;
+  border: none;
+  float: left;
   font-weight: 500;
+  outline: none;
   color: grey;
-  font-size: 15px;
+  padding-left: 10px;
+  font-size: 14px;
+  background: rgba(0,0,0,0);
 }
 
-#opreator{
-  margin: 50px auto;
-  background: #d4d7dc;
-  padding: 5px;
-  color: grey;
-  border-radius: 22px;
-  border: 2px solid #d4d7dc;
-  width: 200px;
-  font-weight: 600;
+#box{
+  width: 810px;
+  height: 600px;
+  margin: 0px auto;
 }
 
+#innerBox{
+  float: right;
+  width: 300px;
+  height: 310px;
+  padding: 25px;
+  margin-top: 120px;
+  opacity: 80%;
+  background: rgba(255,255,255,0.9);
+}
+
+* { margin: 0; padding: 0; display: block}
 </style>

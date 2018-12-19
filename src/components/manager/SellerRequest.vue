@@ -1,0 +1,176 @@
+<template>
+  <div>
+    <div style="height: 42px; width: 866px; margin: 20px auto;background: rgb(241, 241, 241); border: 1px solid #dfdfdf;">
+      <p style="float: left; width: 280px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; line-height: 42px">Basic Info</p>
+      <p style="float: left; width: 500px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; line-height: 42px">Description</p>
+      <p style="float: right; width: 86px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; line-height: 42px">Operate</p>
+    </div>
+
+    <div id="containerShop">
+      <ul>
+        <li class="containerShopLi" v-bind:key="shop" v-for="shop in shops">
+          <div>
+            <div style="float: left; width: 350px; height: 160px;">
+              <img v-bind:src="shop.url" style="float:left; width: 120px; height: 120px; margin-top: 20px; margin-bottom: 20px; margin-right: 20px; border: 1px solid #b6b6b6;"/>
+              <div style="float: left; width: 200px;  height: 120px; margin-top: 20px">
+                <span style="font-size: 14px; font-weight: 700; line-height: 30px; color: rgb(0, 99, 200);">{{ shop.shopName }}</span>
+                <span style="clear:both; float: left; font-size: 12px; font-weight: 400; line-height: 30px; color: rgb(102, 102, 102);"><b>Seller：</b></span>
+                <span style="float: left; font-size: 12px; font-weight: 400; line-height: 30px; color: rgb(0, 99, 200);">{{ shop.sellerName }}</span>
+                <span style="clear:both; float: left; font-size: 12px; font-weight: 400; line-height: 30px; color: rgb(102, 102, 102);"><b>Major Business：</b></span>
+                <span style="float: left; font-size: 12px; font-weight: 400; line-height: 30px; color: rgb(0, 99, 200);">{{ shop.major }}</span>
+                <span style="clear:both; float: left; font-size: 12px; font-weight: 400; line-height: 30px; color: rgb(102, 102, 102);"><b>Telephone：</b></span>
+                <span style="float: left; font-size: 12px; font-weight: 400; line-height: 30px; color: rgb(0, 99, 200);">{{ shop.telephone }}</span>
+              </div>
+            </div>
+
+            <div style="width: 400px; float: left; height: 120px; margin-top: 20px;">
+              <div style="width: 400px; background: rgb(237, 237, 237); height: 100px; padding: 10px;">
+                <p style=" font-size: 13px; font-weight: 400; line-height: 20px; overflow: hidden; color: #666;">{{ shop.description }}</p>
+              </div>
+            </div>
+
+            <div style="width: 86px; float: right; height: 120px; margin-top: 20px;">
+              <button style="text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; height: 26px; width: 60px; border: 1px solid rgb(220, 220, 220); border-radius: 5px; margin-top: 27px; cursor: pointer; margin: 22px auto;" >Approve</button>
+              <button style="text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; height: 26px; width: 60px; border: 1px solid rgb(220, 220, 220); border-radius: 5px; margin-top: 27px; cursor: pointer; margin: 22px auto;" >Reject</button>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <!--<div id="containerBody">-->
+      <!--<ul>-->
+        <!--<li v-bind:key="request" v-for="request in requests">-->
+          <!--<div style="height: 42px;background: rgb(241, 241, 241); border-bottom: 1px solid #dfdfdf">-->
+            <!--<p style="float: left; color: rgb(60, 60, 60); font-size: 12px; width: 100px; text-align: center; font-weight: 800; line-height: 42px ">{{request.shopName}}</p>-->
+            <!--<p style="float: left; color: rgb(60, 60, 60); font-size: 12px; width: 100px; text-align: center; font-weight: 400; line-height: 42px ">{{ request.shopName }}</p>-->
+            <!--<p style="float: right; color: rgb(60, 60, 60); font-size: 12px; width: 100px; text-align: center; font-weight: 400; line-height: 42px ">{{ request.sellerName }}</p>-->
+          <!--</div>-->
+          <!--<div style="padding: 15px; clear: both;">-->
+            <!--<img style="float: left; width: 80px; height: 80px; padding-right: 15px" v-bind:src="request.url"/>-->
+            <!--<div style="width: 220px; float: left; height: 80px;">-->
+              <!--<p style=" color: rgb(60, 60, 60); font-size: 13px; font-weight: 500; line-height: 25px; height: 55px; ">{{ request.goodName }}</p>-->
+              <!--<span style="clear:both; width: 100px; text-align: center; display: block; color: #fff; background: #f40; font-size: 12px;padding: 1px 3px; margin-top: 3px">Authenticated</span>-->
+            <!--</div>-->
+            <!--<p style="float: left; width: 100px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 400; line-height: 80px">¥{{ request.price }}</p>-->
+            <!--<p style="float: left; width: 100px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 400; line-height: 80px">{{ a = 1 }}</p>-->
+            <!--<p style="float: left; width: 100px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; line-height: 80px">¥{{ request.price }}</p>-->
+            <!--<p style="float: left; width: 100px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; line-height: 80px">Succeed</p>-->
+            <!--<button style="float: right; width: 100px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; height: 26px; width: 60px; border: 1px solid rgb(220, 220, 220); border-radius: 5px; margin-top: 27px; cursor: pointer">Refund</button>-->
+          <!--</div>-->
+        <!--</li>-->
+      <!--</ul>-->
+    <!--</div>-->
+
+    <Loading v-show="isLoad"/>
+  </div>
+</template>
+
+<script>
+import Loading from '@/components/common/Loading'
+export default {
+
+  components: {Loading},
+
+  created () {
+    this.isLoad = true
+    this.$http.get('http://jsonplaceholder.typicode.com/users')
+      .then((data) => {
+        this.isLoad = false
+        this.shops = data
+        this.shops = [
+          {
+            shopName: 'Bellroy Google',
+            sellerName: 'bellroy Store',
+            url: 'https://g-search1.alicdn.com/img/bao/uploaded/i4//d9/f2/TB1oA3IQFXXXXXGXpXXSutbFXXX.jpg_140x140Q90.jpg',
+            major: 'Google Phone',
+            count: 2,
+            description: 'We sell mobile phones, there are many mobile phones in our store, welcome everyone to buy our google mobile phone'
+          },
+          {
+            shopName: 'Top Google Phone',
+            sellerName: 'sunny-echo',
+            url: 'https://g-search1.alicdn.com/img/bao/uploaded/i4//e3/ad/TB1nnHkLXXXXXalXpXXwu0bFXXX.png_140x140Q90.jpg',
+            major: 'Phone',
+            count: 4,
+            description: 'We sell mobile phones, there are many mobile phones in our store, welcome everyone to buy our google mobile phone'
+          },
+          {
+            shopName: 'Google Purchase',
+            sellerName: 'sammy0123',
+            url: 'https://g-search1.alicdn.com/img/bao/uploaded/i4//55/5b/TB1yX_bcBLN8KJjSZFPwu0oLXXa.png_140x140Q90.jpg',
+            major: 'Google devices',
+            count: 2,
+            description: 'We sell mobile phones, there are many mobile phones in our store, welcome everyone to buy our google mobile phone'
+          },
+          {
+            shopName: 'The US Google PurChase',
+            sellerName: 'ruiwa403549675',
+            url: 'https://g-search1.alicdn.com/img/bao/uploaded/i4//cb/2f/TB1KwKxfeuSBuNjy1XcSuwYjFXa.jpg_140x140Q90.jpg',
+            major: 'Apple',
+            count: 1,
+            description: 'We sell mobile phones, there are many mobile phones in our store, welcome everyone to buy our google mobile phone'
+          }
+        ]
+      })
+  },
+
+  data () {
+    return {
+      shops: [],
+      isLoad: false,
+      requests: []
+    }
+  },
+
+  methods: {
+    onClickApprove: function (index) {
+      this.isLoad = true
+      this.$http.get('http://jsonplaceholder.typicode.com/users')
+        .then((data) => {
+          this.isLoad = false
+          this.shops.splice(index, 1)
+        })
+    },
+
+    onClickReject: function (index) {
+      this.isLoad = true
+      this.$http.get('http://jsonplaceholder.typicode.com/users')
+        .then((data) => {
+          this.isLoad = false
+          this.shops.splice(index, 1)
+        })
+    }
+  }
+
+}
+</script>
+
+<style scoped>
+  *{
+    margin: 0px;
+    padding: 0px;
+    display: block;
+  }
+
+  #containerShop{
+    width: 866px;
+    min-width: 866px;
+    margin: 0px auto;
+    clear: both;
+  }
+  .containerShopLi {
+    display: block;
+    width: 866px;
+    height: 160px;
+    margin-left:  auto;
+    margin-right:  auto;
+    margin-bottom: 20px;
+    border: 1px solid #dfdfdf;
+  }
+
+  ul{
+    list-style-type: none;
+    display: inline-block;
+  }
+
+</style>

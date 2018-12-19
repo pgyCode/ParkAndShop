@@ -1,19 +1,32 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Login from '@/components/common/Login'
+import Index from '@/components/common/Index'
+import Search from '@/components/common/Search'
+import Register from '@/components/common/Register'
 import Customer from '@/components/customer/Customer'
 import CustomerOwner from '@/components/customer/Owner'
 import CustomerFavourite from '@/components/customer/Favourite'
 import CustomerOrder from '@/components/customer/Order'
 import CustomerCart from '@/components/customer/Cart'
 
-import Saler from '@/components/saler/Saler'
-import SalerOwner from '@/components/saler/Owner'
+// import Saler from '@/components/seller/Saler'
+// import SalerOwner from '@/components/seller/Owner'
 
-import Manager from '@/components/manager/Manager'
-import ManagerSaler from '@/components/manager/Saler'
+// 主页--管理员
+import ManagerSeller from '@/components/manager/Seller'
 import ManagerCustomer from '@/components/manager/Customer'
 import ManagerOwner from '@/components/manager/Owner'
+
+// 主页--管理员--商家
+import ManagerSellerRequest from '@/components/manager/SellerRequest'
+import ManagerSellerBlacklist from '@/components/manager/SellerBlacklist'
+import ManagerSellerSearch from '@/components/manager/SellerSearch'
+
+// 主页--商家
+import SellerShop from '@/components/seller/Shop'
+import SellerAddGood from '@/components/seller/AddGood'
+import SellerInfo from '@/components/seller/Info'
 
 Vue.use(Router)
 
@@ -21,6 +34,40 @@ export default new Router({
   routes: [
     {
       path: '/',
+      component: Index,
+      children: [
+        {path: '/search', component: Search},
+        {path: '/register', component: Register},
+        {path: '/customer/order', component: CustomerOrder},
+        {path: '/customer/favourite', component: CustomerFavourite},
+        {path: '/customer/cart', component: CustomerCart},
+        {
+          path: '/manager/sellers',
+          component: ManagerSeller,
+          children: [
+            {
+              path: '/manager/sellers/request',
+              component: ManagerSellerRequest
+            },
+            {
+              path: '/manager/sellers/blacklist',
+              component: ManagerSellerBlacklist
+            },
+            {
+              path: '/manager/sellers/search',
+              component: ManagerSellerSearch
+            }
+          ]},
+        {path: '/manager/customers', component: ManagerCustomer},
+        {path: '/manager/ads', component: ManagerSeller},
+        {path: '/manager/system', component: ManagerOwner},
+        {path: '/seller/shop', component: SellerShop},
+        {path: '/seller/addGood', component: SellerAddGood},
+        {path: '/seller/info', component: SellerInfo}
+      ]
+    },
+    {
+      path: '/login',
       component: Login
     },
     {
@@ -42,22 +89,6 @@ export default new Router({
     {
       path: '/customer/Cart',
       component: CustomerCart
-    },
-    {
-      path: '/saler/main',
-      component: Saler
-    },
-    {
-      path: '/saler/owner',
-      component: SalerOwner
-    },
-    {
-      path: '/manager/main',
-      component: Manager
-    },
-    {
-      path: '/manager/saler',
-      component: ManagerSaler
     },
     {
       path: '/manager/customer',
