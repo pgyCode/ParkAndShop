@@ -1,30 +1,15 @@
 <template>
   <div style="width: 1000px; margin: 0px auto;">
-    <div style="width: 1000px; min-width: 1000px; margin: 0px auto;">
+    <p style="font-size:12px; font-weight:700; color: #fff; padding: 3px 5px; height: 25px; line-height: 25px; background: rgb(63,127,206)">All Goods</p>
 
-      <div style="width: 1000px; height: 83px; padding: 0px 0px; margin: 0px auto;">
-        <img src="../../assets/logo.png" style="float: left" height="83px" width='210px'/>
-        <p style="float: left; color: rgb(60, 60, 60); line-height: 83px; font-size: 22px; font-weight: 700; margin-left: 20px">Shop</p>
-      </div>
-      <div style=" width: 1000px;height: 19px; padding: 6px 0px; border-bottom: 2px solid #f40">
-        <p style="float: left;font-size: 13px; font-weight: 500; color: rgb(60, 60, 60);">Shop Name:&nbsp;&nbsp; {{ info.shopName }}</p>
-        <p style="float:left; text-align:center; margin-left:10px;font-size: 13px; font-weight: 500; color: #fff; width: 70px; height: 19px; border-radius: 3px; background: #f40;">SHOP</p>
-      </div>
-      <div style="height: 120px; width: 1000px;">
-        <img v-bind:src="info.url"
-             style="float: left; width: 120px; height: 120px;"/>
-        <p src="../../assets/logo.png" style="float:left; width: 880px; height: 120px; font-size: 30px; line-height: 120px; text-align: center; color: rgb(63,127,206);">{{ info.shopName }}</p>
-      </div>
-      <p style="font-size:12px; font-weight:700; color: #fff; padding: 3px 5px; height: 25px; line-height: 25px; background: rgb(63,127,206)">All Goods</p>
-
-      <ul>
-        <li v-bind:key="data" v-for="data in datas">
-          <img v-bind:src="data.url" style="width: 240px; height: 240px; border: 1px solid #dfdfdf;"/>
-          <p style="height: 16px; margin: 10px 3px 7px;text-align: center; vertical-align: center; line-height: 16px; font-weight: 500; font-size: 12px; color: #36c;">{{ data.name }}</p>
-          <p style="height: 27px; text-align: center;  font-weight: 900; font-size: 14px; color: #f40;">💰¥{{ data.price }}</p>
-        </li>
-      </ul>
-    </div>
+    <ul>
+      <li v-bind:key="data" v-for="data in datas">
+        <img v-bind:src="data.url" style="width: 240px; height: 240px; border: 1px solid #dfdfdf;"/>
+        <p style="height: 16px; margin: 10px 3px 7px;text-align: center; vertical-align: center; line-height: 16px; font-weight: 500; font-size: 12px; color: #36c;">{{ data.name }}</p>
+        <p style="height: 27px; text-align: center;  font-weight: 900; font-size: 14px; color: #f40;">💰¥{{ data.price }}</p>
+      </li>
+    </ul>
+    <router-view/>
     <loading v-show="isLoad"/>
   </div>
 </template>

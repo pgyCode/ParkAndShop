@@ -24,7 +24,9 @@ import ManagerSellerBlacklist from '@/components/manager/SellerBlacklist'
 import ManagerSellerSearch from '@/components/manager/SellerSearch'
 
 // 主页--商家
+import Seller from '@/components/seller/Seller'
 import SellerShop from '@/components/seller/Shop'
+import SellerGood from '@/components/seller/Good'
 import SellerAddGood from '@/components/seller/AddGood'
 import SellerInfo from '@/components/seller/Info'
 
@@ -36,6 +38,7 @@ export default new Router({
       path: '/',
       component: Index,
       children: [
+        {path: '/', component: Search},
         {path: '/search', component: Search},
         {path: '/register', component: Register},
         {path: '/customer/order', component: CustomerOrder},
@@ -61,7 +64,23 @@ export default new Router({
         {path: '/manager/customers', component: ManagerCustomer},
         {path: '/manager/ads', component: ManagerSeller},
         {path: '/manager/system', component: ManagerOwner},
-        {path: '/seller/shop', component: SellerShop},
+        {path: '/seller',
+          component: Seller,
+          children: [
+            {
+              path: '/',
+              component: SellerShop
+            },
+            {
+              path: '/seller/shop',
+              component: SellerShop
+            },
+            {
+              path: '/seller/good',
+              name: 'seller_good',
+              component: SellerGood
+            }
+          ]},
         {path: '/seller/addGood', component: SellerAddGood},
         {path: '/seller/info', component: SellerInfo}
       ]

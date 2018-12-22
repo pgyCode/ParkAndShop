@@ -1,3 +1,4 @@
+<link href="../../assets/logo.ico" rel="SHORTCUT ICON" />
 <template>
   <div>
     <div id="containerHeader">
@@ -37,23 +38,6 @@
 import Loading from '@/components/common/Loading'
 export default {
 
-  created () {
-    this.$router.push('/search')
-    const name = this.getCookie('userName')
-    console.log(name)
-    if (name === '') {
-      this.welcomeMsg = 'Dear,Please Login'
-    } else {
-      if (this.getCookie('userType') === '2') {
-        this.welcomeMsg = 'Manager:' + name
-      } else if (this.getCookie('userType') === '0') {
-        this.welcomeMsg = 'Customer:' + name
-      } else if (this.getCookie('userType') === '1') {
-        this.welcomeMsg = 'Seller:' + name
-      }
-    }
-  },
-
   components: {Loading},
   data () {
     return {
@@ -69,6 +53,25 @@ export default {
   },
 
   methods: {
+
+    /**
+     * 初始化
+     */
+    init: function () {
+      if (this.getCookie('userName') === '' ||
+            this.getCookie('userId') === '' ||
+            this.getCookie('userType') === '') {
+        this.welcomeMsg = 'Dear,Please Login'
+      } else {
+        if (this.getCookie('userType') === '2') {
+          this.welcomeMsg = 'Manager:' + this.getCookie('userName')
+        } else if (this.getCookie('userType') === '0') {
+          this.welcomeMsg = 'Customer:' + this.getCookie('userName')
+        } else if (this.getCookie('userType') === '1') {
+          this.welcomeMsg = 'Seller:' + this.getCookie('userName')
+        }
+      }
+    },
 
     checkPoiSearch: function (poi) {
       this.poiSearch = poi
@@ -94,6 +97,14 @@ export default {
       console.log(name)
       this.$router.push('/login')
     }
+  },
+
+  updated () {
+    this.init()
+  },
+
+  created () {
+    this.init()
   }
 }
 </script>

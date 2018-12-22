@@ -26,11 +26,11 @@
       <div style="clear: both; width: 500px;margin: 0px auto;" v-show="poiRegister == 0">
         <div style="clear: both; padding-top: 35px; height: 37px;">
           <p style="text-align: right; float: left; width: 150px; height: 35px; line-height: 35px; font-size: 14px; font-weight: 400; color: rgb(60, 60, 60);">Telephone:&nbsp;</p>
-          <input style="float: left; width: 340px;  height: 35px; border: 1px solid #dfdfdf"/>
+          <input v-model="cTelephone" style="float: left; width: 340px;  height: 35px; border: 1px solid #dfdfdf"/>
         </div>
         <div style="clear: both; padding-top: 20px; height: 37px;">
           <p style="text-align: right; float: left; width: 150px; height: 35px; line-height: 35px; font-size: 14px; font-weight: 400; color: rgb(60, 60, 60);">Nickname:&nbsp;</p>
-          <input style="float: left; width: 340px;  height: 35px; border: 1px solid #dfdfdf"/>
+          <input v-model="cNickname" style="float: left; width: 340px;  height: 35px; border: 1px solid #dfdfdf"/>
         </div>
         <div style="clear: both; padding-top: 20px; height: 37px;">
           <p style="text-align: right; float: left; width: 150px; height: 35px; line-height: 35px; font-size: 14px; font-weight: 400; color: rgb(60, 60, 60);">Address:&nbsp;</p>
@@ -38,7 +38,7 @@
         </div>
         <div style="clear: both; padding-top: 20px; height: 37px;">
           <p style="text-align: right; float: left; width: 150px; height: 35px; line-height: 35px; font-size: 14px; font-weight: 400; color: rgb(60, 60, 60);">Password:&nbsp;</p>
-          <input type="password" style="float: left; width: 340px;  height: 35px; border: 1px solid #dfdfdf"/>
+          <input v-model="cPassword" type="password" style="float: left; width: 340px;  height: 35px; border: 1px solid #dfdfdf"/>
         </div>
         <button style="float: right; margin-top: 20px; width: 340px; margin-right: 10px; height: 42px; border: none; background: #f40; border-radius: 5px; font-weight: 700; font-size: 16px; color: #fff;"
                 v-on:click="onClickRegister()">Register</button>
@@ -81,11 +81,13 @@
                 v-on:click="onClickRegister()">Register</button>
       </div>
     </div>
+    <loading v-show="isLoad"/>
   </div>
 </template>
 
 <script>
 
+import Loading from '@/components/common/Loading'
 import $ from 'jquery'
 
 function JSselectFile () {
@@ -120,12 +122,16 @@ function upload () {
   }
 }
 export default {
-  components: {},
+  components: { Loading },
   data () {
     return {
+      isLoad: false,
       poiRegister: 0,
       localUrl: '/static/headimg.jpg',
-      url: ''
+      url: '',
+      cTelephone: '',
+      cNickname: '',
+      cPassword: ''
     }
   },
 
@@ -140,7 +146,24 @@ export default {
     },
 
     onClickRegister: function () {
-
+      this.isLoad = true
+      this.$http.get(this.URL + 'c/logup?username=' + this.cTelephone + '&password=' + this.cPassword)
+        .then((data) => {
+          this.isLoad = false
+          const response = data.body
+          if (response.code === 101) {
+            this.setCookie('userId', response.data.userID, 7)
+            this.setCookie('userName', this.cNickname, 7)
+            this.setCookie('userType', 0, 7)
+            this.$router.push('/')
+          } else {
+            alert('Register Failed')
+          }
+        })
+        .catch(() => {
+          alert('Register Failed')
+          this.isLoad = false
+        })
     },
 
     onSellerImgChange: function (e) {
