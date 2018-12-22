@@ -17,12 +17,12 @@
       <ul>
         <li v-bind:key="order" v-for="order in orders">
           <div style="padding: 15px; clear: both;">
-            <img style="float: left; width: 80px; height: 80px; padding-right: 15px" v-bind:src="order.url"/>
+            <img style="float: left; width: 80px; height: 80px; padding-right: 15px" v-bind:src="order.portraitURL"/>
             <div style="width: 220px; float: left; height: 80px;">
-              <p style=" color: rgb(60, 60, 60); font-size: 13px; font-weight: 500; line-height: 25px; height: 55px; ">{{ order.goodName }}</p>
+              <p style=" color: rgb(60, 60, 60); font-size: 13px; font-weight: 500; line-height: 25px; height: 55px; ">{{ order.pName }}</p>
               <span style="clear:both; width: 100px; text-align: center; display: block; color: #fff; background: #f40; font-size: 12px;padding: 1px 3px; margin-top: 3px">Authenticated</span>
             </div>
-            <p style="float: left; width: 100px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; line-height: 80px">{{ order.shopName }}</p>
+            <p style="float: left; width: 100px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; line-height: 80px">{{ order.sName }}</p>
             <p style="float: left; width: 100px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 400; line-height: 80px">¥{{ order.price }}</p>
             <p style="float: left; width: 100px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 400; line-height: 80px">{{ a = 1 }}</p>
             <p style="float: left; width: 100px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; line-height: 80px">¥{{ order.price }}</p>
@@ -57,6 +57,22 @@ export default {
 
   created: function () {
     this.isLoad = true
+    this.$http.get('http://47.106.11.120:8080/DiGou/api/c/lookupCart?cID=' + this.getCookie('userId'))
+      .then((data) => {
+        console.log(data)
+        this.isLoad = false
+        const response = data.body
+        if (response.code === 101) {
+          this.orders = response.data.pArray
+        } else {
+          alert('Connect Failed')
+        }
+      })
+      .catch(() => {
+        this.isLoad = false
+        alert('Connect Failed')
+      })
+    /*
     this.$http.get('http://jsonplaceholder.typicode.com/users')
       .then((data) => {
         this.orders = [
@@ -83,7 +99,7 @@ export default {
       })
       .catch(() => {
         this.isLoad = false
-      })
+      }) */
   }
 }
 </script>

@@ -15,8 +15,9 @@
     </div>
     <div id="containerBody" v-show="poiSearch == 0">
       <ul>
-        <li class="containerBodyLi" v-bind:key="data" v-for="data in datas" v-on:mouseenter="onLiEnter($event)" v-on:mouseleave="onLiLeave($event)">
-          <div>
+        <li v-bind:key="data" v-for="data in datas"
+            v-on:click="goGood(data)">
+          <div class="containerBodyLi" v-on:mouseenter="onLiEnter($event)" v-on:mouseleave="onLiLeave($event)">
             <img style="width: 180px; height: 180px;" v-bind:src="data.portraitURL"/>
             <h4 style="color: #f40; font-weight: 600; float: left; height: 22px; line-height:17px; margin-top: 11px; padding-left: 10px">¥{{ data.price }}</h4>
             <p style="display: block;margin-top: 6px; padding: 0px 10px; color: #3d3d3d; height: 18px; font-size: 14px; font-weight: 500; clear: both">{{ data.pName }}</p>
@@ -37,8 +38,9 @@
     </div>
     <div id="containerShop" v-show="poiSearch == 1">
       <ul>
-        <li class="containerShopLi" v-bind:key="shop" v-for="shop in shops" v-on:click="goShop(10)">
-          <div>
+        <li v-bind:key="shop" v-for="shop in shops"
+            v-on:click="goShop(shop)">
+          <div  class="containerShopLi">
             <div style="float: left; width: 350px; height: 162px;">
               <img v-bind:src="shop.url"
                    style="float:left; width: 120px; height: 120px; margin-right: 20px; border: 1px solid #b6b6b6;"/>
@@ -113,7 +115,11 @@ export default {
   methods: {
 
     goShop: function (poi) {
-      console.log('qwewe')
+      this.$router.push('/seller/shop')
+    },
+
+    goGood: function (info) {
+      this.$router.push({name: 'seller_good', params: {data: info}})
     },
 
     checkPoiSearch: function (poi) {
@@ -149,14 +155,15 @@ export default {
     onClickSearch: function () {
       this.isLoad = true
       if (this.poiSearch === 0) {
-        this.$http.get('http://jsonplaceholder.typicode.com/users')
-        // ('http://192.168.43.16:8000/api/c/searchproducts?pName=' + this.value + '&pageIndex=0&pageSize=10')
+        this.$http.get('http://47.106.11.120:8080/DiGou/api/c/searchproducts?pName=' + this.value + '&pageIndex=0&pageSize=10')
           .then((data) => {
             console.log(data)
             // this.users = data.body
             this.isLoad = false
 
-            // this.datas = data.body.data.pArray
+            this.datas = data.body.data.pArray
+
+            /*
             this.datas = [
               {
                 pName: 'HuaShuo ROG PHONE',
@@ -218,7 +225,7 @@ export default {
                 pID: 1,
                 sID: 1
               }
-            ]
+            ] */
           })
           .catch(() => {
             this.isLoad = false

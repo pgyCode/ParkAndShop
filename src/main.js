@@ -49,6 +49,8 @@ Vue.prototype.setHtml = function (key, value) {
   document.getElementById(key).html = value
 }
 
+Vue.prototype.URL = 'http://47.106.11.120:8080/DiGou/api/'
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

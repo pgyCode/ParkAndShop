@@ -20,7 +20,7 @@
               </div>
               <div style="clear: both;width: 300px; height: 42px; margin-top: 20px;border: 1px solid rgb(221, 221, 221);">
                 <span style="background:rgb(221, 221, 221); width: 20px;float: left; height: 24px; line-height: 24px; padding: 9px 10px;">🔒</span>
-                <input placeholder="password" v-model="password"/>
+                <input placeholder="password" type="password" v-model="password"/>
               </div>
               <button style="margin-top: 20px; width: 300px; height: 42px; border: none; background: #f40; border-radius: 5px; font-weight: 700; font-size: 16px; color: #fff;"
                       v-on:click="onClickLogin">Login</button>
@@ -69,20 +69,22 @@ export default {
     onClickLogin: function () {
       this.isLoad = true
       if (this.poiLogin === '0') {
-        this.$http.get('http://jsonplaceholder.typicode.com/users')
-        // ('http://192.168.43.16:8000/api/login?username=' + this.username + '&password=' + this.password)
+        this.$http.get('http://47.106.11.120:8080/DiGou/api/c/login?username=' + this.username + '&password=' + this.password)
           .then((data) => {
-            // this.setCookie('userName', data.body.data.username, 7)
-            // this.setCookie('userId', data.body.data.userID, 7)
-            // this.setCookie('usertype', '1', 7)
-            this.setCookie('userName', 'James', 7)
-            this.setCookie('userId', '3', 7)
-            this.setCookie('userType', '0', 7)
-            this.$router.push('/')
             this.isLoad = false
+            const response = data.body
+            if (response.code === 101) {
+              this.setCookie('userId', response.data.userID, 7)
+              this.setCookie('userName', '暂时没有昵称', 7)
+              this.setCookie('userType', 0, 7)
+              this.$router.push('/')
+            } else {
+              alert('Login Failed')
+            }
           })
           .catch(() => {
             this.isLoad = false
+            alert('Login Failed')
           })
       } else if (this.poiLogin === '1') {
         this.$http.get('http://jsonplaceholder.typicode.com/users')
@@ -101,21 +103,14 @@ export default {
             this.isLoad = false
           })
       } else if (this.poiLogin === '2') {
-        this.$http.get('http://jsonplaceholder.typicode.com/users')
-        // ('http://192.168.43.16:8000/api/login?username=' + this.username + '&password=' + this.password)
-          .then((data) => {
-            // this.setCookie('userName', data.body.data.username, 7)
-            // this.setCookie('userId', data.body.data.userID, 7)
-            // this.setCookie('usertype', '1', 7)
-            this.setCookie('userName', 'Admin', 7)
-            this.setCookie('userId', '3', 7)
-            this.setCookie('userType', '2', 7)
-            this.$router.push('/')
-            this.isLoad = false
-          })
-          .catch(() => {
-            this.isLoad = false
-          })
+        console.log('qwerti')
+        if (this.username === 'admin' && this.password === '123456') {
+          this.setCookie('userName', 'Admin', 7)
+          this.setCookie('userId', '3', 7)
+          this.setCookie('userType', '2', 7)
+          this.$router.push('/')
+        }
+        this.isLoad = false
       }
     }
   }
