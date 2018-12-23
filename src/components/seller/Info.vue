@@ -37,15 +37,18 @@
           <input v-model="data.nickname" style="float: left; width: 340px;  height: 35px; border: 1px solid #dfdfdf"/>
         </div>
         <button style="float: right; margin-top: 20px; width: 340px; margin-right: 10px; height: 42px; border: none; background: #f40; border-radius: 5px; font-weight: 700; font-size: 16px; color: #fff;"
-                v-on:click="onClickRegister()">Commit</button>
+                v-on:click="onClickCommit()">Commit</button>
       </div>
     </div>
+    <loading v-show="isLoad"/>
   </div>
 </template>
 
 <script>
 
 import $ from 'jquery'
+
+import Loading from '@/components/common/Loading'
 
 function JSselectFile () {
   $('#photoFileUpload').trigger('click')
@@ -59,33 +62,14 @@ function getFileUrl (obj) {
   url = window.URL.createObjectURL(obj.files.item(0))
   return url
 }
-
-function upload () {
-  const AV = require('leancloud-storage')
-  var fileUploadControl = $('#photoFileUpload')[0]
-  if (fileUploadControl.files.length <= 0) {
-    return
-  }
-  var localFile = fileUploadControl.files[0]
-  var name = 'avatar.jpg'
-  var file = new AV.File(name, localFile)
-  file.save().then(function (file) {
-    // 文件保存成功
-    console.log(file.url())
-    this.url = file.url()
-  }, function (error) {
-    // 异常处理
-    console.log(error)
-  })
-}
 export default {
-  components: {},
+  components: {Loading},
   data () {
     return {
       poiRegister: 0,
       localUrl: '/static/headimg.jpg',
-      url: '',
-      data: {}
+      data: {},
+      isLoad: false
     }
   },
 
@@ -99,30 +83,65 @@ export default {
       this.poiRegister = poi
     },
 
-    onClickRegister: function () {
-
+    onClickCommit: function () {
+      this.isLoad = true
+      this.$http.get(this.URL + 'b/info/modify?id=' +
+        this.getCookie('userId') +
+        '&url=' +
+        this.data.url +
+        '&telephone=' +
+        this.data.telephone +
+        '&shopName=' +
+        this.data.shopName +
+        '&nickname=' +
+        this.data.nickname +
+        '&description=' +
+        this.data.description +
+        '&major=' +
+        this.data.major)
+        .then((data) => {
+          console.log(data)
+          this.isLoad = false
+          alert('Modify Succeed!')
+        })
+        .catch(() => {
+          this.isLoad = false
+        })
     },
 
     onSellerImgChange: function (e) {
       this.data.url = getFileUrl(e.srcElement)
-      console.log(this.url + 'wqe')
-      upload()
+      const AV = require('leancloud-storage')
+      var fileUploadControl = $('#photoFileUpload')[0]
+      if (fileUploadControl.files.length <= 0) {
+        return
+      }
+      var localFile = fileUploadControl.files[0]
+      var name = 'avatar.jpg'
+      var file = new AV.File(name, localFile)
+      file.save().then((file) => {
+        // 文件保存成功
+        this.data.url = file.url()
+        console.log(this.data.url)
+      }, function (error) {
+        // 异常处理
+        console.log(error)
+      })
     }
   },
 
-  created () {
+  created: function () {
     this.isLoad = true
-    this.$http.get('http://jsonplaceholder.typicode.com/users')
+    this.$http.get(this.URL + 'b/info/get?id=' +
+      this.getCookie('userId'))
       .then((data) => {
+        console.log(data)
         this.isLoad = false
-        this.data = {
-          url: 'http://lc-tp28gntm.cn-n1.lcfile.com/d2477ef0b23ec61b963f.jpg',
-          telephone: '18392128500',
-          shopName: 'Yi DianDian',
-          nickname: 'YiDianDian',
-          description: 'We sell drinks, various drinks, milk tea, lemonade, orange juice, etc.',
-          major: 'Drink'
-        }
+        const response = data.body
+        this.data = response.data.data
+      })
+      .catch(() => {
+        this.isLoad = false
       })
   }
 }

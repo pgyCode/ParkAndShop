@@ -55,27 +55,27 @@
         </div>
         <div style="clear: both; padding-top: 20px; height: 37px;">
           <p style="text-align: right; float: left; width: 150px; height: 35px; line-height: 35px; font-size: 14px; font-weight: 400; color: rgb(60, 60, 60);">Telephone:&nbsp;</p>
-          <input style="float: left; width: 340px;  height: 35px; border: 1px solid #dfdfdf"/>
+          <input v-model="bTelephone" style="float: left; width: 340px;  height: 35px; border: 1px solid #dfdfdf"/>
         </div>
         <div style="clear: both; padding-top: 20px; height: 37px;">
           <p style="text-align: right; float: left; width: 150px; height: 35px; line-height: 35px; font-size: 14px; font-weight: 400; color: rgb(60, 60, 60);">ShopName:&nbsp;</p>
-          <input style="float: left; width: 340px;  height: 35px; border: 1px solid #dfdfdf"/>
+          <input v-model="bShopName" style="float: left; width: 340px;  height: 35px; border: 1px solid #dfdfdf"/>
         </div>
         <div style="clear: both; padding-top: 20px; height: 37px;">
           <p style="text-align: right; float: left; width: 150px; height: 35px; line-height: 35px; font-size: 14px; font-weight: 400; color: rgb(60, 60, 60);">Major Business:&nbsp;</p>
-          <input style="float: left; width: 340px;  height: 35px; border: 1px solid #dfdfdf"/>
+          <input v-model="bMajor" style="float: left; width: 340px;  height: 35px; border: 1px solid #dfdfdf"/>
         </div>
         <div style="clear: both; padding-top: 20px; height: 37px;">
           <p style="text-align: right; float: left; width: 150px; height: 35px; line-height: 35px; font-size: 14px; font-weight: 400; color: rgb(60, 60, 60);">Description:&nbsp;</p>
-          <textarea style="float: left; width: 340px; padding: 10px 0px;  height: 100px; border: 1px solid #dfdfdf"/>
+          <textarea v-model="bDescription" style="float: left; width: 340px; padding: 10px 0px;  height: 100px; border: 1px solid #dfdfdf"/>
         </div>
         <div style="clear: both; padding-top: 20px; height: 37px;">
           <p style="text-align: right; float: left; width: 150px; height: 35px; line-height: 35px; font-size: 14px; font-weight: 400; color: rgb(60, 60, 60);">Nickname:&nbsp;</p>
-          <input style="float: left; width: 340px;  height: 35px; border: 1px solid #dfdfdf"/>
+          <input v-model="bNickname" style="float: left; width: 340px;  height: 35px; border: 1px solid #dfdfdf"/>
         </div>
         <div style="clear: both; padding-top: 20px; height: 37px;">
           <p style="text-align: right; float: left; width: 150px; height: 35px; line-height: 35px; font-size: 14px; font-weight: 400; color: rgb(60, 60, 60);">Password:&nbsp;</p>
-          <input type="password" style="float: left; width: 340px;  height: 35px; border: 1px solid #dfdfdf"/>
+          <input v-model="bPassword" type="password" style="float: left; width: 340px;  height: 35px; border: 1px solid #dfdfdf"/>
         </div>
         <button style="float: right; margin-top: 20px; width: 340px; margin-right: 10px; height: 42px; border: none; background: #f40; border-radius: 5px; font-weight: 700; font-size: 16px; color: #fff;"
                 v-on:click="onClickRegister()">Register</button>
@@ -103,24 +103,6 @@ function getFileUrl (obj) {
   return url
 }
 
-function upload () {
-  const AV = require('leancloud-storage')
-  var fileUploadControl = $('#photoFileUpload')[0]
-  if (fileUploadControl.files.length > 0) {
-    var localFile = fileUploadControl.files[0]
-    var name = 'avatar.jpg'
-
-    var file = new AV.File(name, localFile)
-    file.save().then(function (file) {
-      // 文件保存成功
-      console.log(file.url())
-      this.url = file.url()
-    }, function (error) {
-      // 异常处理
-      console.log(error)
-    })
-  }
-}
 export default {
   components: { Loading },
   data () {
@@ -128,10 +110,18 @@ export default {
       isLoad: false,
       poiRegister: 0,
       localUrl: '/static/headimg.jpg',
-      url: '',
+
       cTelephone: '',
       cNickname: '',
-      cPassword: ''
+      cPassword: '',
+
+      bUrl: '',
+      bTelephone: '',
+      bShopName: '',
+      bMajor: '',
+      bDescription: '',
+      bNickname: '',
+      bPassword: ''
     }
   },
 
@@ -147,29 +137,76 @@ export default {
 
     onClickRegister: function () {
       this.isLoad = true
-      this.$http.get(this.URL + 'c/logup?username=' + this.cTelephone + '&password=' + this.cPassword)
-        .then((data) => {
-          this.isLoad = false
-          const response = data.body
-          if (response.code === 101) {
-            this.setCookie('userId', response.data.userID, 7)
-            this.setCookie('userName', this.cNickname, 7)
-            this.setCookie('userType', 0, 7)
-            this.$router.push('/')
-          } else {
+      if (this.poiRegister === 0) {
+        this.$http.get(this.URL + 'c/logup?username=' + this.cTelephone + '&password=' + this.cPassword)
+          .then((data) => {
+            this.isLoad = false
+            const response = data.body
+            if (response.code === 101) {
+              this.setCookie('userId', response.data.userID, 7)
+              this.setCookie('userName', this.cNickname, 7)
+              this.setCookie('userType', 0, 7)
+              this.$router.push('/')
+            } else {
+              alert('Register Failed')
+            }
+          })
+          .catch(() => {
             alert('Register Failed')
-          }
-        })
-        .catch(() => {
-          alert('Register Failed')
-          this.isLoad = false
-        })
+            this.isLoad = false
+          })
+      } else if (this.poiRegister === 1) {
+        this.$http.get(this.URL + 'b/register?url=' +
+          this.bUrl +
+          '&telephone=' +
+          this.bTelephone +
+          '&shopName=' +
+          this.bShopName +
+          '&major=' +
+          this.bMajor +
+          '&description=' +
+          this.bDescription +
+          '&nickname=' +
+          this.bNickname +
+          '&password=' +
+          this.bPassword)
+          .then((data) => {
+            this.isLoad = false
+            const response = data.body
+            if (response.code === 101) {
+              this.setCookie('userId', response.data.id, 7)
+              this.setCookie('userName', this.bNickname, 7)
+              this.setCookie('userType', 1, 7)
+              this.$router.push('/')
+            } else {
+              alert('Register Failed')
+            }
+          })
+          .catch(() => {
+            alert('Register Failed')
+            this.isLoad = false
+          })
+      }
     },
 
     onSellerImgChange: function (e) {
       this.localUrl = getFileUrl(e.srcElement)
-      console.log(this.url + 'wqe')
-      upload()
+
+      const AV = require('leancloud-storage')
+      var fileUploadControl = $('#photoFileUpload')[0]
+      if (fileUploadControl.files.length > 0) {
+        var localFile = fileUploadControl.files[0]
+        var name = 'avatar.jpg'
+        var file = new AV.File(name, localFile)
+        file.save().then((file) => {
+          // 文件保存成功
+          this.bUrl = file.url()
+          console.log(this.bUrl)
+        }, function (error) {
+          // 异常处理
+          console.log(error)
+        })
+      }
     }
   }
 }
