@@ -87,16 +87,21 @@ export default {
             alert('Login Failed')
           })
       } else if (this.poiLogin === '1') {
-        this.$http.get('http://jsonplaceholder.typicode.com/users')
-        // ('http://192.168.43.16:8000/api/login?username=' + this.username + '&password=' + this.password)
+        this.$http.get(this.URL + 'b/login?telephone=' +
+          this.username +
+          '&password=' +
+          this.password)
           .then((data) => {
-            // this.setCookie('userName', data.body.data.username, 7)
-            // this.setCookie('userId', data.body.data.userID, 7)
-            // this.setCookie('usertype', '1', 7)
-            this.setCookie('userName', 'YiDianDian', 7)
-            this.setCookie('userId', '3', 7)
-            this.setCookie('userType', '1', 7)
-            this.$router.push('/')
+            console.log(data)
+            const response = data.body
+            if (response.code === 101) {
+              this.setCookie('userName', response.data.data.nickname, 7)
+              this.setCookie('userId', response.data.data.id, 7)
+              this.setCookie('userType', '1', 7)
+              this.$router.push('/')
+            } else {
+              alert('Login Failed')
+            }
             this.isLoad = false
           })
           .catch(() => {
