@@ -13,7 +13,7 @@
       <router-link class='subTitle' v-show="this.getCookie('userType') == '1'" to="/seller/shop">Shop</router-link>
       <router-link class='subTitle' v-show="this.getCookie('userType') == '2'" to="/manager/system">System</router-link>
       <router-link class='subTitle' v-show="this.getCookie('userType') == '2'" to="/manager/ads">Ads</router-link>
-      <router-link class='subTitle' v-show="this.getCookie('userType') == '2'" to="/manager/customers">Customers</router-link>
+      <router-link class='subTitle' v-show="this.getCookie('userType') == '2'" to="/manager/customer">Customers</router-link>
       <router-link class='subTitle' v-show="this.getCookie('userType') == '2'" to="/manager/sellers">Sellers</router-link>
       <router-link class='subTitle' v-show="this.getCookie('userType') == '0'" to="/customer/order">Info</router-link>
       <router-link class='subTitle' v-show="this.getCookie('userType') == '0'"  to="/customer/cart">Cart</router-link>
