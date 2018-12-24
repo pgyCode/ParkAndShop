@@ -18,25 +18,30 @@
         </div>
         <div style="clear: both; padding-top: 20px; height: 37px;">
           <p style="text-align: right; float: left; width: 150px; height: 35px; line-height: 35px; font-size: 14px; font-weight: 400; color: rgb(60, 60, 60);">Good Name:&nbsp;</p>
-          <input style="float: left; width: 340px;  height: 35px; border: 1px solid #dfdfdf"/>
+          <input v-model="goodName" style="float: left; width: 340px;  height: 35px; border: 1px solid #dfdfdf"/>
         </div>
         <div style="clear: both; padding-top: 20px; height: 37px;">
           <p style="text-align: right; float: left; width: 150px; height: 35px; line-height: 35px; font-size: 14px; font-weight: 400; color: rgb(60, 60, 60);">Price:&nbsp;¥&nbsp;</p>
-          <input style="float: left; width: 340px;  height: 35px; border: 1px solid #dfdfdf"/>
+          <input v-model="price" style="float: left; width: 340px;  height: 35px; border: 1px solid #dfdfdf"/>
+        </div>
+        <div style="clear: both; padding-top: 20px; height: 37px;">
+          <p style="text-align: right; float: left; width: 150px; height: 35px; line-height: 35px; font-size: 14px; font-weight: 400; color: rgb(60, 60, 60);">Count:</p>
+          <input v-model="num" style="float: left; width: 340px;  height: 35px; border: 1px solid #dfdfdf"/>
         </div>
         <div style="clear: both; padding-top: 20px; height: 37px;">
           <p style="text-align: right; float: left; width: 150px; height: 35px; line-height: 35px; font-size: 14px; font-weight: 400; color: rgb(60, 60, 60);">Description:&nbsp;</p>
-          <textarea style="float: left; width: 340px;  height: 140px; border: 1px solid #dfdfdf"/>
+          <textarea v-model="description" style="float: left; width: 340px;  height: 140px; border: 1px solid #dfdfdf"/>
         </div>
         <button style="float: right; margin-top: 20px; width: 340px; margin-right: 10px; height: 42px; border: none; background: #f40; border-radius: 5px; font-weight: 700; font-size: 16px; color: #fff;"
                 v-on:click="onClickRegister()">Publish</button>
       </div>
     </div>
+    <loading v-show="isLoad"/>
   </div>
 </template>
 
 <script>
-
+import Loading from '@/components/common/Loading'
 import $ from 'jquery'
 
 function JSselectFile () {
@@ -52,31 +57,18 @@ function getFileUrl (obj) {
   return url
 }
 
-function upload () {
-  const AV = require('leancloud-storage')
-  var fileUploadControl = $('#photoFileUpload')[0]
-  if (fileUploadControl.files.length <= 0) {
-    return
-  }
-  var localFile = fileUploadControl.files[0]
-  var name = 'avatar.jpg'
-  var file = new AV.File(name, localFile)
-  file.save().then(function (file) {
-    // 文件保存成功
-    console.log(file.url())
-    this.url = file.url()
-  }, function (error) {
-    // 异常处理
-    console.log(error)
-  })
-}
 export default {
-  components: {},
+  components: {Loading},
   data () {
     return {
+      isLoad: false,
       poiRegister: 0,
       localUrl: '/static/headimg.jpg',
-      url: ''
+      url: '',
+      goodName: '',
+      price: '',
+      num: '',
+      description: ''
     }
   },
 
@@ -91,13 +83,48 @@ export default {
     },
 
     onClickRegister: function () {
-
+      this.isLoad = true
+      this.$http.get(this.URL + 'b/good/add?id=' +
+        this.getCookie('userId') +
+        '&url=' +
+        this.url +
+        '&goodName=' +
+        this.goodName +
+        '&price=' +
+        this.price +
+        '&description=' +
+        this.description +
+        '&num=' +
+        this.num)
+        .then((data) => {
+          this.isLoad = false
+          alert('Add Succeed')
+        })
+        .catch(() => {
+          this.isLoad = false
+          alert('Add Failed')
+        })
     },
 
     onSellerImgChange: function (e) {
       this.localUrl = getFileUrl(e.srcElement)
-      console.log(this.url + 'wqe')
-      upload()
+
+      const AV = require('leancloud-storage')
+      var fileUploadControl = $('#photoFileUpload')[0]
+      if (fileUploadControl.files.length <= 0) {
+        return
+      }
+      var localFile = fileUploadControl.files[0]
+      var name = 'avatar.jpg'
+      var file = new AV.File(name, localFile)
+      file.save().then((file) => {
+        // 文件保存成功
+        this.url = file.url()
+        console.log(this.url)
+      }, function (error) {
+        // 异常处理
+        console.log(error)
+      })
     }
   }
 }

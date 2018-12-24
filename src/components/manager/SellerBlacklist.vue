@@ -15,7 +15,7 @@
               <div style="float: left; width: 150px;  height: 120px; margin-top: 20px">
                 <span style="font-size: 14px; font-weight: 700; line-height: 30px; color: rgb(0, 99, 200);">{{ shop.shopName }}</span>
                 <span style="clear:both; float: left; font-size: 12px; font-weight: 400; line-height: 30px; color: rgb(102, 102, 102);"><b>Seller：</b></span>
-                <span style="float: left; font-size: 12px; font-weight: 400; line-height: 30px; color: rgb(0, 99, 200);">{{ shop.sellerName }}</span>
+                <span style="float: left; font-size: 12px; font-weight: 400; line-height: 30px; color: rgb(0, 99, 200);">{{ shop.nickname }}</span>
                 <span style="clear:both; float: left; font-size: 12px; font-weight: 400; line-height: 30px; color: rgb(102, 102, 102);"><b>Major Business：</b></span>
                 <span style="float: left; font-size: 12px; font-weight: 400; line-height: 30px; color: rgb(0, 99, 200);">{{ shop.major }}</span>
                 <span style="clear:both; float: left; font-size: 12px; font-weight: 400; line-height: 30px; color: rgb(102, 102, 102);"><b>Telephone：</b></span>
@@ -30,12 +30,13 @@
             </div>
 
             <div style="width: 86px; float: right; height: 120px; margin-top: 20px;">
-              <button style="text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; height: 26px; width: 60px; border: 1px solid rgb(220, 220, 220); border-radius: 5px; cursor: pointer; margin: 47px auto;" >Cancel</button>
+              <button v-on:click="onClickCancel(shop)" style="text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; height: 26px; width: 60px; border: 1px solid rgb(220, 220, 220); border-radius: 5px; cursor: pointer; margin: 47px auto;" >Cancel</button>
             </div>
           </div>
         </li>
       </ul>
     </div>
+    <loading v-show="isLoad"/>
   </div>
 </template>
 
@@ -46,30 +47,7 @@ export default {
   components: {Loading},
 
   created () {
-    this.isLoad = true
-    this.$http.get('http://jsonplaceholder.typicode.com/users')
-      .then((data) => {
-        this.isLoad = false
-        this.shops = data
-        this.shops = [
-          {
-            shopName: 'Top Google Phone',
-            sellerName: 'sunny-echo',
-            url: 'https://g-search1.alicdn.com/img/bao/uploaded/i4//e3/ad/TB1nnHkLXXXXXalXpXXwu0bFXXX.png_140x140Q90.jpg',
-            major: 'Phone',
-            count: 4,
-            description: 'We sell mobile phones, there are many mobile phones in our store, welcome everyone to buy our google mobile phone'
-          },
-          {
-            shopName: 'Google Purchase',
-            sellerName: 'sammy0123',
-            url: 'https://g-search1.alicdn.com/img/bao/uploaded/i4//55/5b/TB1yX_bcBLN8KJjSZFPwu0oLXXa.png_140x140Q90.jpg',
-            major: 'Google devices',
-            count: 2,
-            description: 'We sell mobile phones, there are many mobile phones in our store, welcome everyone to buy our google mobile phone'
-          }
-        ]
-      })
+    this.initLoad()
   },
 
   data () {
@@ -81,12 +59,16 @@ export default {
   },
 
   methods: {
-    onClickApprove: function (index) {
+    onClickCancel: function (info) {
       this.isLoad = true
-      this.$http.get('http://jsonplaceholder.typicode.com/users')
+      this.$http.get(this.URL + 'm/seller_black_cancel?id=' +
+        info.id)
         .then((data) => {
           this.isLoad = false
-          this.shops.splice(index, 1)
+          this.initLoad()
+        })
+        .catch(() => {
+          this.isLoad = false
         })
     },
 
@@ -96,6 +78,18 @@ export default {
         .then((data) => {
           this.isLoad = false
           this.shops.splice(index, 1)
+        })
+    },
+
+    initLoad: function () {
+      this.isLoad = true
+      this.$http.get(this.URL + 'm/seller_black_info')
+        .then((data) => {
+          this.isLoad = false
+          this.shops = data.body.data.array
+        })
+        .catch(() => {
+          this.isLoad = false
         })
     }
   }

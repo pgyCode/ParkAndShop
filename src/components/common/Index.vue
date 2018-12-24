@@ -93,8 +93,6 @@ export default {
       this.clearCookie('userName')
       this.clearCookie('userType')
       this.clearCookie('userId')
-      const name = this.getCookie('userName')
-      console.log(name)
       this.$router.push('/login')
     }
   },
@@ -103,7 +101,8 @@ export default {
     this.init()
   },
 
-  created () {
+  mounted () {
+    console.log(this.getCookie('userName'))
     this.init()
   }
 }

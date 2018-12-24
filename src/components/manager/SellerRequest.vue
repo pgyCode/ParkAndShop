@@ -15,7 +15,7 @@
               <div style="float: left; width: 200px;  height: 120px; margin-top: 20px">
                 <span style="font-size: 14px; font-weight: 700; line-height: 30px; color: rgb(0, 99, 200);">{{ shop.shopName }}</span>
                 <span style="clear:both; float: left; font-size: 12px; font-weight: 400; line-height: 30px; color: rgb(102, 102, 102);"><b>Seller：</b></span>
-                <span style="float: left; font-size: 12px; font-weight: 400; line-height: 30px; color: rgb(0, 99, 200);">{{ shop.sellerName }}</span>
+                <span style="float: left; font-size: 12px; font-weight: 400; line-height: 30px; color: rgb(0, 99, 200);">{{ shop.nickname }}</span>
                 <span style="clear:both; float: left; font-size: 12px; font-weight: 400; line-height: 30px; color: rgb(102, 102, 102);"><b>Major Business：</b></span>
                 <span style="float: left; font-size: 12px; font-weight: 400; line-height: 30px; color: rgb(0, 99, 200);">{{ shop.major }}</span>
                 <span style="clear:both; float: left; font-size: 12px; font-weight: 400; line-height: 30px; color: rgb(102, 102, 102);"><b>Telephone：</b></span>
@@ -30,7 +30,7 @@
             </div>
 
             <div style="width: 86px; float: right; height: 120px; margin-top: 20px;">
-              <button style="text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; height: 26px; width: 60px; border: 1px solid rgb(220, 220, 220); border-radius: 5px; margin-top: 27px; cursor: pointer; margin: 22px auto;" >Approve</button>
+              <button v-on:click="onClickApprove(shop)" style="text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; height: 26px; width: 60px; border: 1px solid rgb(220, 220, 220); border-radius: 5px; margin-top: 27px; cursor: pointer; margin: 22px auto;" >Approve</button>
               <button style="text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; height: 26px; width: 60px; border: 1px solid rgb(220, 220, 220); border-radius: 5px; margin-top: 27px; cursor: pointer; margin: 22px auto;" >Reject</button>
             </div>
           </div>
@@ -72,46 +72,7 @@ export default {
   components: {Loading},
 
   created () {
-    this.isLoad = true
-    this.$http.get('http://jsonplaceholder.typicode.com/users')
-      .then((data) => {
-        this.isLoad = false
-        this.shops = data
-        this.shops = [
-          {
-            shopName: 'Bellroy Google',
-            sellerName: 'bellroy Store',
-            url: 'https://g-search1.alicdn.com/img/bao/uploaded/i4//d9/f2/TB1oA3IQFXXXXXGXpXXSutbFXXX.jpg_140x140Q90.jpg',
-            major: 'Google Phone',
-            count: 2,
-            description: 'We sell mobile phones, there are many mobile phones in our store, welcome everyone to buy our google mobile phone'
-          },
-          {
-            shopName: 'Top Google Phone',
-            sellerName: 'sunny-echo',
-            url: 'https://g-search1.alicdn.com/img/bao/uploaded/i4//e3/ad/TB1nnHkLXXXXXalXpXXwu0bFXXX.png_140x140Q90.jpg',
-            major: 'Phone',
-            count: 4,
-            description: 'We sell mobile phones, there are many mobile phones in our store, welcome everyone to buy our google mobile phone'
-          },
-          {
-            shopName: 'Google Purchase',
-            sellerName: 'sammy0123',
-            url: 'https://g-search1.alicdn.com/img/bao/uploaded/i4//55/5b/TB1yX_bcBLN8KJjSZFPwu0oLXXa.png_140x140Q90.jpg',
-            major: 'Google devices',
-            count: 2,
-            description: 'We sell mobile phones, there are many mobile phones in our store, welcome everyone to buy our google mobile phone'
-          },
-          {
-            shopName: 'The US Google PurChase',
-            sellerName: 'ruiwa403549675',
-            url: 'https://g-search1.alicdn.com/img/bao/uploaded/i4//cb/2f/TB1KwKxfeuSBuNjy1XcSuwYjFXa.jpg_140x140Q90.jpg',
-            major: 'Apple',
-            count: 1,
-            description: 'We sell mobile phones, there are many mobile phones in our store, welcome everyone to buy our google mobile phone'
-          }
-        ]
-      })
+    this.initLoad()
   },
 
   data () {
@@ -123,12 +84,18 @@ export default {
   },
 
   methods: {
-    onClickApprove: function (index) {
+    onClickApprove: function (shopInfo) {
       this.isLoad = true
-      this.$http.get('http://jsonplaceholder.typicode.com/users')
+      this.$http.get(this.URL + 'm/seller_pass_approve?id=' +
+        shopInfo.id)
         .then((data) => {
+          console.log(data)
           this.isLoad = false
-          this.shops.splice(index, 1)
+          this.initLoad()
+        })
+        .catch(() => {
+          this.isLoad = false
+          alert('Operate Failed')
         })
     },
 
@@ -138,6 +105,19 @@ export default {
         .then((data) => {
           this.isLoad = false
           this.shops.splice(index, 1)
+        })
+    },
+
+    initLoad: function () {
+      this.isLoad = true
+      this.$http.get(this.URL + 'm/seller_pass_info')
+        .then((data) => {
+          this.isLoad = false
+          const response = data.body
+          this.shops = response.data.array
+        })
+        .catch(() => {
+          this.isLoad = false
         })
     }
   }
