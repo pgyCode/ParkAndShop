@@ -1,36 +1,35 @@
 <template>
   <div>
-    <div id="containerHeader">
-      <span class="title" v-on:click="checkFrame(0)">Park&&Shop</span>
-      <span class="title" v-on:click="checkFrame(1)">black list</span>
-      <input class="title"/>
-      <button class="title" v-on:click="checkFrame(2)">Search</button>
+    <div style="clear: both; width: 866px; height: 40px; margin: 0px auto; border-bottom: 2px solid #dfdfdf">
+      <router-link style="line-height: 40px; float: left; font-size: 14px; text-align: center; font-weight: 700; padding:0px 20px"
+                   @click.native="onCheckTab(0)"
+                   class="basicTab"
+                   :class="{checkTab:poiTab == 0}" to="/manager/customer/search">Search</router-link>
+      <router-link style="line-height: 40px; float: left; font-size: 14px; text-align: center; font-weight: 700; padding:0px 20px"
+                   @click.native="onCheckTab(1)"
+                   class="basicTab"
+                   :class="{checkTab:poiTab == 1}" to="/manager/customer/blacklist">BlackList</router-link>
     </div>
-    <customer-main v-show="currentFrame == 0"/>
-    <customer-black v-show="currentFrame == 1"/>
-    <customer-search v-show="currentFrame == 2"/>
-
-    <div id="containerFooter">
-      <span id="copyright">@copyright group_nine 2018</span>
-    </div>
+    <router-view/>
   </div>
 </template>
 
 <script>
-import CustomerMain from '@/components/manager/CustomerMain'
-import CustomerBlack from '@/components/manager/CustomerBlack'
-import CustomerSearch from '@/components/manager/CustomerSearch'
 export default {
-  components: {CustomerMain, CustomerBlack, CustomerSearch},
   data () {
     return {
-      currentFrame: 0
+      currentFrame: 0,
+      poiTab: 0
     }
   },
 
   methods: {
     checkFrame: function (position) {
       this.currentFrame = position
+    },
+
+    onCheckTab: function (poi) {
+      this.poiTab = poi
     }
   }
 }
@@ -38,50 +37,35 @@ export default {
 
 <style scoped>
 
-  #containerHeader{
-    padding: 30px;
-    background: #d4d7dc;
+  *{
+    display: block;
+    margin: 0px;
+    padding: 0px;
+    text-decoration: none;
   }
 
   .title{
-    margin-left: 20px;
-    font-size: 35px;
-    padding: 0px 20px;
-    font-family: "BogleWeb";
+    border-bottom: 5px solid #003aff;
+
   }
 
-  ul{
-    flex-wrap: wrap;
-    list-style: none;
+  #containerTop{
   }
 
-  li{
-    width: 300px;
-    flex-basis: 200px;
-    padding: 20px;
-    border: 3px solid #acccdc;
-    border-radius: 40px;
-    font-weight: 600;
-    font-size: 18px;
-    margin-top: 30px;
+  #containerRight{
+    clear: both;
+    width: 1000px;
   }
-  #containerLeft{
-    width: 100%;
-    height: 500px;
-    background: #000;
-    position: relative;
-    text-align: center;
-  }
-
   img{
     height: 400px;
   }
 
-  #containerFooter{
-    clear: both;
-    background-color: #d4d7dc;
-    text-align: center;
-    padding: 20px;
-    color: gray;
+  .basicTab{
+    color: #808285;
+  }
+
+  .checkTab{
+    color: #f40;
+    border-bottom: 2px solid #f40;
   }
 </style>

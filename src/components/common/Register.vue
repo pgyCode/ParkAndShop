@@ -34,7 +34,7 @@
         </div>
         <div style="clear: both; padding-top: 20px; height: 37px;">
           <p style="text-align: right; float: left; width: 150px; height: 35px; line-height: 35px; font-size: 14px; font-weight: 400; color: rgb(60, 60, 60);">Address:&nbsp;</p>
-          <input style="float: left; width: 340px;  height: 35px; border: 1px solid #dfdfdf"/>
+          <input v-model="cAddress" style="float: left; width: 340px;  height: 35px; border: 1px solid #dfdfdf"/>
         </div>
         <div style="clear: both; padding-top: 20px; height: 37px;">
           <p style="text-align: right; float: left; width: 150px; height: 35px; line-height: 35px; font-size: 14px; font-weight: 400; color: rgb(60, 60, 60);">Password:&nbsp;</p>
@@ -114,6 +114,7 @@ export default {
       cTelephone: '',
       cNickname: '',
       cPassword: '',
+      cAddress: '',
 
       bUrl: '',
       bTelephone: '',
@@ -138,7 +139,14 @@ export default {
     onClickRegister: function () {
       this.isLoad = true
       if (this.poiRegister === 0) {
-        this.$http.get(this.URL + 'c/logup?username=' + this.cTelephone + '&password=' + this.cPassword)
+        this.$http.get(this.URL + 'c/logup?username=' +
+          this.cTelephone +
+          '&password=' +
+          this.cPassword +
+          '&address=' +
+          this.cAddress +
+          '&nickname=' +
+          this.cNickname)
           .then((data) => {
             this.isLoad = false
             const response = data.body
