@@ -99,6 +99,7 @@ export default {
               this.setCookie('userName', response.data.data.nickname, 7)
               this.setCookie('userId', response.data.data.id, 7)
               this.setCookie('shopName', response.data.data.shopName, 7)
+              this.setCookie('url', response.data.data.url, 7)
               this.setCookie('userType', '1', 7)
               this.$router.push('/')
             } else {

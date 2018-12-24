@@ -28,12 +28,6 @@ import Good from '@/components/seller/Good'
 export default {
   components: {Loading, Good},
 
-  mounted () {
-    this.shopName = this.$route.params.data.sName
-
-    console.log(this.data)
-  },
-
   data () {
     return {
       info: {
@@ -47,20 +41,15 @@ export default {
     }
   },
 
-  created () {
+  mounted () {
     this.info.shopName = this.getCookie('shopName')
+    this.info.url = this.getCookie('url')
   },
 
   methods: {
     childByValue: function (childValue) {
       // childValue就是子组件传过来的值
-      console.log('qwe')
-      console.log(this.getCookie('shopName'))
-      if (this.getCookie('shopName') === '') {
-        this.info.shopName = childValue
-      } else {
-        this.info.shopName = this.getCookie('shopName')
-      }
+      this.info.shopName = childValue
     }
   }
 

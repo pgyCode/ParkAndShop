@@ -49,7 +49,6 @@ export default {
 
   methods: {
     addCart: function () {
-      this.isLoad = true
       this.$http.get(this.URL + 'c/addToCart?cID=' + this.getCookie('userId') + '&pID=' + this.data.pID)
         .then((data) => {
           this.isLoad = false

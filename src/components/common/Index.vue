@@ -94,6 +94,7 @@ export default {
       this.clearCookie('userType')
       this.clearCookie('userId')
       this.clearCookie('shopName')
+      this.clearCookie('url')
       this.$router.push('/login')
     }
   },

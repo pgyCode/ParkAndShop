@@ -31,7 +31,7 @@
 
             <div style="width: 86px; float: right; height: 120px; margin-top: 20px;">
               <button v-on:click="onClickApprove(shop)" style="text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; height: 26px; width: 60px; border: 1px solid rgb(220, 220, 220); border-radius: 5px; margin-top: 27px; cursor: pointer; margin: 22px auto;" >Approve</button>
-              <button style="text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; height: 26px; width: 60px; border: 1px solid rgb(220, 220, 220); border-radius: 5px; margin-top: 27px; cursor: pointer; margin: 22px auto;" >Reject</button>
+              <button  v-on:click="onClickReject(shop)"  style="text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; height: 26px; width: 60px; border: 1px solid rgb(220, 220, 220); border-radius: 5px; margin-top: 27px; cursor: pointer; margin: 22px auto;" >Reject</button>
             </div>
           </div>
         </li>
@@ -101,10 +101,16 @@ export default {
 
     onClickReject: function (index) {
       this.isLoad = true
-      this.$http.get('http://jsonplaceholder.typicode.com/users')
+      this.$http.get(this.URL + 'm/seller_pass_reject?id=' +
+        index.id)
         .then((data) => {
+          console.log(data)
           this.isLoad = false
-          this.shops.splice(index, 1)
+          this.initLoad()
+        })
+        .catch(() => {
+          this.isLoad = false
+          alert('Operate Failed')
         })
     },
 
