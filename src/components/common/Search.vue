@@ -17,17 +17,17 @@
       <ul>
         <li v-bind:key="data" v-for="data in datas"
             v-on:click="goGood(data)"  class="containerBodyLi">
-          <div v-on:mouseenter="onLiEnter($event)" v-on:mouseleave="onLiLeave($event)">
-            <img style="width: 180px; height: 180px;" v-bind:src="data.portraitURL"/>
+          <div style="border: 1px solid #dfdfdf;" v-on:mouseenter="onLiEnter($event)" v-on:mouseleave="onLiLeave($event)">
+            <img style="width: 178px; height: 180px;" v-bind:src="data.portraitURL"/>
             <h4 style="color: #f40; font-weight: 600; float: left; height: 22px; line-height:17px; margin-top: 11px; padding-left: 10px">¥{{ data.price }}</h4>
             <p style="display: block;margin-top: 6px; padding: 0px 10px; color: #3d3d3d; height: 18px; font-size: 14px; font-weight: 500; clear: both">{{ data.pName }}</p>
-            <p style="display: block;margin-top: 6px; padding: 0px 10px; color: #808285; height: 36px; font-size: 12px; font-weight: 400; clear: both">Description:{{ data.description }}</p>
+            <p style="overflow:hidden; display: block;margin-top: 6px; padding: 0px 10px; color: #808285; height: 36px; font-size: 12px; font-weight: 400; clear: both">Description:{{ data.description }}</p>
             <div>
-              <div style="float: left; padding-left: 10px">
+              <divw style="float: left; padding-left: 10px">
                 <span style="display: block; margin: 2px 0px; width: 10px; height: 3px; background: #f40"></span>
                 <span style="display: block; margin: 2px 0px; width: 10px; height: 3px;  background: #f40"></span>
                 <span style="display: block; margin: 2px 0px; width: 10px; height: 3px;  background: #f40"></span>
-              </div>
+              </divw>
               <span style="display: block; color: #888; font-size: 12px; padding-left:3px;float: left">{{ data.sName }}</span>
               <span  style="display: block; color: #888; font-size: 12px; padding-left: 10px; text-align: right; padding-right: 10px; white-space:nowrap;overflow:hidden; text-overflow:ellipsis;">Remain:{{ data.count }} pieces</span>
             </div>
@@ -158,81 +158,14 @@ export default {
         this.$http.get('http://47.106.11.120:8080/DiGou/api/c/searchproducts?pName=' + this.value + '&pageIndex=0&pageSize=10')
           .then((data) => {
             console.log(data)
-            // this.users = data.body
             this.isLoad = false
-
             this.datas = data.body.data.pArray
-
-            /*
-            this.datas = [
-              {
-                pName: 'HuaShuo ROG PHONE',
-                price: 5999.00,
-                portraitURL: 'https://g-search2.alicdn.com/img/bao/uploaded/i4/TB1oAS6qzDpK1RjSZFrXXa78VXa.jpg_240x240Q90.jpg',
-                sName: 'HuaShuo',
-                count: 88,
-                description: 'This is a HuaShuo phone.',
-                pID: 1,
-                sID: 1
-              },
-              {
-                pName: 'Razer Phone 2',
-                price: 5990.99,
-                portraitURL: 'https://g-search3.alicdn.com/img/bao/uploaded/i4/TB15ZaPjSzqK1RjSZFpXXakSXXa.jpg_240x240Q90.jpg',
-                sName: 'Razer',
-                count: 90,
-                description: 'This is a Razer phone.',
-                pID: 1,
-                sID: 1
-              },
-              {
-                pName: 'Nokia Phone 1020',
-                price: 768.00,
-                portraitURL: 'https://g-search3.alicdn.com/img/bao/uploaded/i4/TB10zbvIFXXXXbKXFXXXXXXXXXX.jpg_240x240Q90.jpg',
-                sName: 'Nokia',
-                count: 99,
-                description: 'This is a Nokia phone.',
-                pID: 1,
-                sID: 1
-              },
-              {
-                pName: 'Nokia Phone 1520',
-                price: 866.00,
-                portraitURL: 'https://g-search3.alicdn.com/img/bao/uploaded/i4/TB1NOxOHVXXXXXOXXXXXXXXXXXX.jpg_240x240Q90.jpg',
-                sName: 'Nokia',
-                count: 89,
-                description: 'This is a Nokia phone.',
-                pID: 1,
-                sID: 1
-              },
-              {
-                pName: 'Nokia Phone 930',
-                price: 598.00,
-                portraitURL: 'https://g-search2.alicdn.com/img/bao/uploaded/i4/TB1SkfgHFXXXXc8apXXXXXXXXXX.jpg_240x240Q90.jpg',
-                sName: 'Nokia',
-                count: 100,
-                description: 'This is a Nokia phone.',
-                pID: 1,
-                sID: 1
-              },
-              {
-                pName: 'Apple iPhone XR',
-                price: 6499.00,
-                portraitURL: 'https://g-search3.alicdn.com/img/bao/uploaded/i4/i1/1917047079/O1CN0122AEDRms6xN0ZWl_!!0-item_pic.jpg_460x460Q90.jpg',
-                sName: 'Apple',
-                count: 30,
-                description: 'This is an Apple phone.',
-                pID: 1,
-                sID: 1
-              }
-            ] */
           })
           .catch(() => {
             this.isLoad = false
           })
       } else if (this.poiSearch === 1) {
-        this.$http.get('http://jsonplaceholder.typicode.com/users')
-          // 'http://192.168.31.41:8000/api/searchproducts?pageIndex=0&pageSize=10')
+        this.$http.get(this.URL + 'm/seller_black_info')
           .then((data) => {
             console.log(data)
             this.users = data.body
@@ -350,10 +283,9 @@ export default {
   .containerBodyLi {
     display: block;
     width: 180px;
-    height: 320px;
+    height: 314px;
     float: left;
     margin: 10px;
-    border: 1px solid #dfdfdf;
   }
 
   .containerShopLi {

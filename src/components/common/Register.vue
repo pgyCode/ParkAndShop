@@ -148,6 +148,7 @@ export default {
           '&nickname=' +
           this.cNickname)
           .then((data) => {
+            console.log(data)
             this.isLoad = false
             const response = data.body
             if (response.code === 101) {
@@ -184,6 +185,7 @@ export default {
             if (response.code === 101) {
               this.setCookie('userId', response.data.id, 7)
               this.setCookie('userName', this.bNickname, 7)
+              this.setCookie('shopName', response.data.shopName, 7)
               this.setCookie('userType', 1, 7)
               this.$router.push('/')
             } else {
