@@ -7,11 +7,11 @@
         <div id="containerBody">
           <div id="box">
             <div id="innerBox">
-              <h4 style="margin-top: 9px; padding-bottom: 8px">Login By Passwrod</h4>
+              <h4 style="margin-top: 9px; padding-bottom: 8px">Login By Password</h4>
               <select v-model="poiLogin" style="margin-top: 9px; height: 40px; border: 1px solid rgb(221, 221, 221); width: 300px;font-weight: 500;color: grey;font-size: 14px; outline: none;">
                 <option value="0">Customer</option>
                 <option value="1">Seller</option>
-                <option value="2">Manager</option>
+                <option value="2">Administrator</option>
               </select>
 
               <div style="width: 300px; height: 42px; margin-top: 20px; border: 1px solid rgb(221, 221, 221);">
@@ -71,11 +71,12 @@ export default {
       if (this.poiLogin === '0') {
         this.$http.get('http://47.106.11.120:8080/DiGou/api/c/login?username=' + this.username + '&password=' + this.password)
           .then((data) => {
+            console.log(data)
             this.isLoad = false
             const response = data.body
             if (response.code === 101) {
               this.setCookie('userId', response.data.userID, 7)
-              this.setCookie('userName', '暂时没有昵称', 7)
+              this.setCookie('userName', response.data.nickname, 7)
               this.setCookie('userType', 0, 7)
               this.$router.push('/')
             } else {
@@ -97,6 +98,7 @@ export default {
             if (response.code === 101) {
               this.setCookie('userName', response.data.data.nickname, 7)
               this.setCookie('userId', response.data.data.id, 7)
+              this.setCookie('shopName', response.data.data.shopName, 7)
               this.setCookie('userType', '1', 7)
               this.$router.push('/')
             } else {

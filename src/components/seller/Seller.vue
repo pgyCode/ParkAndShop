@@ -47,11 +47,20 @@ export default {
     }
   },
 
+  created () {
+    this.info.shopName = this.getCookie('shopName')
+  },
+
   methods: {
     childByValue: function (childValue) {
       // childValue就是子组件传过来的值
       console.log('qwe')
-      this.info.shopName = childValue
+      console.log(this.getCookie('shopName'))
+      if (this.getCookie('shopName') === '') {
+        this.info.shopName = childValue
+      } else {
+        this.info.shopName = this.getCookie('shopName')
+      }
     }
   }
 
