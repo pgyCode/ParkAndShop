@@ -18,6 +18,7 @@
     </div>
     <router-view/>
     <good v-show="false" v-on:childByValue="childByValue"/>
+    <good v-show="false" v-on:childByValue="childByValue"/>
   </div>
 </template>
 

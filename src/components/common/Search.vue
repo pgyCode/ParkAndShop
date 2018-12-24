@@ -16,8 +16,8 @@
     <div id="containerBody" v-show="poiSearch == 0">
       <ul>
         <li v-bind:key="data" v-for="data in datas"
-            v-on:click="goGood(data)">
-          <div class="containerBodyLi" v-on:mouseenter="onLiEnter($event)" v-on:mouseleave="onLiLeave($event)">
+            v-on:click="goGood(data)"  class="containerBodyLi">
+          <div v-on:mouseenter="onLiEnter($event)" v-on:mouseleave="onLiLeave($event)">
             <img style="width: 180px; height: 180px;" v-bind:src="data.portraitURL"/>
             <h4 style="color: #f40; font-weight: 600; float: left; height: 22px; line-height:17px; margin-top: 11px; padding-left: 10px">¥{{ data.price }}</h4>
             <p style="display: block;margin-top: 6px; padding: 0px 10px; color: #3d3d3d; height: 18px; font-size: 14px; font-weight: 500; clear: both">{{ data.pName }}</p>
@@ -39,8 +39,8 @@
     <div id="containerShop" v-show="poiSearch == 1">
       <ul>
         <li v-bind:key="shop" v-for="shop in shops"
-            v-on:click="goShop(shop)">
-          <div  class="containerShopLi">
+            v-on:click="goShop(shop)"  class="containerShopLi">
+          <div>
             <div style="float: left; width: 350px; height: 162px;">
               <img v-bind:src="shop.url"
                    style="float:left; width: 120px; height: 120px; margin-right: 20px; border: 1px solid #b6b6b6;"/>
@@ -114,8 +114,8 @@ export default {
 
   methods: {
 
-    goShop: function (poi) {
-      this.$router.push('/seller/shop')
+    goShop: function (info) {
+      this.$router.push({name: 'seller_shop', params: {data: info}})
     },
 
     goGood: function (info) {
