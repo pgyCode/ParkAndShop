@@ -38,7 +38,7 @@
             </div>
 
             <div style="width: 86px; float: right; height: 120px; margin-top: 20px;">
-              <button style="text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; height: 26px; width: 60px; border: 1px solid rgb(220, 220, 220); border-radius: 5px; cursor: pointer; margin: 47px auto;" >Block</button>
+              <button v-on:click="onClickBlock(shop)" style="text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; height: 26px; width: 60px; border: 1px solid rgb(220, 220, 220); border-radius: 5px; cursor: pointer; margin: 47px auto;" >Block</button>
             </div>
           </div>
         </li>
@@ -58,52 +58,29 @@ export default {
     return {
       shops: [],
       isLoad: false,
-      requests: []
+      requests: [],
+      value: ''
     }
   },
 
   methods: {
+    onClickBlock: function (info) {
+      this.isLoad = true
+      this.$http.get(this.URL + 'm/seller_white_block?id=' +
+        info.id)
+        .then((data) => {
+          this.isLoad = false
+          this.onClickSearch()
+        })
+    },
 
     onClickSearch: function () {
       this.isLoad = true
-      this.$http.get('http://jsonplaceholder.typicode.com/users')
+      this.$http.get(this.URL + 'm/seller_white_info?value=' +
+        this.value)
         .then((data) => {
           this.isLoad = false
-          this.shops = data
-          this.shops = [
-            {
-              shopName: 'Bellroy Google',
-              sellerName: 'bellroy Store',
-              url: 'https://g-search1.alicdn.com/img/bao/uploaded/i4//d9/f2/TB1oA3IQFXXXXXGXpXXSutbFXXX.jpg_140x140Q90.jpg',
-              major: 'Google Phone',
-              count: 2,
-              description: 'We sell mobile phones, there are many mobile phones in our store, welcome everyone to buy our google mobile phone'
-            },
-            {
-              shopName: 'Top Google Phone',
-              sellerName: 'sunny-echo',
-              url: 'https://g-search1.alicdn.com/img/bao/uploaded/i4//e3/ad/TB1nnHkLXXXXXalXpXXwu0bFXXX.png_140x140Q90.jpg',
-              major: 'Phone',
-              count: 4,
-              description: 'We sell mobile phones, there are many mobile phones in our store, welcome everyone to buy our google mobile phone'
-            },
-            {
-              shopName: 'Google Purchase',
-              sellerName: 'sammy0123',
-              url: 'https://g-search1.alicdn.com/img/bao/uploaded/i4//55/5b/TB1yX_bcBLN8KJjSZFPwu0oLXXa.png_140x140Q90.jpg',
-              major: 'Google devices',
-              count: 2,
-              description: 'We sell mobile phones, there are many mobile phones in our store, welcome everyone to buy our google mobile phone'
-            },
-            {
-              shopName: 'The US Google PurChase',
-              sellerName: 'ruiwa403549675',
-              url: 'https://g-search1.alicdn.com/img/bao/uploaded/i4//cb/2f/TB1KwKxfeuSBuNjy1XcSuwYjFXa.jpg_140x140Q90.jpg',
-              major: 'Apple',
-              count: 1,
-              description: 'We sell mobile phones, there are many mobile phones in our store, welcome everyone to buy our google mobile phone'
-            }
-          ]
+          this.shops = data.body.data.array
         })
     }
   }
