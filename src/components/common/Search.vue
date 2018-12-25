@@ -17,19 +17,19 @@
       <ul>
         <li v-bind:key="data" v-for="data in datas"
             v-on:click="goGood(data)"  class="containerBodyLi">
-          <div style="border: 1px solid #dfdfdf;" v-on:mouseenter="onLiEnter($event)" v-on:mouseleave="onLiLeave($event)">
+          <div style="padding-bottom:5px; border: 1px solid #dfdfdf;" v-on:mouseenter="onLiEnter($event)" v-on:mouseleave="onLiLeave($event)">
             <img style="width: 178px; height: 180px;" v-bind:src="data.portraitURL"/>
             <h4 style="color: #f40; font-weight: 600; float: left; height: 22px; line-height:17px; margin-top: 11px; padding-left: 10px">¥{{ data.price }}</h4>
             <p style="display: block;margin-top: 6px; padding: 0px 10px; color: #3d3d3d; height: 18px; font-size: 14px; font-weight: 500; clear: both">{{ data.pName }}</p>
-            <p style="overflow:hidden; display: block;margin-top: 6px; padding: 0px 10px; color: #808285; height: 36px; font-size: 12px; font-weight: 400; clear: both">Description:{{ data.description }}</p>
+            <p style="overflow:hidden; display: block;margin-top: 6px; padding: 0px 10px; color: #808285; height: 36px; font-size: 12px; font-weight: 400; clear: both">{{ data.description }}</p>
             <div>
               <divw style="float: left; padding-left: 10px">
                 <span style="display: block; margin: 2px 0px; width: 10px; height: 3px; background: #f40"></span>
                 <span style="display: block; margin: 2px 0px; width: 10px; height: 3px;  background: #f40"></span>
                 <span style="display: block; margin: 2px 0px; width: 10px; height: 3px;  background: #f40"></span>
               </divw>
-              <span style="display: block; color: #888; font-size: 12px; padding-left:3px;float: left">{{ data.sName }}</span>
-              <span  style="display: block; color: #888; font-size: 12px; padding-left: 10px; text-align: right; padding-right: 10px; white-space:nowrap;overflow:hidden; text-overflow:ellipsis;">Remain:{{ data.count }} pieces</span>
+              <span style="display: block; color: #888; font-size: 12px; padding-left:3px;float: left">{{ data.shopName }}</span>
+              <span  style="display: block; color: #888; font-size: 12px; padding-left: 10px; text-align: right; padding-right: 10px; white-space:nowrap;overflow:hidden; text-overflow:ellipsis;">Remain:{{ data.num }} pieces</span>
             </div>
             <span style="clear:both; width: 100px; margin-left:10px; text-align: center; display: block; color: #fff; background: #f40; font-size: 12px;padding: 1px 3px; margin-top: 3px">Authenticated</span>
           </div>
