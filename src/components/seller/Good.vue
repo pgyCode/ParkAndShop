@@ -36,7 +36,7 @@ export default {
   components: {Loading},
   mounted () {
     this.data = this.$route.params.data
-    this.$emit('childByValue', this.data.shopName)
+    this.$emit('childByValue', this.data.sID)
     console.log(this.data)
   },
 

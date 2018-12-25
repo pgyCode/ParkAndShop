@@ -32,7 +32,7 @@ export default {
     initLoad: function () {
       this.isLoad = true
       this.$http.get(this.URL + 'b/good/all?id=' +
-        this.getCookie('userId'))
+        this.id)
         .then((data) => {
           console.log(data)
           this.isLoad = false
@@ -49,14 +49,11 @@ export default {
     }
   },
 
-  created: function () {
-    this.initLoad()
-  },
-
   mounted () {
-    this.data = this.$route.params.data
-    this.$emit('childByValue', this.data.sName)
-    console.log(this.data)
+    this.id = this.$route.params.data
+    this.$emit('childByValue', this.id)
+    this.initLoad()
+    console.log(this.id)
   }
 
   // mounted () {

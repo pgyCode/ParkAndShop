@@ -10,7 +10,7 @@
       <router-link class='subTitle' v-show="this.getCookie('userType') == '1'" to="/seller/info">Info</router-link>
       <router-link class='subTitle' v-show="this.getCookie('userType') == '1'" to="/seller/addGood">Add Goods</router-link>
       <router-link class='subTitle' v-show="this.getCookie('userType') == '1'" to="/seller/order">Order</router-link>
-      <router-link class='subTitle' v-show="this.getCookie('userType') == '1'" to="/seller/shop">Shop</router-link>
+      <router-link class='subTitle' v-show="this.getCookie('userType') == '1'" to="#" v-on:click.native="onClickIndexShop()">Shop</router-link>
       <router-link class='subTitle' v-show="this.getCookie('userType') == '2'" to="/manager/system">System</router-link>
       <router-link class='subTitle' v-show="this.getCookie('userType') == '2'" to="/manager/ads">Ads</router-link>
       <router-link class='subTitle' v-show="this.getCookie('userType') == '2'" to="/manager/customer">Customers</router-link>
@@ -96,6 +96,10 @@ export default {
       this.clearCookie('shopName')
       this.clearCookie('url')
       this.$router.push('/login')
+    },
+
+    onClickIndexShop: function () {
+      this.$router.push({name: 'seller_shop', params: {data: this.getCookie('userId')}})
     }
   },
 
