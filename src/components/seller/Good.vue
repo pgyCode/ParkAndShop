@@ -36,7 +36,7 @@ export default {
   components: {Loading},
   mounted () {
     this.data = this.$route.params.data
-    this.$emit('childByValue', this.data.shopName)
+    this.$emit('childByValue', this.data.sID)
     console.log(this.data)
   },
 
@@ -49,7 +49,6 @@ export default {
 
   methods: {
     addCart: function () {
-      this.isLoad = true
       this.$http.get(this.URL + 'c/addToCart?cID=' + this.getCookie('userId') + '&pID=' + this.data.pID)
         .then((data) => {
           this.isLoad = false

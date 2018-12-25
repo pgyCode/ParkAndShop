@@ -3,7 +3,7 @@
     <div style="width: 1000px; min-width: 1000px; margin: 0px auto;">
 
       <div style="width: 1000px; height: 83px; padding: 0px 0px; margin: 0px auto;">
-        <img src="../../assets/logo.png" style="float: left" height="83px" width='210px'/>
+        <img src="../../assets/logo.png" style="float: left;" height="83px" width='210px'/>
         <p style="float: left; color: rgb(60, 60, 60); line-height: 83px; font-size: 22px; font-weight: 700; margin-left: 20px">Shop</p>
       </div>
       <div style=" width: 1000px;height: 19px; padding: 6px 0px; border-bottom: 2px solid #f40">
@@ -12,54 +12,49 @@
       </div>
       <div style="height: 120px; width: 1000px;">
         <img v-bind:src="info.url"
-             style="float: left; width: 120px; height: 120px;"/>
+             style="float: left; width: 118px; height: 118px; border: 1px solid rgb(212,215,220)"/>
         <p src="../../assets/logo.png" style="float:left; width: 880px; height: 120px; font-size: 30px; line-height: 120px; text-align: center; color: rgb(63,127,206);">{{ info.shopName }}</p>
       </div>
     </div>
     <router-view/>
     <good v-show="false" v-on:childByValue="childByValue"/>
-    <good v-show="false" v-on:childByValue="childByValue"/>
+    <shop v-show="false" v-on:childByValue="childByValue"/>
   </div>
 </template>
 
 <script>
 import Loading from '@/components/common/Loading'
 import Good from '@/components/seller/Good'
+import Shop from '@/components/seller/Shop'
 export default {
-  components: {Loading, Good},
-
-  mounted () {
-    this.shopName = this.$route.params.data.sName
-
-    console.log(this.data)
-  },
+  components: {Loading, Good, Shop},
 
   data () {
     return {
+      id: -1,
       info: {
-        url: 'http://lc-tp28gntm.cn-n1.lcfile.com/d2477ef0b23ec61b963f.jpg',
-        telephone: '18392128500',
-        shopName: 'Yi Diandian',
-        nickname: 'YiDianDian',
-        description: 'We sell drinks, various drinks, milk tea, lemonade, orange juice, etc.',
-        major: 'Drink'
       }
     }
-  },
-
-  created () {
-    this.info.shopName = this.getCookie('shopName')
   },
 
   methods: {
     childByValue: function (childValue) {
       // childValue就是子组件传过来的值
-      console.log('qwe')
-      console.log(this.getCookie('shopName'))
-      if (this.getCookie('shopName') === '') {
-        this.info.shopName = childValue
-      } else {
-        this.info.shopName = this.getCookie('shopName')
+      if (childValue !== '') {
+        this.id = childValue
+        this.isLoad = true
+        console.log(this.id)
+        this.$http.get(this.URL + 'b/info/get?id=' +
+          this.id)
+          .then((data) => {
+            console.log(data)
+            this.isLoad = false
+            const response = data.body
+            this.info = response.data.data
+          })
+          .catch(() => {
+            this.isLoad = false
+          })
       }
     }
   }
