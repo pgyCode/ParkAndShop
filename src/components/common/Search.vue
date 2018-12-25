@@ -157,11 +157,12 @@ export default {
     onClickSearch: function () {
       this.isLoad = true
       if (this.poiSearch === 0) {
-        this.$http.get('http://47.106.11.120:8080/DiGou/api/c/searchproducts?pName=' + this.value + '&pageIndex=0&pageSize=10')
+        this.$http.get(this.URL + 'c/searchproducts?pName=' +
+          this.value)
           .then((data) => {
             console.log(data)
             this.isLoad = false
-            this.datas = data.body.data.pArray
+            this.datas = data.body.data.array
           })
           .catch(() => {
             this.isLoad = false
