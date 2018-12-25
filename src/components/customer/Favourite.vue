@@ -35,7 +35,7 @@ export default {
 
   created: function () {
     this.isLoad = true
-    this.$http.get('http://jsonplaceholder.typicode.com/users')
+    this.$http.get(this.URL + 'm/seller_black_info')
       .then((data) => {
         this.users = data.body
         this.datas = [

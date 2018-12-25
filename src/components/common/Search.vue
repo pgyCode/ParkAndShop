@@ -17,19 +17,19 @@
       <ul>
         <li v-bind:key="data" v-for="data in datas"
             v-on:click="goGood(data)"  class="containerBodyLi">
-          <div v-on:mouseenter="onLiEnter($event)" v-on:mouseleave="onLiLeave($event)">
-            <img style="width: 180px; height: 180px;" v-bind:src="data.portraitURL"/>
+          <div style="padding-bottom:5px; border: 1px solid #dfdfdf;" v-on:mouseenter="onLiEnter($event)" v-on:mouseleave="onLiLeave($event)">
+            <img style="width: 178px; height: 180px;" v-bind:src="data.portraitURL"/>
             <h4 style="color: #f40; font-weight: 600; float: left; height: 22px; line-height:17px; margin-top: 11px; padding-left: 10px">¥{{ data.price }}</h4>
             <p style="display: block;margin-top: 6px; padding: 0px 10px; color: #3d3d3d; height: 18px; font-size: 14px; font-weight: 500; clear: both">{{ data.pName }}</p>
-            <p style="display: block;margin-top: 6px; padding: 0px 10px; color: #808285; height: 36px; font-size: 12px; font-weight: 400; clear: both">Description:{{ data.description }}</p>
+            <p style="overflow:hidden; display: block;margin-top: 6px; padding: 0px 10px; color: #808285; height: 36px; font-size: 12px; font-weight: 400; clear: both">{{ data.description }}</p>
             <div>
-              <div style="float: left; padding-left: 10px">
+              <divw style="float: left; padding-left: 10px">
                 <span style="display: block; margin: 2px 0px; width: 10px; height: 3px; background: #f40"></span>
                 <span style="display: block; margin: 2px 0px; width: 10px; height: 3px;  background: #f40"></span>
                 <span style="display: block; margin: 2px 0px; width: 10px; height: 3px;  background: #f40"></span>
-              </div>
-              <span style="display: block; color: #888; font-size: 12px; padding-left:3px;float: left">{{ data.sName }}</span>
-              <span  style="display: block; color: #888; font-size: 12px; padding-left: 10px; text-align: right; padding-right: 10px; white-space:nowrap;overflow:hidden; text-overflow:ellipsis;">Remain:{{ data.count }} pieces</span>
+              </divw>
+              <span style="display: block; color: #888; font-size: 12px; padding-left:3px;float: left">{{ data.shopName }}</span>
+              <span  style="display: block; color: #888; font-size: 12px; padding-left: 10px; text-align: right; padding-right: 10px; white-space:nowrap;overflow:hidden; text-overflow:ellipsis;">Remain:{{ data.num }} pieces</span>
             </div>
             <span style="clear:both; width: 100px; margin-left:10px; text-align: center; display: block; color: #fff; background: #f40; font-size: 12px;padding: 1px 3px; margin-top: 3px">Authenticated</span>
           </div>
@@ -41,15 +41,17 @@
         <li v-bind:key="shop" v-for="shop in shops"
             v-on:click="goShop(shop)"  class="containerShopLi">
           <div>
-            <div style="float: left; width: 350px; height: 162px;">
+            <div style="float: left; width: 400px; height: 162px;">
               <img v-bind:src="shop.url"
                    style="float:left; width: 120px; height: 120px; margin-right: 20px; border: 1px solid #b6b6b6;"/>
-              <div style="float: left; width: 200px;  height: 70px;">
-                <span style="font-size: 14px; font-weight: 700; line-height: 24px; color: rgb(0, 99, 200);">{{ shop.shopName }}</span>
-                <span style="clear:both; float: left; font-size: 12px; font-weight: 400; line-height: 24px; color: rgb(102, 102, 102);"><b>Seller：</b></span>
-                <span style="float: left; font-size: 12px; font-weight: 400; line-height: 24px; color: rgb(0, 99, 200);">{{ shop.sellerName }}</span>
-                <span style="clear:both; float: left; font-size: 12px; font-weight: 400; line-height: 24px; color: rgb(102, 102, 102);"><b>Major Business：</b></span>
-                <span style="float: left; font-size: 12px; font-weight: 400; line-height: 24px; color: rgb(0, 99, 200);">{{ shop.major }}</span>
+              <div style="float: left; width: 250px;  height: 70px; ">
+                <span style="font-size: 14px; font-weight: 700; line-height: 30px; color: rgb(0, 99, 200);">{{ shop.shopName }}</span>
+                <span style="clear:both; float: left; font-size: 12px; font-weight: 400; line-height: 30px; color: rgb(102, 102, 102);"><b>Seller：</b></span>
+                <span style="float: left; font-size: 12px; font-weight: 400; line-height: 30px; color: rgb(0, 99, 200);">{{ shop.nickname }}</span>
+                <span style="clear:both; float: left; font-size: 12px; font-weight: 400; line-height: 30px; color: rgb(102, 102, 102);"><b>Major Business：</b></span>
+                <span style="overflow:hidden; height: 30px;  float: left; font-size: 12px; font-weight: 400; line-height: 30px; color: rgb(0, 99, 200);">{{ shop.major }}</span>
+                <span style="clear:both; float: left; font-size: 12px; font-weight: 400; line-height: 30px; color: rgb(102, 102, 102);"><b>Telephone：</b></span>
+                <span style="overflow:hidden; height: 30px;  float: left; font-size: 12px; font-weight: 400; line-height: 24px; color: rgb(0, 99, 200);">{{ shop.telephone }}</span>
               </div>
               <div style="clear: both; padding-top: 16px; width: 100%; height: 24px;">
                 <div>
@@ -58,13 +60,13 @@
                     <span style="display: block; margin: 2px 0px; width: 10px; height: 3px;  background: #f40"></span>
                     <span style="display: block; margin: 2px 0px; width: 10px; height: 3px;  background: #f40"></span>
                   </div>
-                  <span  style="display: block; color: #888; font-size: 12px; padding-left: 10px; float: left; font-weight: 600">Kinds：{{ shop.count }} pieces</span>
+                  <span  style="display: block; color: #888; font-size: 12px; padding-left: 10px; float: left; font-weight: 600">Kinds：{{ shop.num }} pieces</span>
                 </div>
               </div>
             </div>
 
-            <div style="width: 610px; float: right; height: 162px;">
-              <div style="width: 610px; background: rgb(237, 237, 237); height: 132px;">
+            <div style="width: 560px; float: right; height: 162px;">
+              <div style="width: 560px; background: rgb(237, 237, 237); height: 132px;">
                 <p style="padding-top: 15px; margin-bottom: 10px; margin-left: 20px; font-size: 14px; font-weight: 600; color: #666;">Shop Description:</p>
                 <p style="margin-top: 10px; margin-left: 20px; margin-right: 20px; font-size: 13px; font-weight: 400; color: #666;">{{ shop.description }}</p>
               </div>
@@ -115,7 +117,7 @@ export default {
   methods: {
 
     goShop: function (info) {
-      this.$router.push({name: 'seller_shop', params: {data: info}})
+      this.$router.push({name: 'seller_shop', params: {data: info.id}})
     },
 
     goGood: function (info) {
@@ -155,98 +157,22 @@ export default {
     onClickSearch: function () {
       this.isLoad = true
       if (this.poiSearch === 0) {
-        this.$http.get('http://47.106.11.120:8080/DiGou/api/c/searchproducts?pName=' + this.value + '&pageIndex=0&pageSize=10')
+        this.$http.get(this.URL + 'c/searchproducts?pName=' +
+          this.value)
           .then((data) => {
             console.log(data)
-            // this.users = data.body
             this.isLoad = false
-
-            this.datas = data.body.data.pArray
-
-            /*
-            this.datas = [
-              {
-                pName: 'HuaShuo ROG PHONE',
-                price: 5999.00,
-                portraitURL: 'https://g-search2.alicdn.com/img/bao/uploaded/i4/TB1oAS6qzDpK1RjSZFrXXa78VXa.jpg_240x240Q90.jpg',
-                sName: 'HuaShuo',
-                count: 88,
-                description: 'This is a HuaShuo phone.',
-                pID: 1,
-                sID: 1
-              },
-              {
-                pName: 'Razer Phone 2',
-                price: 5990.99,
-                portraitURL: 'https://g-search3.alicdn.com/img/bao/uploaded/i4/TB15ZaPjSzqK1RjSZFpXXakSXXa.jpg_240x240Q90.jpg',
-                sName: 'Razer',
-                count: 90,
-                description: 'This is a Razer phone.',
-                pID: 1,
-                sID: 1
-              },
-              {
-                pName: 'Nokia Phone 1020',
-                price: 768.00,
-                portraitURL: 'https://g-search3.alicdn.com/img/bao/uploaded/i4/TB10zbvIFXXXXbKXFXXXXXXXXXX.jpg_240x240Q90.jpg',
-                sName: 'Nokia',
-                count: 99,
-                description: 'This is a Nokia phone.',
-                pID: 1,
-                sID: 1
-              },
-              {
-                pName: 'Nokia Phone 1520',
-                price: 866.00,
-                portraitURL: 'https://g-search3.alicdn.com/img/bao/uploaded/i4/TB1NOxOHVXXXXXOXXXXXXXXXXXX.jpg_240x240Q90.jpg',
-                sName: 'Nokia',
-                count: 89,
-                description: 'This is a Nokia phone.',
-                pID: 1,
-                sID: 1
-              },
-              {
-                pName: 'Nokia Phone 930',
-                price: 598.00,
-                portraitURL: 'https://g-search2.alicdn.com/img/bao/uploaded/i4/TB1SkfgHFXXXXc8apXXXXXXXXXX.jpg_240x240Q90.jpg',
-                sName: 'Nokia',
-                count: 100,
-                description: 'This is a Nokia phone.',
-                pID: 1,
-                sID: 1
-              },
-              {
-                pName: 'Apple iPhone XR',
-                price: 6499.00,
-                portraitURL: 'https://g-search3.alicdn.com/img/bao/uploaded/i4/i1/1917047079/O1CN0122AEDRms6xN0ZWl_!!0-item_pic.jpg_460x460Q90.jpg',
-                sName: 'Apple',
-                count: 30,
-                description: 'This is an Apple phone.',
-                pID: 1,
-                sID: 1
-              }
-            ] */
+            this.datas = data.body.data.array
           })
           .catch(() => {
             this.isLoad = false
           })
       } else if (this.poiSearch === 1) {
-        this.$http.get('http://jsonplaceholder.typicode.com/users')
-          // 'http://192.168.31.41:8000/api/searchproducts?pageIndex=0&pageSize=10')
+        this.$http.get(this.URL + 'm/seller_white_info?value=' +
+          this.value)
           .then((data) => {
-            console.log(data)
-            this.users = data.body
             this.isLoad = false
-            this.shops = [
-              {
-                shopName: 'Google Purchase',
-                sellerName: 'sammy0123',
-                url: 'https://g-search1.alicdn.com/img/bao/uploaded/i4//55/5b/TB1yX_bcBLN8KJjSZFPwu0oLXXa.png_140x140Q90.jpg',
-                major: 'Google devices',
-                count: 2,
-                description: 'We sell mobile phones, there are many mobile phones in our store, welcome everyone to buy our google mobile phone'
-              }
-            ]
+            this.shops = data.body.data.array
           })
           .catch(() => {
             this.isLoad = false
@@ -350,10 +276,9 @@ export default {
   .containerBodyLi {
     display: block;
     width: 180px;
-    height: 320px;
+    height: 314px;
     float: left;
     margin: 10px;
-    border: 1px solid #dfdfdf;
   }
 
   .containerShopLi {
