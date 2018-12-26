@@ -29,7 +29,6 @@ import ManagerCustomerSearch from '@/components/manager/CustomerSearch'
 
 // 主页--商家
 import Seller from '@/components/seller/Seller'
-import SellerOrder from '@/components/seller/Order'
 import SellerShop from '@/components/seller/Shop'
 import SellerGood from '@/components/seller/Good'
 import SellerAddGood from '@/components/seller/AddGood'
