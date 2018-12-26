@@ -72,7 +72,6 @@ export default {
 
     onClickBuy: function (id) {
       this.isLoad = true
-      console.log(this.URL + 'c/makeOrder?cID=' + this.getCookie('userId') + '&pID=' + id)
       this.$http.get(this.URL + 'c/makeOrder?cID=' + this.getCookie('userId') + '&pID=' + id)
         .then((data) => {
           console.log(data)

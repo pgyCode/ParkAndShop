@@ -117,7 +117,8 @@ export default {
   methods: {
 
     goShop: function (info) {
-      this.$router.push({name: 'seller_shop', params: {data: info.id}})
+      console.log(info.id)
+      this.$router.push({name: 'customer_shop', params: {data: info.id}})
     },
 
     goGood: function (info) {

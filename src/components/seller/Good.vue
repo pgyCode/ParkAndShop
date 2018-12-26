@@ -34,6 +34,7 @@ import Loading from '@/components/common/Loading'
 
 export default {
   components: {Loading},
+
   mounted () {
     this.data = this.$route.params.data
     this.$emit('childByValue', this.data.sID)

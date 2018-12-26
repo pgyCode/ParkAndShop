@@ -10,6 +10,7 @@ import CustomerFavourite from '@/components/customer/Favourite'
 import CustomerOrder from '@/components/customer/Order'
 import CustomerCart from '@/components/customer/Cart'
 import CustomerInfo from '@/components/customer/Info'
+import CustomerShop from '@/components/customer/Shop'
 
 // import Saler from '@/components/seller/Saler'
 // import SalerOwner from '@/components/seller/Owner'
@@ -99,6 +100,11 @@ export default new Router({
               path: '/seller/shop',
               name: 'seller_shop',
               component: SellerShop
+            },
+            {
+              path: '/customer/shop',
+              name: 'customer_shop',
+              component: CustomerShop
             },
             {
               path: '/seller/good',

@@ -11,11 +11,11 @@
     </div>
     <div id="containerBody">
       <ul>
-        <li v-bind:key="order" v-for="order in orders">
+        <li v-bind:key="order" v-for="order in orders" v-on:click="goGood(order.product)">
           <div style="height: 42px;background: rgb(241, 241, 241); border-bottom: 1px solid #dfdfdf">
-            <p style="float: left; color: rgb(60, 60, 60); font-size: 12px; width: 100px; text-align: center; font-weight: 800; line-height: 42px ">{{order.createTime}}</p>
-            <p style="float: left; color: rgb(60, 60, 60); font-size: 12px; width: 130px; text-align: center; font-weight: 400; line-height: 42px ">OrderNum: {{ order.orderID}}</p>
-            <p style="float: left; color: rgb(60, 60, 60); font-size: 12px; width: 300px; text-align: center; font-weight: 400; line-height: 42px ">{{ order.product.shopName }}</p>
+            <p style="float: left; color: rgb(60, 60, 60); font-size: 12px; width: 150px; padding-left: 20px; font-weight: 800; line-height: 42px ">{{order.createTime | formatDate }}</p>
+            <p style="float: left; color: rgb(60, 60, 60); font-size: 12px; width: 130px; text-align: left; font-weight: 400; line-height: 42px ">OrderNum: {{ order.orderID}}</p>
+            <p style="float: left; color: rgb(60, 60, 60); font-size: 12px; width: 160px; text-align: center; font-weight: 400; line-height: 42px ">{{ order.product.shopName }}</p>
             <p style="float: right; color: rgb(60, 60, 60); font-size: 12px; width: 90px; text-align: center; font-weight: 400; line-height: 42px ">{{ order.product.shopName }}</p>
           </div>
           <div style="padding: 15px; clear: both;">
@@ -28,7 +28,7 @@
             <p style="float: left; width: 100px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 400; line-height: 80px">{{ a = 1 }}</p>
             <p style="float: left; width: 100px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; line-height: 80px">¥{{ order.product.price }}</p>
             <p style="float: left; width: 100px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; line-height: 80px">{{ getStatus(order.isFinish) }}</p>
-            <button style="float: right; width: 100px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; height: 26px; width: 60px; border: 1px solid rgb(220, 220, 220); border-radius: 5px; margin-top: 27px; cursor: pointer" v-on:click="onClickRefund(order.orderID)">Refund</button>
+            <button v-show="order.isFinish === 1" style="float: right; width: 100px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; height: 26px; width: 60px; border: 1px solid rgb(220, 220, 220); border-radius: 5px; margin-top: 27px; cursor: pointer" v-on:click="onClickRefund(order.orderID)">Refund</button>
           </div>
         </li>
       </ul>
@@ -83,11 +83,33 @@ export default {
       } else if (statu === 1) {
         return 'Succeed'
       }
+    },
+
+    goGood: function (info) {
+      this.$router.push({name: 'seller_good', params: {data: info}})
     }
   },
 
   created: function () {
     this.initLoad()
+  },
+
+  filters: {
+    formatDate: function (value) {
+      let date = new Date(value)
+      let y = date.getFullYear()
+      let MM = date.getMonth() + 1
+      MM = MM < 10 ? ('0' + MM) : MM
+      let d = date.getDate()
+      d = d < 10 ? ('0' + d) : d
+      let h = date.getHours()
+      h = h < 10 ? ('0' + h) : h
+      let m = date.getMinutes()
+      m = m < 10 ? ('0' + m) : m
+      let s = date.getSeconds()
+      s = s < 10 ? ('0' + s) : s
+      return y + '-' + MM + '-' + d + ' ' + h + ':' + m + ':' + s
+    }
   }
 }
 </script>
