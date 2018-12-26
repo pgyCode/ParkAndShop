@@ -23,12 +23,17 @@ import ManagerSellerRequest from '@/components/manager/SellerRequest'
 import ManagerSellerBlacklist from '@/components/manager/SellerBlacklist'
 import ManagerSellerSearch from '@/components/manager/SellerSearch'
 
+// 主页--管理员--买家
+import ManagerCustomerBlack from '@/components/manager/CustomerBlack'
+import ManagerCustomerSearch from '@/components/manager/CustomerSearch'
+
 // 主页--商家
 import Seller from '@/components/seller/Seller'
 import SellerShop from '@/components/seller/Shop'
 import SellerGood from '@/components/seller/Good'
 import SellerAddGood from '@/components/seller/AddGood'
 import SellerInfo from '@/components/seller/Info'
+import SellerOrder from '@/components/seller/Order'
 
 Vue.use(Router)
 
@@ -61,7 +66,23 @@ export default new Router({
               component: ManagerSellerSearch
             }
           ]},
-        {path: '/manager/customers', component: ManagerCustomer},
+        {
+          path: '/manager/customer',
+          component: ManagerCustomer,
+          children: [
+            {
+              path: '/manager/customer/blacklist',
+              component: ManagerCustomerBlack
+            },
+            {
+              path: '/manager/customer/search',
+              component: ManagerCustomerSearch
+            },
+            {
+              path: '/',
+              component: ManagerCustomerSearch
+            }
+          ]},
         {path: '/manager/ads', component: ManagerSeller},
         {path: '/manager/system', component: ManagerOwner},
         {path: '/seller',
@@ -83,7 +104,8 @@ export default new Router({
             }
           ]},
         {path: '/seller/addGood', component: SellerAddGood},
-        {path: '/seller/info', component: SellerInfo}
+        {path: '/seller/info', component: SellerInfo},
+        {path: '/seller/order', component: SellerOrder}
       ]
     },
     {

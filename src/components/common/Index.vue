@@ -9,11 +9,11 @@
       <router-link style="float: left; margin-left: 10px" class='subTitle' v-show="this.getCookie('userName') == ''" to="/register">Register</router-link>
       <router-link class='subTitle' v-show="this.getCookie('userType') == '1'" to="/seller/info">Info</router-link>
       <router-link class='subTitle' v-show="this.getCookie('userType') == '1'" to="/seller/addGood">Add Goods</router-link>
-      <router-link class='subTitle' v-show="this.getCookie('userType') == '1'" to="/manager/system">Order</router-link>
-      <router-link class='subTitle' v-show="this.getCookie('userType') == '1'" to="/seller/shop">Shop</router-link>
+      <router-link class='subTitle' v-show="this.getCookie('userType') == '1'" to="/seller/order">Order</router-link>
+      <router-link class='subTitle' v-show="this.getCookie('userType') == '1'" to="#" v-on:click.native="onClickIndexShop()">Shop</router-link>
       <router-link class='subTitle' v-show="this.getCookie('userType') == '2'" to="/manager/system">System</router-link>
       <router-link class='subTitle' v-show="this.getCookie('userType') == '2'" to="/manager/ads">Ads</router-link>
-      <router-link class='subTitle' v-show="this.getCookie('userType') == '2'" to="/manager/customers">Customers</router-link>
+      <router-link class='subTitle' v-show="this.getCookie('userType') == '2'" to="/manager/customer">Customers</router-link>
       <router-link class='subTitle' v-show="this.getCookie('userType') == '2'" to="/manager/sellers">Sellers</router-link>
       <router-link class='subTitle' v-show="this.getCookie('userType') == '0'" to="/customer/order">Info</router-link>
       <router-link class='subTitle' v-show="this.getCookie('userType') == '0'"  to="/customer/cart">Cart</router-link>
@@ -93,7 +93,13 @@ export default {
       this.clearCookie('userName')
       this.clearCookie('userType')
       this.clearCookie('userId')
+      this.clearCookie('shopName')
+      this.clearCookie('url')
       this.$router.push('/login')
+    },
+
+    onClickIndexShop: function () {
+      this.$router.push({name: 'seller_shop', params: {data: this.getCookie('userId')}})
     }
   },
 
