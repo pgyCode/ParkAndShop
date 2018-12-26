@@ -5,10 +5,10 @@
     </div>
     <div id="containerBody">
       <ul>
-        <li v-bind:key="data" v-for="data in datas">
-          <img v-bind:src="data.url" style="width: 148px; height: 148px; border: 1px solid #dfdfdf;"/>
-          <p style="height: 30px; text-align: center; line-height: 30px; font-weight: 500; font-size: 12px; color: rgb(60, 60, 60);">{{ data.name }}</p>
-          <p style="height: 20px; text-align: center; line-height: 20px; font-weight: 900; font-size: 14px; color: #f40;">💰¥{{ data.price }}</p>
+        <li v-bind:key="data" v-for="data in datas" v-on:click="goGood(data.product)">
+          <img v-bind:src="data.product.portraitURL" style="width: 148px; height: 148px; border: 1px solid #dfdfdf;"/>
+          <p style="height: 30px; text-align: center; line-height: 30px; font-weight: 500; font-size: 12px; color: rgb(60, 60, 60);">{{ data.product.pName }}</p>
+          <p style="height: 20px; text-align: center; line-height: 20px; font-weight: 900; font-size: 14px; color: #f40;">💰¥{{ data.product.price }}</p>
         </li>
       </ul>
     </div>
@@ -25,41 +25,32 @@ export default {
       isLoad: false,
       currentPage: 1,
       name: 'sds',
-      users: []
+      datas: []
     }
   },
 
   methods: {
+    initLoad: function () {
+      this.isLoad = true
+      this.$http.get(this.URL + 'c/myFavourite?cID=' + this.getCookie('userId'))
+        .then((data) => {
+          console.log(data)
+          this.isLoad = false
+          const response = data.body
+          this.datas = response.data.favourites
+        })
+        .catch(() => {
+          this.isLoad = false
+        })
+    },
 
+    goGood: function (info) {
+      this.$router.push({name: 'seller_good', params: {data: info}})
+    }
   },
 
   created: function () {
-    this.isLoad = true
-    this.$http.get(this.URL + 'm/seller_black_info')
-      .then((data) => {
-        this.users = data.body
-        this.datas = [
-          {
-            url: 'https://g-search2.alicdn.com/img/bao/uploaded/i4/TB1oAS6qzDpK1RjSZFrXXa78VXa.jpg_240x240Q90.jpg',
-            name: 'HuaShuo ROG PHONE',
-            price: '5999.00'
-          },
-          {
-            url: 'https://g-search3.alicdn.com/img/bao/uploaded/i4/TB15ZaPjSzqK1RjSZFpXXakSXXa.jpg_240x240Q90.jpg',
-            name: 'Razer Phone 2',
-            price: '5990.99'
-          },
-          {
-            url: 'https://g-search3.alicdn.com/img/bao/uploaded/i4/TB10zbvIFXXXXbKXFXXXXXXXXXX.jpg_240x240Q90.jpg',
-            name: 'Nokia Phone 1020',
-            price: '768.00'
-          }
-        ]
-        this.isLoad = false
-      })
-      .catch(() => {
-        this.isLoad = false
-      })
+    this.initLoad()
   }
 }
 </script>

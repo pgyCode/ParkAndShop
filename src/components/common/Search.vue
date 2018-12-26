@@ -23,11 +23,11 @@
             <p style="display: block;margin-top: 6px; padding: 0px 10px; color: #3d3d3d; height: 18px; font-size: 14px; font-weight: 500; clear: both">{{ data.pName }}</p>
             <p style="overflow:hidden; display: block;margin-top: 6px; padding: 0px 10px; color: #808285; height: 36px; font-size: 12px; font-weight: 400; clear: both">{{ data.description }}</p>
             <div>
-              <divw style="float: left; padding-left: 10px">
+              <div style="float: left; padding-left: 10px">
                 <span style="display: block; margin: 2px 0px; width: 10px; height: 3px; background: #f40"></span>
                 <span style="display: block; margin: 2px 0px; width: 10px; height: 3px;  background: #f40"></span>
                 <span style="display: block; margin: 2px 0px; width: 10px; height: 3px;  background: #f40"></span>
-              </divw>
+              </div>
               <span style="display: block; color: #888; font-size: 12px; padding-left:3px;float: left">{{ data.shopName }}</span>
               <span  style="display: block; color: #888; font-size: 12px; padding-left: 10px; text-align: right; padding-right: 10px; white-space:nowrap;overflow:hidden; text-overflow:ellipsis;">Remain:{{ data.num }} pieces</span>
             </div>
