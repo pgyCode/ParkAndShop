@@ -93,15 +93,6 @@ export default new Router({
           component: Seller,
           children: [
             {
-              path: '/',
-              component: SellerShop
-            },
-            {
-              path: '/seller/shop',
-              name: 'seller_shop',
-              component: SellerShop
-            },
-            {
               path: '/customer/shop',
               name: 'customer_shop',
               component: CustomerShop
@@ -118,7 +109,12 @@ export default new Router({
           name: 'seller_good_info',
           component: SellerGoodInformation},
         {path: '/seller/info', component: SellerInfo},
-        {path: '/seller/order', component: SellerOrder}
+        {path: '/seller/order', component: SellerOrder},
+        {
+          path: '/seller/shop',
+          name: 'seller_shop',
+          component: SellerShop
+        }
       ]
     },
     {
