@@ -49,7 +49,7 @@ Vue.prototype.setHtml = function (key, value) {
   document.getElementById(key).html = value
 }
 
-Vue.prototype.URL = 'http://47.106.11.120:8080/DiGou/api/'
+Vue.prototype.URL = 'http://47.106.11.120:8080/DiGou//api/'
 // Vue.prototype.URL = 'http://127.0.0.1:8080/api/'
 
 /* eslint-disable no-new */
