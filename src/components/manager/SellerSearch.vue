@@ -83,6 +83,16 @@ export default {
           this.shops = data.body.data.array
         })
     }
+  },
+
+  created () {
+    this.isLoad = true
+    this.$http.get(this.URL + 'm/seller_white_info?value=' +
+      this.value)
+      .then((data) => {
+        this.isLoad = false
+        this.shops = data.body.data.array
+      })
   }
 
 }
