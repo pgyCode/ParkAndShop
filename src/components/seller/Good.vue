@@ -17,7 +17,7 @@
             <p style="margin-top: 10px; margin-left: 20px; margin-right: 20px; font-size: 13px; font-weight: 400; color: #666;">{{ data.description }}</p>
           </div>
         </div>
-        <p>Number：1 </p>
+        <p>Number：{{ data.num }}</p>
         <div style="margin-top: 20px">
           <button style="float: right; width: 178px; height: 38px; margin-left: 5px; border: none; background: rgb(255, 0, 54); color: #fff; font-weight: 400; font-size: 16px" v-on:click="addCart()">Add to cart</button>
           <button style="float: right; width: 178px; height: 38px; margin-left: 5px;border: none; background: rgb(255,90,44); color: #fff; font-weight: 400; font-size: 16px" v-on:click="addFavourite()">Favourite</button>

@@ -35,6 +35,7 @@ import SellerGood from '@/components/seller/Good'
 import SellerAddGood from '@/components/seller/AddGood'
 import SellerInfo from '@/components/seller/Info'
 import SellerOrder from '@/components/seller/Order'
+import SellerGoodInformation from '@/components/seller/Good_info'
 
 Vue.use(Router)
 
@@ -106,6 +107,10 @@ export default new Router({
             }
           ]},
         {path: '/seller/addGood', component: SellerAddGood},
+        {
+          path: '/seller/Good_info',
+          name: 'seller_good_info',
+          component: SellerGoodInformation},
         {path: '/seller/info', component: SellerInfo},
         {path: '/seller/order', component: SellerOrder}
       ]
