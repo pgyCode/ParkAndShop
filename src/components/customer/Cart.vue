@@ -23,7 +23,7 @@
               <p style=" color: rgb(60, 60, 60); font-size: 13px; font-weight: 500; line-height: 25px; height: 55px; ">{{ order.pName }}</p>
               <span style="clear:both; width: 100px; text-align: center; display: block; color: #fff; background: #f40; font-size: 12px;padding: 1px 3px; margin-top: 3px">Authenticated</span>
             </div>
-            <p style="float: left; width: 100px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; line-height: 80px">{{ order.sName }}</p>
+            <p style="float: left; width: 100px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; line-height: 80px">{{ order.shopName }}</p>
             <p style="float: left; width: 100px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 400; line-height: 80px">¥{{ order.price }}</p>
             <p style="float: left; width: 100px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 400; line-height: 80px">{{ a = 1 }}</p>
             <p style="float: left; width: 100px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; line-height: 80px">¥{{ order.price }}</p>
@@ -96,39 +96,15 @@ export default {
         .catch(() => {
           this.isLoad = false
         })
+    },
+
+    goGood: function (info) {
+      this.$router.push({name: 'seller_good', params: {data: info}})
     }
   },
 
   created: function () {
     this.initLoad()
-    /*
-    this.$http.get('http://jsonplaceholder.typicode.com/users')
-      .then((data) => {
-        this.orders = [
-          {
-            url: 'https://g-search2.alicdn.com/img/bao/uploaded/i4/TB1oAS6qzDpK1RjSZFrXXa78VXa.jpg_240x240Q90.jpg',
-            goodName: 'HuaShuo ROG PHONE',
-            shopName: 'HuaShuo',
-            price: '5999.00'
-          },
-          {
-            url: 'https://g-search3.alicdn.com/img/bao/uploaded/i4/TB15ZaPjSzqK1RjSZFpXXakSXXa.jpg_240x240Q90.jpg',
-            goodName: 'Razer Phone 2',
-            shopName: 'Razer',
-            price: '5990.99'
-          },
-          {
-            url: 'https://g-search3.alicdn.com/img/bao/uploaded/i4/TB10zbvIFXXXXbKXFXXXXXXXXXX.jpg_240x240Q90.jpg',
-            goodName: 'Nokia Phone 1020',
-            shopName: 'Nokia',
-            price: '768.00'
-          }
-        ]
-        this.isLoad = false
-      })
-      .catch(() => {
-        this.isLoad = false
-      }) */
   }
 }
 </script>

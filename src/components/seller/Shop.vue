@@ -51,6 +51,9 @@ export default {
 
   mounted () {
     this.id = this.$route.params.data
+    if (this.id === undefined) {
+      this.id = this.getCookie('userId')
+    }
     this.$emit('childByValue', this.id)
     this.initLoad()
     console.log(this.id)
