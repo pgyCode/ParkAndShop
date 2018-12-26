@@ -1,3 +1,4 @@
+
 <template>
   <div>
     <div style="height: 48px; width: 866px; margin: 0px auto;">
@@ -26,7 +27,10 @@
             <p style="float: left; width: 100px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 400; line-height: 80px">¥{{ order.price }}</p>
             <p style="float: left; width: 100px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 400; line-height: 80px">{{ a = 1 }}</p>
             <p style="float: left; width: 100px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; line-height: 80px">¥{{ order.price }}</p>
-            <button style="float: right; width: 100px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; height: 26px; width: 50px; border: 1px solid rgb(220, 220, 220); border-radius: 5px; margin-top: 27px; cursor: pointer">Buy</button>
+            <div style="float: right; width: 50px">
+              <button style="width: 50px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; height: 26px; width: 50px; border: 1px solid rgb(220, 220, 220); border-radius: 5px; margin-top: 5px; cursor: pointer" v-on:click="onClickBuy(order.pID)">Buy</button>
+              <button style="width: 50px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; height: 26px; width: 50px; border: 1px solid rgb(220, 220, 220); border-radius: 5px; margin-top: 15px; cursor: pointer" v-on:click="onClickCancel(order.pID)">Cancel</button>
+            </div>
           </div>
         </li>
       </ul>
@@ -52,26 +56,51 @@ export default {
   },
 
   methods: {
+    onClickCancel: function (id) {
+      this.isLoad = true
+      console.log(this.URL + 'c/removeFromCart?cID=' + this.getCookie('userId') + '&pID=' + id)
+      this.$http.get(this.URL + 'c/removeFromCart?cID=' + this.getCookie('userId') + '&pID=' + id)
+        .then((data) => {
+          console.log(data)
+          this.isLoad = false
+          this.initLoad()
+        })
+        .catch(() => {
+          this.isLoad = false
+        })
+    },
 
+    onClickBuy: function (id) {
+      this.isLoad = true
+      console.log(this.URL + 'c/makeOrder?cID=' + this.getCookie('userId') + '&pID=' + id)
+      this.$http.get(this.URL + 'c/makeOrder?cID=' + this.getCookie('userId') + '&pID=' + id)
+        .then((data) => {
+          console.log(data)
+          this.isLoad = false
+          this.initLoad()
+        })
+        .catch(() => {
+          this.isLoad = false
+        })
+    },
+
+    initLoad: function () {
+      this.isLoad = true
+      this.$http.get(this.URL + 'c/lookupCart?cID=' + this.getCookie('userId'))
+        .then((data) => {
+          console.log(data)
+          this.isLoad = false
+          const response = data.body
+          this.orders = response.data.pArray
+        })
+        .catch(() => {
+          this.isLoad = false
+        })
+    }
   },
 
   created: function () {
-    this.isLoad = true
-    this.$http.get('http://47.106.11.120:8080/DiGou/api/c/lookupCart?cID=' + this.getCookie('userId'))
-      .then((data) => {
-        console.log(data)
-        this.isLoad = false
-        const response = data.body
-        if (response.code === 101) {
-          this.orders = response.data.pArray
-        } else {
-          alert('Connect Failed')
-        }
-      })
-      .catch(() => {
-        this.isLoad = false
-        alert('Connect Failed')
-      })
+    this.initLoad()
     /*
     this.$http.get('http://jsonplaceholder.typicode.com/users')
       .then((data) => {
