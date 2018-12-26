@@ -1,5 +1,6 @@
 <template>
   <div>
+
     <div style="clear: both; width: 866px; height: 40px; margin: 0px auto; border-bottom: 2px solid #dfdfdf">
       <router-link style="line-height: 40px; float: left; font-size: 14px; text-align: center; font-weight: 700; padding:0px 20px"
                    @click.native="onCheckTab(0)"
@@ -11,23 +12,26 @@
                    :class="{checkTab:poiTab == 1}" to="/manager/customer/blacklist">BlackList</router-link>
     </div>
     <router-view/>
+
   </div>
 </template>
 
 <script>
 export default {
+  created () {
+  },
+  component: {},
   data () {
     return {
-      currentFrame: 0,
+      currentFrame: 1,
+      shops: [],
       poiTab: 0
     }
   },
-
   methods: {
     checkFrame: function (position) {
       this.currentFrame = position
     },
-
     onCheckTab: function (poi) {
       this.poiTab = poi
     }
