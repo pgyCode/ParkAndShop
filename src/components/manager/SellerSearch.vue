@@ -18,9 +18,9 @@
       <ul>
         <li class="containerShopLi" v-bind:key="shop" v-for="shop in shops">
           <div>
-            <div style="float: left; width: 350px; height: 160px;">
+            <div style="float: left; width: 400px; height: 160px;">
               <img v-bind:src="shop.url" style="float:left; width: 120px; height: 120px; margin-top: 20px; margin-bottom: 20px; margin-right: 20px; border: 1px solid #b6b6b6;"/>
-              <div style="float: left; width: 200px;  height: 120px; margin-top: 20px">
+              <div style="float: left; width: 250px;  height: 120px; margin-top: 20px">
                 <span style="font-size: 14px; font-weight: 700; line-height: 30px; color: rgb(0, 99, 200);">{{ shop.shopName }}</span>
                 <span style="clear:both; float: left; font-size: 12px; font-weight: 400; line-height: 30px; color: rgb(102, 102, 102);"><b>Seller：</b></span>
                 <span style="float: left; font-size: 12px; font-weight: 400; line-height: 30px; color: rgb(0, 99, 200);">{{ shop.sellerName }}</span>
@@ -31,8 +31,8 @@
               </div>
             </div>
 
-            <div style="width: 400px; float: left; height: 120px; margin-top: 20px;">
-              <div style="width: 400px; background: rgb(237, 237, 237); height: 100px; padding: 10px;">
+            <div style="width: 350px; float: left; height: 120px; margin-top: 20px;">
+              <div style="width: 350px; background: rgb(237, 237, 237); height: 100px; padding: 10px;">
                 <p style=" font-size: 13px; font-weight: 400; line-height: 20px; overflow: hidden; color: #666;">{{ shop.description }}</p>
               </div>
             </div>
@@ -83,6 +83,16 @@ export default {
           this.shops = data.body.data.array
         })
     }
+  },
+
+  created () {
+    this.isLoad = true
+    this.$http.get(this.URL + 'm/seller_white_info?value=' +
+      this.value)
+      .then((data) => {
+        this.isLoad = false
+        this.shops = data.body.data.array
+      })
   }
 
 }

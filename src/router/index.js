@@ -9,6 +9,8 @@ import CustomerOwner from '@/components/customer/Owner'
 import CustomerFavourite from '@/components/customer/Favourite'
 import CustomerOrder from '@/components/customer/Order'
 import CustomerCart from '@/components/customer/Cart'
+import CustomerInfo from '@/components/customer/Info'
+import CustomerShop from '@/components/customer/Shop'
 
 // import Saler from '@/components/seller/Saler'
 // import SalerOwner from '@/components/seller/Owner'
@@ -29,12 +31,12 @@ import ManagerCustomerSearch from '@/components/manager/CustomerSearch'
 
 // 主页--商家
 import Seller from '@/components/seller/Seller'
-import SellerOrder from '@/components/seller/Order'
 import SellerShop from '@/components/seller/Shop'
 import SellerGood from '@/components/seller/Good'
 import SellerAddGood from '@/components/seller/AddGood'
 import SellerInfo from '@/components/seller/Info'
 import SellerOrder from '@/components/seller/Order'
+import SellerGoodInformation from '@/components/seller/Good_info'
 
 Vue.use(Router)
 
@@ -50,6 +52,7 @@ export default new Router({
         {path: '/customer/order', component: CustomerOrder},
         {path: '/customer/favourite', component: CustomerFavourite},
         {path: '/customer/cart', component: CustomerCart},
+        {path: '/customer/info', component: CustomerInfo},
         {
           path: '/manager/sellers',
           component: ManagerSeller,
@@ -90,13 +93,9 @@ export default new Router({
           component: Seller,
           children: [
             {
-              path: '/',
-              component: SellerShop
-            },
-            {
-              path: '/seller/shop',
-              name: 'seller_shop',
-              component: SellerShop
+              path: '/customer/shop',
+              name: 'customer_shop',
+              component: CustomerShop
             },
             {
               path: '/seller/good',
@@ -105,8 +104,17 @@ export default new Router({
             }
           ]},
         {path: '/seller/addGood', component: SellerAddGood},
+        {
+          path: '/seller/Good_info',
+          name: 'seller_good_info',
+          component: SellerGoodInformation},
         {path: '/seller/info', component: SellerInfo},
-        {path: '/seller/order', component: SellerOrder}
+        {path: '/seller/order', component: SellerOrder},
+        {
+          path: '/seller/shop',
+          name: 'seller_shop',
+          component: SellerShop
+        }
       ]
     },
     {
