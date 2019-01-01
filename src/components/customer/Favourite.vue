@@ -5,10 +5,12 @@
     </div>
     <div id="containerBody">
       <ul>
-        <li v-bind:key="data" v-for="data in datas" v-on:click="goGood(data.product)">
-          <img v-bind:src="data.product.portraitURL" style="width: 148px; height: 148px; border: 1px solid #dfdfdf;"/>
+        <li v-bind:key="data" v-for="data in datas" >
+          <img v-bind:src="data.product.portraitURL" style="width: 148px; height: 148px; border: 1px solid #dfdfdf;" v-on:click="goGood(data.product)"/>
           <p style="height: 30px; text-align: center; line-height: 30px; font-weight: 500; font-size: 12px; color: rgb(60, 60, 60);">{{ data.product.pName }}</p>
           <p style="height: 20px; text-align: center; line-height: 20px; font-weight: 900; font-size: 14px; color: #f40;">💰¥{{ data.product.price }}</p>
+          <button style="width: 50px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; height: 26px; width: 50px; border: 1px solid rgb(220, 220, 220); border-radius: 5px; margin: 0 auto; cursor: pointer" v-on:click="onClickRemove(data.pID)">remove</button>
+
         </li>
       </ul>
     </div>
@@ -25,7 +27,7 @@ export default {
       isLoad: false,
       currentPage: 1,
       name: 'sds',
-      datas: []
+      datas:[],
     }
   },
 
@@ -43,12 +45,23 @@ export default {
           this.isLoad = false
         })
     },
+    onClickRemove: function (id) {
+      this.isLoad = true
+      this.$http.get(this.URL + 'c/unfavourite?cID=' + this.getCookie('userId') + '&pID=' + id)
+        .then((data) => {
+          console.log(data)
+          this.isLoad = false
+          this.initLoad()
+        })
+        .catch(() => {
+          this.isLoad = false
+        })
+    },
 
     goGood: function (info) {
       this.$router.push({name: 'seller_good', params: {data: info}})
     }
   },
-
   created: function () {
     this.initLoad()
   }
