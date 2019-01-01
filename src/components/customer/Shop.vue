@@ -52,6 +52,7 @@ export default {
   mounted () {
     if (this.$route.params.data !== undefined) {
       this.id = this.$route.params.data
+      console.log(this.id)
       this.$emit('childByValue', this.id)
       this.initLoad()
     }
