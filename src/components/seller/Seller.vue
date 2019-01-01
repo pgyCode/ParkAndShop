@@ -16,9 +16,11 @@
         <p src="../../assets/logo.png" style="float:left; width: 880px; height: 120px; font-size: 30px; line-height: 120px; text-align: center; color: rgb(63,127,206);">{{ info.shopName }}</p>
       </div>
     </div>
+    <loading v-show="isLoad"/>
     <router-view/>
     <good v-show="false" v-on:childByValue="childByValue"/>
     <shop v-show="false" v-on:childByValue="childByValue"/>
+    <customerShop v-show="false" v-on:childByValue="childByValue"/>
   </div>
 </template>
 
@@ -26,20 +28,22 @@
 import Loading from '@/components/common/Loading'
 import Good from '@/components/seller/Good'
 import Shop from '@/components/seller/Shop'
+import CustomerShop from '@/components/customer/Shop'
 export default {
-  components: {Loading, Good, Shop},
+  components: {CustomerShop, Loading, Good, Shop},
 
   data () {
     return {
       id: -1,
       info: {
-      }
+      },
+      isLoad: false
     }
   },
 
   methods: {
     childByValue: function (childValue) {
-      // childValue就是子组件传过来的值
+      console.log('我收到的是' + childValue)
       if (childValue !== '') {
         this.id = childValue
         this.isLoad = true
