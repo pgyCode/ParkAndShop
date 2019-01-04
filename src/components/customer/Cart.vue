@@ -98,14 +98,13 @@ export default {
           this.isLoad = false
         })
     },
-    add: function(order) {
-        order.number++;
-
+    add: function (order) {
+      order.number++
     },
     sub: function (order) {
-        if(order.number>1){
-          order.number--;
-        }
+      if (order.number > 1) {
+        order.number--
+      }
     },
 
     goGood: function (info) {

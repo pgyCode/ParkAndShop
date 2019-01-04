@@ -27,7 +27,7 @@ export default {
       isLoad: false,
       currentPage: 1,
       name: 'sds',
-      datas:[],
+      datas: []
     }
   },
 
