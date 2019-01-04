@@ -18,11 +18,6 @@
           </div>
         </div>
         <p>Number：{{ data.num }}</p>
-        <div style="margin-top: 20px">
-          <button style="float: right; width: 178px; height: 38px; margin-left: 5px; border: none; background: rgb(255, 0, 54); color: #fff; font-weight: 400; font-size: 16px" v-on:click="addCart()">Add to cart</button>
-          <button style="float: right; width: 178px; height: 38px; margin-left: 5px;border: none; background: rgb(255,90,44); color: #fff; font-weight: 400; font-size: 16px" v-on:click="addFavourite()">Favourite</button>
-          <!--<button style="float: left; width: 178px; height: 38px; margin-left: 5px; border: 2px solid rgb(255, 0, 54); background: rgb(255, 237, 237); color: rgb(255, 0, 54); font-weight: 400; font-size: 16px">Buy Now</button>-->
-        </div>
         <loading v-show="isLoad"/>
       </div>
     </div>
@@ -49,34 +44,6 @@ export default {
   },
 
   methods: {
-    addCart: function () {
-      this.$http.get(this.URL + 'c/addToCart?cID=' + this.getCookie('userId') + '&pID=' + this.data.pID)
-        .then((data) => {
-          this.isLoad = false
-          const response = data.body
-          if (response.code === 101) {
-            alert('Add to cart Succeed!')
-          } else {
-            alert('Add to cart Failed!')
-          }
-        })
-        .catch(() => {
-          this.isLoad = false
-          alert('Add to cart Failed!')
-        })
-    },
-
-    addFavourite: function () {
-      this.$http.get(this.URL + 'c/addFavourite?cID=' + this.getCookie('userId') + '&pID=' + this.data.pID)
-        .then((data) => {
-          this.isLoad = false
-          alert('Add to Favourite Succeed!')
-        })
-        .catch(() => {
-          this.isLoad = false
-          alert('Add to Favourite Failed!')
-        })
-    }
   }
 }
 </script>

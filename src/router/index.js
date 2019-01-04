@@ -37,6 +37,7 @@ import SellerAddGood from '@/components/seller/AddGood'
 import SellerInfo from '@/components/seller/Info'
 import SellerOrder from '@/components/seller/Order'
 import SellerGoodInformation from '@/components/seller/Good_info'
+import SellerProfit from '@/components/seller/Profit'
 
 Vue.use(Router)
 
@@ -114,6 +115,11 @@ export default new Router({
           path: '/seller/shop',
           name: 'seller_shop',
           component: SellerShop
+        },
+        {
+          path: '/seller/profit',
+          name: 'seller_profit',
+          component: SellerProfit
         }
       ]
     },
