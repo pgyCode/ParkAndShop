@@ -4,7 +4,9 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import VueResource from 'vue-resource'
+import echarts from 'echarts'
 
+Vue.prototype.$echarts = echarts
 Vue.config.productionTip = false
 Vue.use(VueResource)
 
@@ -49,8 +51,9 @@ Vue.prototype.setHtml = function (key, value) {
   document.getElementById(key).html = value
 }
 
-Vue.prototype.URL = 'http://47.106.11.120:8080/DiGou/api/'
-// Vue.prototype.URL = 'http://127.0.0.1:8080/api/'
+// Vue.prototype.URL = 'http://47.106.11.120:8080/DiGou/api/'
+// Vue.prototype.URL = 'http://127.0.0.1:8000/api/'
+Vue.prototype.URL = 'http://192.168.31.150:8080/api/'
 
 /* eslint-disable no-new */
 new Vue({

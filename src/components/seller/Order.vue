@@ -14,7 +14,7 @@
         <li v-bind:key="order" v-for="order in orders">
           <div style="height: 42px;background: rgb(241, 241, 241); border-bottom: 1px solid #dfdfdf">
             <p style="float: left; color: rgb(60, 60, 60); font-size: 12px; width: 100px; text-align: center; font-weight: 800; line-height: 42px ">{{order.time}}</p>
-            <p style="float: left; color: rgb(60, 60, 60); font-size: 12px; width: 130px; text-align: center; font-weight: 400; line-height: 42px ">OrderNum: {{ order.orderID}}</p>
+            <p style="float: left; color: rgb(60, 60, 60); font-size: 12px; width: 130px; text-align: center; font-weight: 400; line-height: 42px ">OrderID: {{ order.orderID}}</p>
             <p style="float: left; color: rgb(60, 60, 60); font-size: 12px; width: 300px; text-align: center; font-weight: 400; line-height: 42px ">{{ order.shopName }}</p>
             <p style="float: right; color: rgb(60, 60, 60); font-size: 12px; width: 90px; text-align: center; font-weight: 400; line-height: 42px ">{{ order.sellerName }}</p>
           </div>
@@ -24,14 +24,19 @@
               <p style=" color: rgb(60, 60, 60); font-size: 13px; font-weight: 500; line-height: 25px; height: 55px; ">{{ order.pName }}</p>
               <span style="clear:both; width: 100px; text-align: center; display: block; color: #fff; background: #f40; font-size: 12px;padding: 1px 3px; margin-top: 3px">Authenticated</span>
             </div>
-            <p style="float: left; width: 100px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 400; line-height: 80px">¥{{ order.price }}</p>
-            <p style="float: left; width: 100px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 400; line-height: 80px">{{ a = 1 }}</p>
-            <p style="float: left; width: 100px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; line-height: 80px">¥{{ order.price}}</p>
-            <p style="float: left; width: 100px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; line-height: 80px">Succeed</p>
+            <p style="float: left; width: 100px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 400; line-height: 80px">¥{{ order.orderPrice }}</p>
+            <p style="float: left; width: 100px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 400; line-height: 80px">{{ order.amount }}</p>
+            <p style="float: left; width: 100px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; line-height: 80px">¥{{ order.orderPrice * order.amount}}</p>
+            <p style="float: left; width: 100px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; line-height: 80px">{{ status }}</p>
             <p style="float: left; width: 100px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; line-height: 80px"></p>
-            <button style="float: right; width: 100px;text-align: center; color: rgb(60, 60, 60); font-size: 12px;
+            <div>
+              <button style="float: right; width: 100px;text-align: center; color: rgb(60, 60, 60); font-size: 12px;
              font-weight: 600; height: 26px; width: 60px; border: 1px solid rgb(220, 220, 220); border-radius: 5px;
               margin-top: 27px; cursor: pointer" v-on:click="refund(order.orderID)">Refund</button>
+              <button style="float: right; width: 100px;text-align: center; color: rgb(60, 60, 60); font-size: 12px;
+             font-weight: 600; height: 26px; width: 60px; border: 1px solid rgb(220, 220, 220); border-radius: 5px;
+              margin-top: 27px; cursor: pointer" v-on:click="send(order.orderID)">Send</button>
+            </div>
           </div>
         </li>
       </ul>
@@ -50,8 +55,10 @@ export default {
     return {
       isLoad: false,
       currentPage: 1,
-      name: 'sds',
-      orders: []
+      // name: 'sds',
+      orders: [],
+      status: '&nbsp',
+      status_num: 1 // 初始值：未发货
     }
   },
 
@@ -62,8 +69,20 @@ export default {
         .then((data) => {
           this.isLoad = false
           alert('refund Succeed')
-          this.initLoad()
         })
+      this.status = 'Failed'
+      this.initLoad()
+    },
+
+    send: function (id) {
+      this.isLoad = true
+      this.$http.get(this.URL + 'b/order/send?orderId=' + id)
+        .then((data) => {
+          this.isLoad = false
+          alert('send Succeed')
+        })
+      this.status = 'Sending'
+      this.initLoad()
     },
 
     initLoad: function () {
@@ -72,6 +91,9 @@ export default {
         .then((data) => {
           console.log(data)
           this.orders = data.body.data.order
+          /* if (this.orders.isFinish == 0) {
+
+          } */
           this.isLoad = false
         })
         .catch(() => {
@@ -111,5 +133,4 @@ export default {
     margin-top: 10px;
     border: 1px solid #dfdfdf;
   }
-
 </style>
