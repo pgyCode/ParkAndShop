@@ -18,7 +18,7 @@
         </div>
         <div style="clear: both; padding-top: 20px; height: 37px;">
           <p style="text-align: right; float: left; width: 150px; height: 35px; line-height: 35px; font-size: 14px; font-weight: 400; color: rgb(60, 60, 60);">Telephone:&nbsp;</p>
-          <input v-model="data.telephone" style="float: left; width: 340px;  height: 35px; border: 1px solid #dfdfdf"/>
+          <p style="float: left; width: 340px; font-size: 12px; line-height: 35px; height: 35px; border: 1px solid #dfdfdf">{{ data.telephone }}</p>
         </div>
         <div style="clear: both; padding-top: 20px; height: 37px;">
           <p style="text-align: right; float: left; width: 150px; height: 35px; line-height: 35px; font-size: 14px; font-weight: 400; color: rgb(60, 60, 60);">ShopName:&nbsp;</p>
