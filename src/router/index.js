@@ -55,6 +55,11 @@ export default new Router({
         {path: '/customer/cart', component: CustomerCart},
         {path: '/customer/info', component: CustomerInfo},
         {
+          path: '/customer/shop',
+          name: 'customer_shop',
+          component: CustomerShop
+        },
+        {
           path: '/manager/sellers',
           component: ManagerSeller,
           children: [
@@ -93,11 +98,6 @@ export default new Router({
         {path: '/seller',
           component: Seller,
           children: [
-            {
-              path: '/customer/shop',
-              name: 'customer_shop',
-              component: CustomerShop
-            },
             {
               path: '/seller/good',
               name: 'seller_good',
