@@ -20,7 +20,8 @@
               </div>
               <div style="clear: both;width: 300px; height: 42px; margin-top: 20px;border: 1px solid rgb(221, 221, 221);">
                 <span style="background:rgb(221, 221, 221); width: 20px;float: left; height: 24px; line-height: 24px; padding: 9px 10px;">🔒</span>
-                <input placeholder="password" type="password" v-model="password"/>
+                <input placeholder="password" type="password" v-model="password"
+                v-on:keyup.enter = "onClickLogin"/>
               </div>
               <button style="margin-top: 20px; width: 300px; height: 42px; border: none; background: #f40; border-radius: 5px; font-weight: 700; font-size: 16px; color: #fff;"
                       v-on:click="onClickLogin">Login</button>
