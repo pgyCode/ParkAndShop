@@ -1,34 +1,48 @@
 <template>
   <div>
-    <div id="containerHeader">
-      <span id="title">{{ name }}</span>
+
+    <div style="clear: both; width: 866px; height: 40px; margin: 0px auto; border-bottom: 2px solid #dfdfdf">
+      <router-link style="line-height: 40px; width: 70px; float: left; font-size: 14px; font-weight: 700; text-align: center; padding:0px 20px"
+                   @click.native="onCheckTab(0)"
+                   class="basicTab"
+                   :class="{checkTab:poiTab == 0}" to="/manager/owner/history">History</router-link>
+      <router-link style="line-height: 40px; float: left; font-size: 14px; text-align: center; font-weight: 700; padding:0px 20px"
+                   @click.native="onCheckTab(1)"
+                   class="basicTab"
+                   :class="{checkTab:poiTab == 1}" to="/manager/owner/income">Income</router-link>
+      <router-link style="line-height: 40px; float: left; font-size: 14px; text-align: center; font-weight: 700; padding:0px 20px"
+                   @click.native="onCheckTab(2)"
+                   class="basicTab"
+                   :class="{checkTab:poiTab == 2}" to="/manager/owner/search">Search</router-link>
     </div>
-
-    <div id="containerOpreator">
-
-      <div class="input">
-        <span>UserName:&nbsp;&nbsp;</span><input v-model="username"/>
-      </div>
-
-      <div class="input">
-        <span>Telephone:&nbsp;&nbsp;</span><input/>
-      </div>
-
-      <div class="input">
-        <span>Address:&nbsp;&nbsp;</span><input/>
-      </div>
-
-      <div id="opreator" v-on:click="onClickLogin()">Save</div>
-    </div>
+    <router-view/>
 
   </div>
 </template>
 
 <script>
 export default {
+
+  components: {},
   data () {
     return {
-      name: '007用户'
+      currentFrame: 1,
+      shops: [],
+      poiTab: 0
+    }
+  },
+
+  created () {
+    this.$router.push('/manager/owner/history')
+  },
+
+  methods: {
+    checkFrame: function (position) {
+      this.currentFrame = position
+    },
+
+    onCheckTab: function (poi) {
+      this.poiTab = poi
     }
   }
 }
@@ -36,67 +50,35 @@ export default {
 
 <style scoped>
 
-  #containerHeader {
-    padding: 30px;
-    background: #d4d7dc;
-    text-align: center;
-  }
-
-  #title{
-    font-size: 40px;
-    font-family: "HanziPen TC";
-  }
-
-  #containerOpreator{
-    position: center;
-    margin: 80px auto;
-    width: 600px;
-    height: 300px;
-    border: 2px solid #acccdc;
-    border-radius: 25px;
-    text-align: center;
-  }
-
-  .input{
-    clear: both;
-    top: 30px;
-    position: relative;
-    margin-top: 10px;
-    height: 50px;
-    color: #000000;
-    font-weight: 600;
-    font-size: 17px;
-  }
-
-  .input span{
+  *{
     display: block;
+    margin: 0px;
+    padding: 0px;
+    text-decoration: none;
+  }
+
+  .title{
+    border-bottom: 5px solid #003aff;
+
+  }
+
+  #containerTop{
+  }
+
+  #containerRight{
     clear: both;
-    float: left;
-    width: 100px;
-    margin-left: 50px;
+    width: 1000px;
+  }
+  img{
+    height: 400px;
   }
 
-  input{
-    border: 1px solid #000;
-    width: 400px;
-    height: 30px;
-    float: left;
-    padding-left: 5px;
-    border-radius: 5px;
-    font-weight: 500;
-    color: grey;
-    font-size: 15px;
+  .basicTab{
+    color: #808285;
   }
 
-  #opreator{
-    margin: 50px auto;
-    background: #d4d7dc;
-    padding: 5px;
-    color: grey;
-    border-radius: 22px;
-    border: 2px solid #d4d7dc;
-    width: 200px;
-    font-weight: 600;
+  .checkTab{
+    color: #f40;
+    border-bottom: 2px solid #f40;
   }
-
 </style>

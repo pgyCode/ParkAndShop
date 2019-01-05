@@ -52,6 +52,9 @@ Vue.prototype.setHtml = function (key, value) {
 }
 
 Vue.prototype.URL = 'http://47.106.11.120:8080/DiGou/api/'
+// Vue.prototype.URL = 'http://192.168.31.222:8080/api/'
+// Vue.prototype.URL = 'http://192.168.43.138:8080/api/'
+// Vue.prototype.URL = 'http://127.0.0.1:8080/api/'
 // Vue.prototype.URL = 'http://127.0.0.1:8000/api/'
 // Vue.prototype.URL = 'http://192.168.31.150:8080/api/'
 
