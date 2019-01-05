@@ -38,27 +38,27 @@
       </ul>
     </div>
     <!--<div id="containerBody">-->
-      <!--<ul>-->
-        <!--<li v-bind:key="request" v-for="request in requests">-->
-          <!--<div style="height: 42px;background: rgb(241, 241, 241); border-bottom: 1px solid #dfdfdf">-->
-            <!--<p style="float: left; color: rgb(60, 60, 60); font-size: 12px; width: 100px; text-align: center; font-weight: 800; line-height: 42px ">{{request.shopName}}</p>-->
-            <!--<p style="float: left; color: rgb(60, 60, 60); font-size: 12px; width: 100px; text-align: center; font-weight: 400; line-height: 42px ">{{ request.shopName }}</p>-->
-            <!--<p style="float: right; color: rgb(60, 60, 60); font-size: 12px; width: 100px; text-align: center; font-weight: 400; line-height: 42px ">{{ request.sellerName }}</p>-->
-          <!--</div>-->
-          <!--<div style="padding: 15px; clear: both;">-->
-            <!--<img style="float: left; width: 80px; height: 80px; padding-right: 15px" v-bind:src="request.url"/>-->
-            <!--<div style="width: 220px; float: left; height: 80px;">-->
-              <!--<p style=" color: rgb(60, 60, 60); font-size: 13px; font-weight: 500; line-height: 25px; height: 55px; ">{{ request.goodName }}</p>-->
-              <!--<span style="clear:both; width: 100px; text-align: center; display: block; color: #fff; background: #f40; font-size: 12px;padding: 1px 3px; margin-top: 3px">Authenticated</span>-->
-            <!--</div>-->
-            <!--<p style="float: left; width: 100px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 400; line-height: 80px">¥{{ request.price }}</p>-->
-            <!--<p style="float: left; width: 100px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 400; line-height: 80px">{{ a = 1 }}</p>-->
-            <!--<p style="float: left; width: 100px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; line-height: 80px">¥{{ request.price }}</p>-->
-            <!--<p style="float: left; width: 100px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; line-height: 80px">Succeed</p>-->
-            <!--<button style="float: right; width: 100px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; height: 26px; width: 60px; border: 1px solid rgb(220, 220, 220); border-radius: 5px; margin-top: 27px; cursor: pointer">Refund</button>-->
-          <!--</div>-->
-        <!--</li>-->
-      <!--</ul>-->
+    <!--<ul>-->
+    <!--<li v-bind:key="request" v-for="request in requests">-->
+    <!--<div style="height: 42px;background: rgb(241, 241, 241); border-bottom: 1px solid #dfdfdf">-->
+    <!--<p style="float: left; color: rgb(60, 60, 60); font-size: 12px; width: 100px; text-align: center; font-weight: 800; line-height: 42px ">{{request.shopName}}</p>-->
+    <!--<p style="float: left; color: rgb(60, 60, 60); font-size: 12px; width: 100px; text-align: center; font-weight: 400; line-height: 42px ">{{ request.shopName }}</p>-->
+    <!--<p style="float: right; color: rgb(60, 60, 60); font-size: 12px; width: 100px; text-align: center; font-weight: 400; line-height: 42px ">{{ request.sellerName }}</p>-->
+    <!--</div>-->
+    <!--<div style="padding: 15px; clear: both;">-->
+    <!--<img style="float: left; width: 80px; height: 80px; padding-right: 15px" v-bind:src="request.url"/>-->
+    <!--<div style="width: 220px; float: left; height: 80px;">-->
+    <!--<p style=" color: rgb(60, 60, 60); font-size: 13px; font-weight: 500; line-height: 25px; height: 55px; ">{{ request.goodName }}</p>-->
+    <!--<span style="clear:both; width: 100px; text-align: center; display: block; color: #fff; background: #f40; font-size: 12px;padding: 1px 3px; margin-top: 3px">Authenticated</span>-->
+    <!--</div>-->
+    <!--<p style="float: left; width: 100px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 400; line-height: 80px">¥{{ request.price }}</p>-->
+    <!--<p style="float: left; width: 100px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 400; line-height: 80px">{{ a = 1 }}</p>-->
+    <!--<p style="float: left; width: 100px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; line-height: 80px">¥{{ request.price }}</p>-->
+    <!--<p style="float: left; width: 100px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; line-height: 80px">Succeed</p>-->
+    <!--<button style="float: right; width: 100px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; height: 26px; width: 60px; border: 1px solid rgb(220, 220, 220); border-radius: 5px; margin-top: 27px; cursor: pointer">Refund</button>-->
+    <!--</div>-->
+    <!--</li>-->
+    <!--</ul>-->
     <!--</div>-->
 
     <Loading v-show="isLoad"/>
@@ -87,7 +87,7 @@ export default {
     onClickApprove: function (shopInfo) {
       this.isLoad = true
       this.$http.get(this.URL + 'm/seller_pass_approve?id=' +
-        shopInfo.id)
+          shopInfo.id)
         .then((data) => {
           console.log(data)
           this.isLoad = false
@@ -102,7 +102,7 @@ export default {
     onClickReject: function (index) {
       this.isLoad = true
       this.$http.get(this.URL + 'm/seller_pass_reject?id=' +
-        index.id)
+          index.id)
         .then((data) => {
           console.log(data)
           this.isLoad = false
