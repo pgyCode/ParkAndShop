@@ -74,7 +74,7 @@ export default {
       currentPage: 1,
       name: 'sds',
       datas:[],
-      shops:[],
+      shops:[]
     }
   },
 
