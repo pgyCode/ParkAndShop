@@ -1,10 +1,13 @@
 <template>
   <div>
     <loading v-show="isLoad"/>
-    <div v-show="isComment" style="position: fixed; top: 0px;left: 0px;right: 0px;bottom: 0px;margin: auto; width: 350px; height: 150px; background: #fbf6ff">
-      <button style="width: 20px; height: 20px;" v-on:click="isComment = false">X</button>
-      <textarea v-model="comment" style="float: left; width: 350px;  height: 150px; border: 1px solid #dfdfdf"/>
-      <button v-on:click="onClickSure()" style="margin-top: 20px;  width: 80px; height: 40px; border: none; background: #00b400; border-radius: 5px; font-weight: 700; font-size: 16px; color: #fff;">OK</button>
+    <div v-show="isComment" style="background: #d5d5d5; border-radius: 5px; position: fixed; top: 0px;left: 0px;right: 0px;bottom: 0px;margin: auto; width: 352px; height: 213px">
+      <div>
+        <p style="padding-left:8px; line-height: 30px; float: left; font-size: 15px; font-weight: 600; color: rgb(60, 60, 60);">Comment</p>
+        <img style="float: right; width: 20px; height: 20px; padding: 5px"  v-on:click="isComment = false" src="../../assets/close.jpg"/>
+      </div>
+      <textarea v-model="comment" style="float: left; width: 350px; line-height: 16px; font-weight: 500; resize:none; font-size: 13px; color: rgb(60, 60, 60);  height: 150px; border: 1px solid #dfdfdf"/>
+      <button v-on:click="onClickSure()" style="float:right;width: 80px; height: 30px; border: none; background: #f40; border-radius: 5px; font-weight: 700; font-size: 16px; color: #fff;">OK</button>
     </div>
     <div style="height: 30px; width: 866px; margin: 20px auto;background: rgb(255,255,255); border: 1px solid #ffffff;">
     <button style="width: 70px; height: 30px; float: left;" v-on:click="onClickDayly()">dayly</button>
@@ -35,12 +38,12 @@
               <span style="clear:both; width: 100px; text-align: center; display: block; color: #fff; background: #f40; font-size: 12px;padding: 1px 3px; margin-top: 3px">Authenticated</span>
             </div>
             <p style="float: left; width: 100px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 400; line-height: 80px">¥{{ order.product.price }}</p>
-            <p style="float: left; width: 100px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 400; line-height: 80px">{{ order.product.number }}</p>
-            <p style="float: left; width: 100px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; line-height: 80px">¥{{ order.product.price * order.product.number }}</p>
-            <p style="float: left; width: 100px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; line-height: 80px">{{ getStatus(order.product.isFinish) }}</p>
-            <button v-show="order.product.isFinish === 3" style="float: right; width: 100px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; height: 26px; width: 60px; border: 1px solid rgb(220, 220, 220); border-radius: 5px; margin-top: 27px; cursor: pointer" v-on:ick="onClickConfirm(order.orderID)">Confirm</button>
-            <button v-show="order.product.isFinish === 1||order.product.isFinish === 2||order.product.isFinish === 3" style="float: right; width: 100px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; height: 26px; width: 60px; border: 1px solid rgb(220, 220, 220); border-radius: 5px; margin-top: 27px; cursor: pointer" v-on:click="onClickRefund(order.orderID)">Refund</button>
-            <button v-show="order.product.isFinish === 2" style="float: right; width: 100px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; height: 26px; width: 60px; border: 1px solid rgb(220, 220, 220); border-radius: 5px; margin-top: 27px; cursor: pointer" v-on:click="onClickComment(order.orderID)">comment</button>
+            <p style="float: left; width: 100px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 400; line-height: 80px">{{ order.product.num }}</p>
+            <p style="float: left; width: 100px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; line-height: 80px">¥{{ order.product.price * order.product.num }}</p>
+            <p style="float: left; width: 100px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; line-height: 80px">{{ getStatus(order.isFinish) }}</p>
+            <button v-show="order.isFinish === 3" style="float: right; width: 100px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; height: 26px; width: 60px; border: 1px solid rgb(220, 220, 220); border-radius: 5px; margin-top: 27px; cursor: pointer" v-on:click="onClickConfirm(order.orderID)">Confirm</button>
+            <button v-show="order.isFinish === 1||order.isFinish === 2||order.isFinish === 3" style="float: right; width: 100px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; height: 26px; width: 60px; border: 1px solid rgb(220, 220, 220); border-radius: 5px; margin-top: 27px; cursor: pointer" v-on:click="onClickRefund(order.orderID)">Refund</button>
+            <button v-show="order.isFinish === 2" style="float: right; width: 100px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; height: 26px; width: 60px; border: 1px solid rgb(220, 220, 220); border-radius: 5px; margin-top: 27px; cursor: pointer" v-on:click="onClickComment(order.orderID)">comment</button>
           </div>
         </li>
       </ul>
