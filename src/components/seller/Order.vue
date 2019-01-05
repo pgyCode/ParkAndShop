@@ -1,38 +1,52 @@
 <template>
   <div>
-
-    <div style="height: 42px; width: 866px; margin: 20px auto;background: rgb(241, 241, 241); border: 1px solid #dfdfdf;">
-      <p style="float: left; width: 330px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; line-height: 42px">Good</p>
-      <p style="float: left; width: 100px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; line-height: 42px">Price</p>
-      <p style="float: left; width: 100px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; line-height: 42px">Number</p>
-      <p style="float: left; width: 100px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; line-height: 42px">Sum</p>
-      <p style="float: left; width: 100px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; line-height: 42px">Trading Status</p>
-      <p style="float: right; width: 80px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; line-height: 42px">Operate</p>
+    <div style="height: 42px; width: 1000px; margin: 20px auto;background: rgb(42,86,215); border: #000000 ;solid :000000;">
+      <p style="float: left; width: 250px;text-align: center;color: rgb(60, 60, 60); font-size: 15px; font-weight: 600; line-height: 42px">Good</p>
+      <p style="float: left; width: 80px;text-align: center; color: rgb(60, 60, 60); font-size: 15px; font-weight: 600; line-height: 42px">Price</p>
+      <p style="float: left; width: 150px;text-align: center; color: rgb(60, 60, 60); font-size: 15px; font-weight: 600; line-height: 42px">Number</p>
+      <!--<p style="float: left; width: 120px;text-align: center; color: rgb(60, 60, 60); font-size: 15px; font-weight: 600; line-height: 42px">Sum</p>-->
+      <p style="float: left; width: 150px;text-align: center; color: rgb(60, 60, 60); font-size: 15px; font-weight: 600; line-height: 42px">Information</p>
+      <p style="float: left; width: 150px;text-align: center; color: rgb(60, 60, 60); font-size: 15px; font-weight: 600; line-height: 42px">Time</p>
+      <p style="float: left; width: 130px;text-align: center; color: rgb(60, 60, 60); font-size: 15px; font-weight: 600; line-height: 42px">Trading Status</p>
+      <!--<p style="float: right; width: 120px;text-align: center; color: rgb(60, 60, 60); font-size: 15px; font-weight: 600; line-height: 42px">Operate</p>-->
     </div>
     <div id="containerBody">
       <ul>
-        <li v-bind:key="order" v-for="order in orders">
-          <div style="height: 42px;background: rgb(241, 241, 241); border-bottom: 1px solid #dfdfdf">
-            <p style="float: left; color: rgb(60, 60, 60); font-size: 12px; width: 100px; text-align: center; font-weight: 800; line-height: 42px ">{{order.time}}</p>
-            <p style="float: left; color: rgb(60, 60, 60); font-size: 12px; width: 130px; text-align: center; font-weight: 400; line-height: 42px ">OrderNum: {{ order.orderID}}</p>
-            <p style="float: left; color: rgb(60, 60, 60); font-size: 12px; width: 300px; text-align: center; font-weight: 400; line-height: 42px ">{{ order.shopName }}</p>
-            <p style="float: right; color: rgb(60, 60, 60); font-size: 12px; width: 90px; text-align: center; font-weight: 400; line-height: 42px ">{{ order.sellerName }}</p>
+        <li v-bind:key="order" v-for="order in orders" style="border-width:1px;border-color: black;" >
+          <div style="height: 42px;background: rgb(241, 241, 241); border-bottom: none;border-color: black; solid: #dfdfdf">
+            <!--<p style="float: left; color: rgb(60, 60, 60); font-size: 12px; width: 100px; text-align: center; font-weight: 800; line-height: 42px ">{{order.time}}</p>-->
+            <p style="float: left; color: rgb(60, 60, 60); font-size: 12px; width: 1000px; font-weight: 700; line-height: 42px ">&nbsp;&nbsp;&nbsp;OrderID: &nbsp;&nbsp;&nbsp;&nbsp;{{ order.orderID}}
+             </p>
           </div>
-          <div style="padding: 15px; clear: both;">
-            <img style="float: left; width: 80px; height: 80px; padding-right: 15px" v-bind:src="order.portraitURL"/>
-            <div style="width: 220px; float: left; height: 80px;">
-              <p style=" color: rgb(60, 60, 60); font-size: 13px; font-weight: 500; line-height: 25px; height: 55px; ">{{ order.pName }}</p>
-              <span style="clear:both; width: 100px; text-align: center; display: block; color: #fff; background: #f40; font-size: 12px;padding: 1px 3px; margin-top: 3px">Authenticated</span>
+            <div style="height: 108px; width: 1000px;">
+             <img v-bind:src="order.portraitURL"
+               style="float: left; width: 105px; height: 108px; border:none;"  v-on:click="goOrder(order)"/>
+
+          <div style="width: 880px;height: 108px;margin: 0px auto;">
+             <div style="width: 800px;height: 108px;margin: 0px auto;float: left" v-on:click="goOrder(order)">
+              <p style="float: left; width: 100px;text-align:center;color: rgb(60, 60, 60); font-size: 12px; font-weight: 700; line-height: 96px">{{ order.pName }}</p>
+              <!--<span style="clear:both; width: 100px; text-align: center; display: block; color: #fff; background: #f40; font-size: 12px;padding: 1px 3px; margin-top: 3px">Authenticated</span>-->
+            <!--</div>-->
+            <p style="float: left; width: 160px;text-align:center;color: rgb(60, 60, 60); font-size: 12px; font-weight: 700; line-height: 96px">¥{{ order.orderPrice }}</p>
+            <p style="float: left; width: 80px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 700; line-height: 96px">{{  order.amount }}</p>
+            <!--<p style="float: left; width: 70px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; line-height: 96px">¥{{ order.orderPrice*order.amount}}</p>-->
+            <div style="float: left; width: 220px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; line-height: 50px">
+              <p>{{ order.username}}</p>
+              <p>{{order.address}}</p>
             </div>
-            <p style="float: left; width: 100px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 400; line-height: 80px">¥{{ order.price }}</p>
-            <p style="float: left; width: 100px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 400; line-height: 80px">{{ a = 1 }}</p>
-            <p style="float: left; width: 100px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; line-height: 80px">¥{{ order.price}}</p>
-            <p style="float: left; width: 100px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; line-height: 80px">Succeed</p>
-            <p style="float: left; width: 100px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; line-height: 80px"></p>
-            <button style="float: right; width: 100px;text-align: center; color: rgb(60, 60, 60); font-size: 12px;
-             font-weight: 600; height: 26px; width: 60px; border: 1px solid rgb(220, 220, 220); border-radius: 5px;
-              margin-top: 27px; cursor: pointer" v-on:click="refund(order.orderID)">Refund</button>
-          </div>
+            <div style="float: left; width: 80px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; line-height: 50px">
+              <p>{{ order.Date}}</p>
+            </div>
+            <p style="float: left; width: 160px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; line-height: 96px">Succeed</p>
+            <!--<div style="float:left; width: 100px;text-align: center; color: rgb(60, 60, 60); font-size: 12px;-->
+             <!--font-weight: 600;border-radius: 5px;-->
+             <!--cursor: pointer">-->
+              <!--<button style="margin:0px auto;margin-top: 15px;border: none;text-align: center;background: #f3476c;color: white;" v-on:click="refund(order.orderID)">Refund</button>-->
+              <!--<button style="margin:0px auto;margin-top: 25px;border: none;background: #f3476c;color: white;" v-on:click="send(order.orderID)">&nbsp;Send &nbsp;</button>-->
+            <!--</div>-->
+             </div>
+           </div>
+    </div>
         </li>
       </ul>
     </div>
@@ -42,7 +56,7 @@
 </template>
 
 <script>
-
+/* eslint-disable no-trailing-spaces,indent */
 import Loading from '@/components/common/Loading'
 export default {
   components: {Loading},
@@ -77,6 +91,11 @@ export default {
         .catch(() => {
           this.isLoad = false
         })
+    },
+
+    goOrder: function (order) {
+       console.log(order)
+      this.$router.push({name: 'seller_order_info', params: {data: order}})
     }
   },
   created: function () {
@@ -95,8 +114,8 @@ export default {
   }
 
   #containerBody{
-    width: 866px;
-    margin: 0px auto;
+    width: 1000px;
+    margin: 0px ;
     clear: both;
   }
 
@@ -105,7 +124,7 @@ export default {
   }
 
   li{
-    width: 866px;
+    width: 1000px;
     height: 150px;
     display: block;
     margin-top: 10px;

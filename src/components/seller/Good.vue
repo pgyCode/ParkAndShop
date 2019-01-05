@@ -41,7 +41,7 @@ export default {
     console.log(this.data)
   },
 
-  data: function () {
+  data () {
     return {
       data: {},
       isLoad: false
