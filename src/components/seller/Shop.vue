@@ -100,13 +100,14 @@ export default {
     }
   },
 
-  mounted () {
+  activated () {
+    console.log(this.$route.params.data)
     if (this.$route.params.data !== undefined) {
       this.id = this.$route.params.data
-      this.$emit('childByValue', this.id)
-      this.initLoad()
-      this.initInfo()
     }
+    this.$emit('childByValue', this.id)
+    this.initLoad()
+    this.initInfo()
     // console.log('测试 mounted')
     // this.id = this.getCookie('userId')
     // this.$emit('childByValue', this.id)

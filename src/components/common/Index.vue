@@ -23,7 +23,7 @@
 
     </div>
 
-    <router-view style="width: 1000px; margin: 0px auto;"/>
+    <keep-alive><router-view style="width: 1000px; margin: 0px auto;"/></keep-alive>
 
     <!--<div id="containerFooter">-->
       <!--<span id="copyright">©copyright group_nine 2018</span>-->

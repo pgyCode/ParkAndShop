@@ -1,6 +1,12 @@
+int x=1;
 <template>
   <div>
-
+    <loading v-show="isLoad"/>
+    <div v-show="isComment" style="position: fixed; top: 0px;left: 0px;right: 0px;bottom: 0px;margin: auto; width: 350px; height: 150px; background: #fbf6ff">
+      <button style="width: 20px; height: 20px;" v-on:click="isComment = false">X</button>
+      <textarea v-model="comment" style="float: left; width: 350px;  height: 150px; border: 1px solid #dfdfdf"/>
+      <button v-on:click="onClickSure()" style="margin-top: 20px; width: 80px; height: 40px; border: none; background: #00b400; border-radius: 5px; font-weight: 700; font-size: 16px; color: #fff;">OK</button>
+    </div>
     <div style="height: 42px; width: 866px; margin: 20px auto;background: rgb(241, 241, 241); border: 1px solid #dfdfdf;">
       <p style="float: left; width: 330px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; line-height: 42px">Good</p>
       <p style="float: left; width: 100px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; line-height: 42px">Price</p>
@@ -15,7 +21,6 @@
           <div style="height: 42px;background: rgb(241, 241, 241); border-bottom: 1px solid #dfdfdf">
             <p style="float: left; color: rgb(60, 60, 60); font-size: 12px; width: 150px; padding-left: 20px; font-weight: 800; line-height: 42px ">{{order.createTime | formatDate }}</p>
             <p style="float: left; color: rgb(60, 60, 60); font-size: 12px; width: 130px; text-align: left; font-weight: 400; line-height: 42px ">OrderNum: {{ order.orderID}}</p>
-            <p style="float: left; color: rgb(60, 60, 60); font-size: 12px; width: 160px; text-align: center; font-weight: 400; line-height: 42px ">{{ order.product.shopName }}</p>
             <p style="float: right; color: rgb(60, 60, 60); font-size: 12px; width: 90px; text-align: center; font-weight: 400; line-height: 42px ">{{ order.product.shopName }}</p>
           </div>
           <div style="padding: 15px; clear: both;">
@@ -28,13 +33,14 @@
             <p style="float: left; width: 100px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 400; line-height: 80px">{{ a = 1 }}</p>
             <p style="float: left; width: 100px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; line-height: 80px">¥{{ order.product.price }}</p>
             <p style="float: left; width: 100px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; line-height: 80px">{{ getStatus(order.isFinish) }}</p>
-            <button v-show="order.isFinish === 1" style="float: right; width: 100px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; height: 26px; width: 60px; border: 1px solid rgb(220, 220, 220); border-radius: 5px; margin-top: 27px; cursor: pointer" v-on:click="onClickRefund(order.orderID)">Refund</button>
+            <button v-show="order.isFinish === 3" style="float: right; width: 100px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; height: 26px; width: 60px; border: 1px solid rgb(220, 220, 220); border-radius: 5px; margin-top: 27px; cursor: pointer" v-on:ick="onClickConfirm(order.orderID)">Confirm</button>
+            <button v-show="order.isFinish === 1||order.isFinish === 2||order.isFinish === 3" style="float: right; width: 100px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; height: 26px; width: 60px; border: 1px solid rgb(220, 220, 220); border-radius: 5px; margin-top: 27px; cursor: pointer" v-on:click="onClickRefund(order.orderID)">Refund</button>
+            <button v-show="order.isFinish === 2" style="float: right; width: 100px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; height: 26px; width: 60px; border: 1px solid rgb(220, 220, 220); border-radius: 5px; margin-top: 27px; cursor: pointer" v-on:click="onClickComment(order.orderID)">comment</button>
           </div>
         </li>
       </ul>
-    </div>
 
-    <Loading v-show="isLoad"/>
+    </div>
   </div>
 </template>
 
@@ -47,7 +53,10 @@ export default {
       isLoad: false,
       currentPage: 1,
       name: 'sds',
-      orders: []
+      orders: [],
+      isComment: false,
+      currentCommentId: -1,
+      comment: ''
     }
   },
 
@@ -67,11 +76,48 @@ export default {
     },
     onClickRefund: function (id) {
       this.isLoad = true
+      event.stopPropagation()
       this.$http.get(this.URL + 'c/refund?orderID=' + id)
         .then((data) => {
           console.log(data)
           this.isLoad = false
           this.initLoad()
+        })
+        .catch(() => {
+          this.isLoad = false
+        })
+    },
+    onClickConfirm: function (id) {
+      event.stopPropagation()
+      this.isLoad = true
+      this.$http.get(this.URL + 'c/confirmOrder?orderID=' + id)
+        .then((data) => {
+          console.log(data)
+          this.isLoad = false
+          this.initLoad()
+        })
+        .catch(() => {
+          this.isLoad = false
+        })
+    },
+    onClickComment: function (id) {
+      this.isComment = true
+      this.currentCommentId = id
+      // 阻止点击事件向上传递，防止影响到父容器的点击事件
+      event.stopPropagation()
+    },
+    onClickSure: function () {
+      this.isComment = false
+      this.isLoad = true
+      this.$http.get(this.URL + 'c/comment?orderID=' +
+        this.currentCommentId +
+        '&message=' +
+        this.comment)
+        .then((data) => {
+          console.log(data)
+          alert('Comment Succeed')
+          this.comment = ''
+          this.isLoad = false
         })
         .catch(() => {
           this.isLoad = false

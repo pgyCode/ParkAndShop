@@ -72,7 +72,7 @@ export default {
 
     onClickBuy: function (id) {
       this.isLoad = true
-      this.$http.get(this.URL + 'c/makeOrder?cID=' + this.getCookie('userId') + '&pID=' + id)
+      this.$http.get(this.URL + 'c/makeOrder?cID=' + this.getCookie('userId') + '&pID=' + id + '&amount=' + 1)
         .then((data) => {
           console.log(data)
           this.isLoad = false
