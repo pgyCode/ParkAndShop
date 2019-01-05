@@ -9,6 +9,7 @@
       <div style=" width: 1000px;height: 19px; padding: 6px 0px; border-bottom: 2px solid #f40">
         <p style="float: left;font-size: 13px; font-weight: 500; color: rgb(60, 60, 60);">Shop Name:&nbsp;&nbsp; {{ info.shopName }}</p>
         <p style="float:left; text-align:center; margin-left:10px;font-size: 13px; font-weight: 500; color: #fff; width: 70px; height: 19px; border-radius: 3px; background: #f40;">SHOP</p>
+        <button style="float: right; width: 178px; height: 38px; margin-left: 5px;border: none; background: rgb(255,90,44); color: #fff; font-weight: 400; font-size: 16px" v-on:click="addFavouriteShop()">Favourite</button>
       </div>
       <div style="height: 120px; width: 1000px;">
         <img v-bind:src="info.url"
@@ -31,6 +32,7 @@ import Shop from '@/components/seller/Shop'
 import CustomerShop from '@/components/customer/Shop'
 export default {
   components: {CustomerShop, Loading, Good, Shop},
+
 
   data () {
     return {
@@ -55,11 +57,25 @@ export default {
             this.isLoad = false
             const response = data.body
             this.info = response.data.data
+
           })
           .catch(() => {
             this.isLoad = false
           })
       }
+    },
+    addFavouriteShop: function () {
+      console.log(this.id)
+      console.log(this.URL + 'c/addFavouriteShop?cID=' + this.getCookie('userId') + '&sID=' + this.info.id)
+      this.$http.get(this.URL + 'c/addFavouriteShop?cID=' + this.getCookie('userId') + '&sID=' + this.info.id)
+        .then((data) => {
+          this.isLoad = false
+          alert('Add to FavouriteShop Succeed!')
+        })
+        .catch(() => {
+          this.isLoad = false
+          alert('Add to FavouriteShop Failed!')
+        })
     }
   }
 
