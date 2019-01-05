@@ -6,14 +6,14 @@
         <img src="../../assets/logo.png" style="float: left;" height="83px" width='210px'/>
         <p style="float: left; color: rgb(60, 60, 60); line-height: 83px; font-size: 22px; font-weight: 700; margin-left: 20px">Shop</p>
       </div>
-      <div style=" width: 1000px;height: 19px; padding: 6px 0px; border-bottom: 2px solid #f40">
-        <p style="float: left;font-size: 13px; font-weight: 500; color: rgb(60, 60, 60);">Shop Name:&nbsp;&nbsp; {{ info.shopName }}</p>
-        <p style="float:left; text-align:center; margin-left:10px;font-size: 13px; font-weight: 500; color: #fff; width: 70px; height: 19px; border-radius: 3px; background: #f40;">SHOP</p>
+      <div style=" width: 1000px;height: 19px; padding: 6px 0px; border-bottom: 2px solid #5884ff">
+        <p style="float:left; font-size: 15px;   font-weight: 500; color: rgb(0,0,0);border-radius: 3px;background: #2a56d7">&nbsp;&nbsp;Shop Name:&nbsp;&nbsp;</p>
+        <p >&nbsp;&nbsp; {{ info.shopName }}</p>
       </div>
       <div style="height: 120px; width: 1000px;">
-        <img v-bind:src="info.url"
+        <img v-bind:src="info.url" v-on:click="goShop(info.sID)"
              style="float: left; width: 118px; height: 118px; border: 1px solid rgb(212,215,220)"/>
-        <p src="../../assets/logo.png" style="float:left; width: 880px; height: 120px; font-size: 30px; line-height: 120px; text-align: center; color: rgb(63,127,206);">{{ info.shopName }}</p>
+        <p src="../../assets/logo.png"  style="float:left; width: 880px; height: 120px; font-size: 30px; line-height: 120px; text-align: center; color: rgb(63,127,206);">{{ info.shopName }}</p>
       </div>
     </div>
     <loading v-show="isLoad"/>
@@ -60,6 +60,9 @@ export default {
             this.isLoad = false
           })
       }
+    },
+    goShop: function (info) {
+      this.$router.push({name: 'seller_shop', params: {data: info}})
     }
   }
 
