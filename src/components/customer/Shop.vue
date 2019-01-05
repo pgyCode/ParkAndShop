@@ -51,53 +51,53 @@ export default {
   },
 
   methods: {
-        initLoad: function () {
-              this.isLoad = true
-              this.$http.get(this.URL + 'b/good/all?id=' +
+    initLoad: function () {
+      this.isLoad = true
+      this.$http.get(this.URL + 'b/good/all?id=' +
                 this.id)
-                .then((data) => {
-                  console.log(data)
-                  this.isLoad = false
-                  this.datas = data.body.data.array
-                })
-                .catch((error) => {
-                  console.log(error)
-                  this.isLoad = false
-                })
-            },
+        .then((data) => {
+          console.log(data)
+          this.isLoad = false
+          this.datas = data.body.data.array
+        })
+        .catch((error) => {
+          console.log(error)
+          this.isLoad = false
+        })
+    },
 
-        initInfo: function () {
-          this.isLoad = true
-          console.log(this.id)
-          if (this.$route.params.data !== undefined) {
-            this.id = this.$route.params.data
-            this.$emit('childByValue', this.id)
-          }
-          this.$http.get(this.URL + 'b/info/get?id=' +
+    initInfo: function () {
+      this.isLoad = true
+      console.log(this.id)
+      if (this.$route.params.data !== undefined) {
+        this.id = this.$route.params.data
+        this.$emit('childByValue', this.id)
+      }
+      this.$http.get(this.URL + 'b/info/get?id=' +
             this.id)
-            .then((data) => {
-              console.log(data)
-              this.isLoad = false
-              const response = data.body
-              this.info = response.data.data
-            })
-            .catch(() => {
-              this.isLoad = false
-            })
-        },
-      addFavouriteShop: function () {
-            console.log(this.id)
-            console.log(this.URL + 'c/addFavouriteShop?cID=' + this.getCookie('userId') + '&sID=' + this.info.id)
-            this.$http.get(this.URL + 'c/addFavouriteShop?cID=' + this.getCookie('userId') + '&sID=' + this.info.id)
-              .then((data) => {
-                this.isLoad = false
-                alert('Add to FavouriteShop Succeed!')
-              })
-              .catch(() => {
-                this.isLoad = false
-                alert('Add to FavouriteShop Failed!')
-              })
-          },
+        .then((data) => {
+          console.log(data)
+          this.isLoad = false
+          const response = data.body
+          this.info = response.data.data
+        })
+        .catch(() => {
+          this.isLoad = false
+        })
+    },
+    addFavouriteShop: function () {
+      console.log(this.id)
+      console.log(this.URL + 'c/addFavouriteShop?cID=' + this.getCookie('userId') + '&sID=' + this.info.id)
+      this.$http.get(this.URL + 'c/addFavouriteShop?cID=' + this.getCookie('userId') + '&sID=' + this.info.id)
+        .then((data) => {
+          this.isLoad = false
+          alert('Add to FavouriteShop Succeed!')
+        })
+        .catch(() => {
+          this.isLoad = false
+          alert('Add to FavouriteShop Failed!')
+        })
+    },
 
     goGood: function (info) {
       this.$router.push({name: 'seller_good', params: {data: info}})
