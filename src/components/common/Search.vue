@@ -124,7 +124,7 @@ export default {
 
     goGood: function (info) {
       console.log(info)
-      this.$router.push({name: 'seller_good', params: {data: info}})
+      this.$router.push({name: 'customer_good', params: {data: info}})
     },
 
     checkPoiSearch: function (poi) {
