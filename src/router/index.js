@@ -59,8 +59,8 @@ export default new Router({
           path: '/customer/good',
           name: 'customer_good',
           component: CustomerGood
-	},
-	{
+        },
+        {
           path: '/customer/shop',
           name: 'customer_shop',
           component: CustomerShop
