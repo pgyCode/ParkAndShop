@@ -10,7 +10,8 @@
       <button style="width: 70px; height: 30px; float: left;"
               :class="{btnSearch: poiSearch == 1}" v-on:click="checkPoiSearch(1)">Shop</button>
       <div style="clear: both">
-        <input id="inputSearch" v-model="value"/>
+        <input id="inputSearch" v-model="value"
+               v-on:keyup.enter = "onClickSearch"/>
         <button id="btnSearch" v-on:click="onClickSearch()">Search</button>
       </div>
     </div>
@@ -204,7 +205,8 @@ export default {
     },
 
     goGood: function (info) {
-      this.$router.push({name: 'seller_good', params: {data: info}})
+      console.log(info)
+      this.$router.push({name: 'customer_good', params: {data: info}})
     },
 
     checkPoiSearch: function (poi) {

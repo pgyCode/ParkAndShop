@@ -11,6 +11,7 @@ import CustomerOrder from '@/components/customer/Order'
 import CustomerCart from '@/components/customer/Cart'
 import CustomerInfo from '@/components/customer/Info'
 import CustomerShop from '@/components/customer/Shop'
+import CustomerGood from '@/components/customer/Good'
 
 // import Saler from '@/components/seller/Saler'
 // import SalerOwner from '@/components/seller/Owner'
@@ -50,6 +51,7 @@ import SellerAddGood from '@/components/seller/AddGood'
 import SellerInfo from '@/components/seller/Info'
 import SellerOrder from '@/components/seller/Order'
 import SellerGoodInformation from '@/components/seller/Good_info'
+import SellerProfit from '@/components/seller/Profit'
 
 Vue.use(Router)
 
@@ -66,6 +68,16 @@ export default new Router({
         {path: '/customer/favourite', component: CustomerFavourite},
         {path: '/customer/cart', component: CustomerCart},
         {path: '/customer/info', component: CustomerInfo},
+        {
+          path: '/customer/good',
+          name: 'customer_good',
+          component: CustomerGood
+        },
+        {
+          path: '/customer/shop',
+          name: 'customer_shop',
+          component: CustomerShop
+        },
         {
           path: '/manager/sellers',
           component: ManagerSeller,
@@ -155,11 +167,6 @@ export default new Router({
           component: Seller,
           children: [
             {
-              path: '/customer/shop',
-              name: 'customer_shop',
-              component: CustomerShop
-            },
-            {
               path: '/seller/good',
               name: 'seller_good',
               component: SellerGood
@@ -176,6 +183,11 @@ export default new Router({
           path: '/seller/shop',
           name: 'seller_shop',
           component: SellerShop
+        },
+        {
+          path: '/seller/profit',
+          name: 'seller_profit',
+          component: SellerProfit
         }
       ]
     },
