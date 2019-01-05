@@ -1,5 +1,6 @@
 
 <template>
+
   <div>
     <div style="height: 48px; width: 866px; margin: 0px auto;">
       <p style="height: 48px; width: 100%; line-height: 48px; border-bottom: 2px solid #f40; color: #f40; font-weight: 600">All Cart</p>
@@ -16,7 +17,7 @@
 
     <div id="containerBody">
       <ul>
-        <li v-bind:key="order" v-for="order in orders">
+        <li v-bind:key="order.pID" v-for="order in orders">
           <div style="padding: 15px; clear: both;">
             <img style="float: left; width: 80px; height: 80px; padding-right: 15px" v-bind:src="order.portraitURL"/>
             <div style="width: 220px; float: left; height: 80px;">
@@ -25,8 +26,8 @@
             </div>
             <p style="float: left; width: 100px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; line-height: 80px">{{ order.shopName }}</p>
             <p style="float: left; width: 100px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 400; line-height: 80px">¥{{ order.price }}</p>
-            <p style="float: left; width: 100px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 400; line-height: 80px">{{ a = 1 }}</p>
-            <p style="float: left; width: 100px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; line-height: 80px">¥{{ order.price }}</p>
+            <p style="float: left; width: 100px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 400; line-height: 80px"><button style="width: 10px;margin: 2px" v-on:click ="sub(order)">-</button>{{ order.number }}<button style="width: 10px;margin: 2px" v-on:click ="add(order)">+</button></p>
+            <p style="float: left; width: 100px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; line-height: 80px">¥{{ order.price*order.number }}</p>
             <div style="float: right; width: 50px">
               <button style="width: 50px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; height: 26px; width: 50px; border: 1px solid rgb(220, 220, 220); border-radius: 5px; margin-top: 5px; cursor: pointer" v-on:click="onClickBuy(order.pID)">Buy</button>
               <button style="width: 50px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; height: 26px; width: 50px; border: 1px solid rgb(220, 220, 220); border-radius: 5px; margin-top: 15px; cursor: pointer" v-on:click="onClickCancel(order.pID)">Cancel</button>
@@ -49,6 +50,7 @@ export default {
       isLoad: false,
       currentPage: 1,
       name: 'sds',
+
       users: [],
       datas: [],
       orders: []
@@ -95,6 +97,14 @@ export default {
         .catch(() => {
           this.isLoad = false
         })
+    },
+    add: function (order) {
+      order.number++
+    },
+    sub: function (order) {
+      if (order.number > 1) {
+        order.number--
+      }
     },
 
     goGood: function (info) {

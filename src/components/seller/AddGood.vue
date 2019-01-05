@@ -2,7 +2,7 @@
   <div style="width: 1000px; margin: 0px auto;">
     <div style="width: 1000px; min-width: 1000px; margin: 0px auto;">
 
-      <div style="width: 1000px; height: 83px; padding: 0px 0px; margin: 0px auto;  border-bottom: 2px solid #f40">
+      <div style="width: 1000px; height: 83px; padding: 0px 0px; margin: 0px auto;  border-bottom: 2px solid #5884ff">
         <img src="../../assets/logo.png" style="float: left" height="83px" width='210px'/>
         <p style="float: left; color: rgb(60, 60, 60); line-height: 83px; font-size: 22px; font-weight: 700; margin-left: 20px">Publish Goods</p>
       </div>
