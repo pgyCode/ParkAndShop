@@ -11,7 +11,7 @@
       <router-link class='subTitle' v-show="this.getCookie('userType') == '1'" to="/seller/addGood">Add Goods</router-link>
       <router-link class='subTitle' v-show="this.getCookie('userType') == '1'" to="/seller/order">Order</router-link>
       <span class='subTitle' v-show="this.getCookie('userType') == '1'" v-on:click="goShop()">Shop</span>
-      <router-link class='subTitle' v-show="this.getCookie('userType') == '2'" to="/manager/system">System</router-link>
+      <router-link class='subTitle' v-show="this.getCookie('userType') == '2'" to="/manager/owner">Orders</router-link>
       <router-link class='subTitle' v-show="this.getCookie('userType') == '2'" to="/manager/ads">Ads</router-link>
       <router-link class='subTitle' v-show="this.getCookie('userType') == '2'" to="/manager/customer">Customers</router-link>
       <router-link class='subTitle' v-show="this.getCookie('userType') == '2'" to="/manager/sellers">Sellers</router-link>
