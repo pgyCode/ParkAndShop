@@ -76,7 +76,7 @@ export default {
 
     onClickCommit: function () {
       this.isLoad = true
-      console.log('idddd' + this.getCookie('userId'))
+      console.log('id' + this.getCookie('userId'))
       this.$http.get(this.URL + 'c/alterUserInfo?userID=' +
         this.getCookie('userId') +
         '&portraitURL=' +
@@ -84,9 +84,7 @@ export default {
         '&nickname=' +
         this.data.nickname +
         '&address=' +
-        this.data.address +
-        '&tel=' +
-        this.data.username)
+        this.data.address)
         .then((data) => {
           console.log(data)
           this.isLoad = false
