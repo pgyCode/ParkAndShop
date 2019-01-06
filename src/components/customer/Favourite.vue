@@ -3,9 +3,9 @@
     <div style="height: 48px; width: 850px; margin: 0px auto; margin-top: 10px">
       <p style="height: 48px; width: 100%; line-height: 48px; margin-left: 10px; padding-left: 10px; border-bottom: 2px solid #f40; color: #f40; font-weight: 600">All My Favourite</p>
        <div id="containerSearch" style="float: left; margin-left: 10px;">
-        <button style="width: 70px; height: 30px; float: left;"
+        <button style="width: 70px; height: 30px; float: left;border: 0px; "
                 :class="{btnSearch: poiSearch == 0}" v-on:click="checkPoiSearch(0)">Good</button>
-        <button style="width: 70px; height: 30px; float: left;"
+        <button style="width: 70px; height: 30px; float: left;border: 0px;"
                 :class="{btnSearch: poiSearch == 1}" v-on:click="checkPoiSearch(1)">Shop</button>
         </div>
     </div>
@@ -16,7 +16,7 @@
           <img v-bind:src="data.product.portraitURL" style="width: 148px; height: 148px; border: 1px solid #dfdfdf;" v-on:click="goGood(data.product)"/>
           <p style="height: 30px; text-align: center; line-height: 30px; font-weight: 500; font-size: 12px; color: rgb(60, 60, 60);">{{ data.product.pName }}</p>
           <p style="height: 20px; text-align: center; line-height: 20px; font-weight: 900; font-size: 14px; color: #f40;">💰¥{{ data.product.price }}</p>
-          <button style="width: 50px;text-align: center; background: rgb(255,90,44);color: white; font-size: 12px; font-weight: 600; height: 26px; width: 50px; border: 1px solid rgb(255,90,44); border-radius: 5px; margin: 0 auto; cursor: pointer" v-on:click="onClickRemove(data.product.pID)">remove</button>
+          <button style="float: left; width: 148px; height: 38px;border: none; background: rgb(255,90,44); color: #fff; font-weight: 400; font-size: 16px; margin-top: 10px" v-on:click="onClickRemove(data.product.pID)">remove</button>
         </li>
       </ul>
     </div>
@@ -179,6 +179,7 @@ export default {
     }
 
    .btnSearch{
+      border: 0px;
       background: #f40;
       color: #fff;
       font-weight: 400;
