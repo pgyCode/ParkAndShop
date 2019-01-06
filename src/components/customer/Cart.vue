@@ -29,7 +29,7 @@
             <p style="float: left; width: 100px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 400; line-height: 80px"><button style="width: 10px;margin: 2px" v-on:click ="sub(order)">-</button>{{ order.number }}<button style="width: 10px;margin: 2px" v-on:click ="add(order)">+</button></p>
             <p style="float: left; width: 100px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; line-height: 80px">¥{{ order.price*order.number }}</p>
             <div style="float: right; width: 50px">
-              <button style="width: 50px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; height: 26px; width: 50px; border: 1px solid rgb(220, 220, 220); border-radius: 5px; margin-top: 5px; cursor: pointer" v-on:click="onClickBuy(order.pID)">Buy</button>
+              <button style="width: 50px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; height: 26px; width: 50px; border: 1px solid rgb(220, 220, 220); border-radius: 5px; margin-top: 5px; cursor: pointer" v-on:click="onClickBuy(order)">Buy</button>
               <button style="width: 50px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; height: 26px; width: 50px; border: 1px solid rgb(220, 220, 220); border-radius: 5px; margin-top: 15px; cursor: pointer" v-on:click="onClickCancel(order.pID)">Cancel</button>
             </div>
           </div>
@@ -72,9 +72,9 @@ export default {
         })
     },
 
-    onClickBuy: function (id) {
+    onClickBuy: function (order) {
       this.isLoad = true
-      this.$http.get(this.URL + 'c/makeOrder?cID=' + this.getCookie('userId') + '&pID=' + id)
+      this.$http.get(this.URL + 'c/makeOrder?cID=' + this.getCookie('userId') + '&pID=' + order.pID + '&amount=' + order.number)
         .then((data) => {
           console.log(data)
           this.isLoad = false

@@ -17,7 +17,7 @@
       </div>
     </div>
     <loading v-show="isLoad"/>
-    <router-view/>
+    <keep-alive><router-view/></keep-alive>
     <good v-show="false" v-on:childByValue="childByValue"/>
     <shop v-show="false" v-on:childByValue="childByValue"/>
     <customerShop v-show="false" v-on:childByValue="childByValue"/>
