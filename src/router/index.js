@@ -11,6 +11,7 @@ import CustomerOrder from '@/components/customer/Order'
 import CustomerCart from '@/components/customer/Cart'
 import CustomerInfo from '@/components/customer/Info'
 import CustomerShop from '@/components/customer/Shop'
+import CustomerGood from '@/components/customer/Good'
 
 // import Saler from '@/components/seller/Saler'
 // import SalerOwner from '@/components/seller/Owner'
@@ -19,6 +20,7 @@ import CustomerShop from '@/components/customer/Shop'
 import ManagerSeller from '@/components/manager/Seller'
 import ManagerCustomer from '@/components/manager/Customer'
 import ManagerOwner from '@/components/manager/Owner'
+import ManagerAds from '@/components/manager/Ads'
 
 // 主页--管理员--商家
 import ManagerSellerRequest from '@/components/manager/SellerRequest'
@@ -29,6 +31,18 @@ import ManagerSellerSearch from '@/components/manager/SellerSearch'
 import ManagerCustomerBlack from '@/components/manager/CustomerBlack'
 import ManagerCustomerSearch from '@/components/manager/CustomerSearch'
 
+// 主页--管理员--订单
+import ManagerOwnerHistory from '@/components/manager/OwneHistory'
+import ManagerOwnerIncome from '@/components/manager/OwneIncome'
+import ManagerOwnerSearch from '@/components/manager/OwneSearch'
+
+// 主页--管理员--广告
+import ManagerAdsRequest from '@/components/manager/AdsRequest'
+import ManagerTop5 from '@/components/manager/AdsTop5'
+import ManagerTop10 from '@/components/manager/AdsTop10'
+import ManagerAdsSearch from '@/components/manager/AdsSearch'
+import ManagerAdminGood from '@/components/manager/AdminGood'
+import ManagerAdminShop from '@/components/manager/AdminShop'
 // 主页--商家
 import Seller from '@/components/seller/Seller'
 import SellerShop from '@/components/seller/Shop'
@@ -55,6 +69,11 @@ export default new Router({
         {path: '/customer/cart', component: CustomerCart},
         {path: '/customer/info', component: CustomerInfo},
         {
+          path: '/customer/good',
+          name: 'customer_good',
+          component: CustomerGood
+        },
+        {
           path: '/customer/shop',
           name: 'customer_shop',
           component: CustomerShop
@@ -63,6 +82,10 @@ export default new Router({
           path: '/manager/sellers',
           component: ManagerSeller,
           children: [
+            {
+              path: '/',
+              component: ManagerSellerRequest
+            },
             {
               path: '/manager/sellers/request',
               component: ManagerSellerRequest
@@ -93,7 +116,64 @@ export default new Router({
               component: ManagerCustomerSearch
             }
           ]},
-        {path: '/manager/ads', component: ManagerSeller},
+        {
+          path: '/manager/owner',
+          component: ManagerOwner,
+          children: [
+            {
+              path: '/',
+              component: ManagerOwnerHistory
+            },
+            {
+              path: '/manager/owner/history',
+              component: ManagerOwnerHistory
+            },
+            {
+              path: '/manager/owner/search',
+              component: ManagerOwnerSearch
+            },
+            {
+              path: '/manager/owner/income',
+              component: ManagerOwnerIncome
+            }
+          ]},
+        {
+          path: '/manager/ads',
+          component: ManagerAds,
+          children: [
+            {
+              path: '/',
+              component: ManagerAdsRequest
+            },
+            {
+              path: '/manager/ads/request',
+              component: ManagerAdsRequest
+            },
+            {
+              path: '/manager/ads/search',
+              component: ManagerAdsSearch
+            },
+            {
+              path: '/manager/ads/top5',
+              component: ManagerTop5
+            },
+            {
+              path: '/manager/ads/top10',
+              component: ManagerTop10
+            },
+            {
+              path: '/manager/ads/search/good',
+              name: 'admin_good',
+              component: ManagerAdminGood
+            },
+            {
+              path: '/manager/ads/search/shop',
+              name: 'admin_shop',
+              component: ManagerAdminShop
+            }
+          ]
+
+        },
         {path: '/manager/system', component: ManagerOwner},
         {path: '/seller',
           component: Seller,

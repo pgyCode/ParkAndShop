@@ -4,42 +4,32 @@
 
       <div style="width: 1000px; height: 83px; padding: 0px 0px; margin: 0px auto;  border-bottom: 2px solid #f40">
         <img src="../../assets/logo.png" style="float: left" height="83px" width='210px'/>
-        <p style="float: left; color: rgb(60, 60, 60); line-height: 83px; font-size: 22px; font-weight: 700; margin-left: 20px">Customer Info(Developing)</p>
+        <p style="float: left; color: rgb(60, 60, 60); line-height: 83px; font-size: 22px; font-weight: 700; margin-left: 20px">Customer Info</p>
       </div>
 
-      <!--
       <div style="clear: both; width: 500px;margin: 0px auto;">
         <div style="clear: both; padding-top: 35px; height: 100px;">
           <p style="text-align: right; float: left;  width: 150px; height: 100px; line-height: 100px; font-size: 14px; font-weight: 400; color: rgb(60, 60, 60);">profile photo:&nbsp;</p>
-          <img v-bind:src="data.url" style="float:left; width: 100px; height: 100px; border: 1px solid #dfdfdf;"
+          <img v-bind:src="data.portraitURL" style="float:left; width: 100px; height: 100px; border: 1px solid #dfdfdf;"
                v-on:click="selectFile()"/>
           <input type="file" id="photoFileUpload" v-on:change="onSellerImgChange($event)"
-                 style="filter:alpha(opacity=0);opacity:0;width: 0;height: 0;"/>
-        </div>
+                 style="filter:alpha(opacity=0);opacity:0;width: 0;height: 0;"/></div>
         <div style="clear: both; padding-top: 20px; height: 37px;">
           <p style="text-align: right; float: left; width: 150px; height: 35px; line-height: 35px; font-size: 14px; font-weight: 400; color: rgb(60, 60, 60);">Telephone:&nbsp;</p>
-          <input v-model="data.telephone" style="float: left; width: 340px;  height: 35px; border: 1px solid #dfdfdf"/>
+          <!--<input v-model="data.username" style="float: left; width: 340px;  height: 35px; border: 1px solid #dfdfdf"/>-->
+          <p style="float: left; width: 340px;  height: 35px; font-size: 13px; line-height: 33px; border: 1px solid #dfdfdf">{{data.username}}</p>
         </div>
         <div style="clear: both; padding-top: 20px; height: 37px;">
-          <p style="text-align: right; float: left; width: 150px; height: 35px; line-height: 35px; font-size: 14px; font-weight: 400; color: rgb(60, 60, 60);">ShopName:&nbsp;</p>
-          <input v-model="data.shopName" style="float: left; width: 340px;  height: 35px; border: 1px solid #dfdfdf"/>
-        </div>
-        <div style="clear: both; padding-top: 20px; height: 37px;">
-          <p style="text-align: right; float: left; width: 150px; height: 35px; line-height: 35px; font-size: 14px; font-weight: 400; color: rgb(60, 60, 60);">Major Business:&nbsp;</p>
-          <input v-model="data.major" style="float: left; width: 340px;  height: 35px; border: 1px solid #dfdfdf"/>
-        </div>
-        <div style="clear: both; padding-top: 20px; height: 37px;">
-          <p style="text-align: right; float: left; width: 150px; height: 35px; line-height: 35px; font-size: 14px; font-weight: 400; color: rgb(60, 60, 60);">Description:&nbsp;</p>
-          <textarea v-model="data.description" style="padding:10px 0px; float: left; width: 340px;  height: 100px; border: 1px solid #dfdfdf"/>
+          <p style="text-align: right; float: left; width: 150px; height: 35px; line-height: 35px; font-size: 14px; font-weight: 400; color: rgb(60, 60, 60);">Address:&nbsp;</p>
+          <input v-model="data.address" style="float: left; width: 340px;  height: 35px; border: 1px solid #dfdfdf"/>
         </div>
         <div style="clear: both; padding-top: 20px; height: 37px;">
           <p style="text-align: right; float: left; width: 150px; height: 35px; line-height: 35px; font-size: 14px; font-weight: 400; color: rgb(60, 60, 60);">Nickname:&nbsp;</p>
-          <input v-model="data.nickname" style="float: left; width: 340px;  height: 35px; border: 1px solid #dfdfdf"/>
+          <input v-model="data.nickname" style="float: left; width: 340px;  height: 35px; border: 1px solid #dfdfdf" v-on:keyup.enter = "onClickCommit"/>
         </div>
         <button style="float: right; margin-top: 20px; width: 340px; margin-right: 10px; height: 42px; border: none; background: #f40; border-radius: 5px; font-weight: 700; font-size: 16px; color: #fff;"
                 v-on:click="onClickCommit()">Commit</button>
       </div>
-      -->
     </div>
     <loading v-show="isLoad"/>
   </div>
@@ -86,20 +76,15 @@ export default {
 
     onClickCommit: function () {
       this.isLoad = true
-      this.$http.get(this.URL + 'b/info/modify?id=' +
+      console.log('id' + this.getCookie('userId'))
+      this.$http.get(this.URL + 'c/alterUserInfo?userID=' +
         this.getCookie('userId') +
-        '&url=' +
-        this.data.url +
-        '&telephone=' +
-        this.data.telephone +
-        '&shopName=' +
-        this.data.shopName +
+        '&portraitURL=' +
+        this.data.portraitURL +
         '&nickname=' +
         this.data.nickname +
-        '&description=' +
-        this.data.description +
-        '&major=' +
-        this.data.major)
+        '&address=' +
+        this.data.address)
         .then((data) => {
           console.log(data)
           this.isLoad = false
@@ -109,9 +94,8 @@ export default {
           this.isLoad = false
         })
     },
-
     onSellerImgChange: function (e) {
-      this.data.url = getFileUrl(e.srcElement)
+      this.data.portraitURL = getFileUrl(e.srcElement)
       const AV = require('leancloud-storage')
       var fileUploadControl = $('#photoFileUpload')[0]
       if (fileUploadControl.files.length <= 0) {
@@ -122,8 +106,8 @@ export default {
       var file = new AV.File(name, localFile)
       file.save().then((file) => {
         // 文件保存成功
-        this.data.url = file.url()
-        console.log(this.data.url)
+        this.data.portraitURL = file.url()
+        console.log(this.data.portraitURL)
       }, function (error) {
         // 异常处理
         console.log(error)
@@ -133,13 +117,13 @@ export default {
 
   created: function () {
     this.isLoad = true
-    this.$http.get(this.URL + 'b/info/get?id=' +
+    this.$http.get(this.URL + 'c/myInfo?cID=' +
       this.getCookie('userId'))
       .then((data) => {
-        console.log(data)
         this.isLoad = false
+        console.log(data)
         const response = data.body
-        this.data = response.data.data
+        this.data = response.data
       })
       .catch(() => {
         this.isLoad = false

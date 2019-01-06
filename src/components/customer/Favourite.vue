@@ -1,18 +1,16 @@
 <template>
   <div>
     <div style="height: 48px; width: 850px; margin: 0px auto; margin-top: 10px">
-      <p style="height: 48px; width: 100%; line-height: 48px; margin-left: 10px; padding-left: 10px; border-bottom: 2px solid #f40; color: #f40; font-weight: 600">
-        All My Favourite
+      <p style="height: 48px; width: 100%; line-height: 48px; margin-left: 10px; padding-left: 10px; border-bottom: 2px solid #f40; color: #f40; font-weight: 600">All My Favourite</p>
        <div id="containerSearch" style="float: left; margin-left: 10px;">
         <button style="width: 70px; height: 30px; float: left;"
                 :class="{btnSearch: poiSearch == 0}" v-on:click="checkPoiSearch(0)">Good</button>
         <button style="width: 70px; height: 30px; float: left;"
                 :class="{btnSearch: poiSearch == 1}" v-on:click="checkPoiSearch(1)">Shop</button>
         </div>
-      </p>
     </div>
 
-    <div id="containerBody" v-show="poiSearch == 0">
+    <div class="containerBody" v-show="poiSearch == 0">
       <ul>
         <li v-bind:key="data" v-for="data in datas" >
           <img v-bind:src="data.product.portraitURL" style="width: 148px; height: 148px; border: 1px solid #dfdfdf;" v-on:click="goGood(data.product)"/>
@@ -23,7 +21,7 @@
       </ul>
     </div>
 
-    <div id="containerBody" v-show="poiSearch == 1">
+    <div class="containerBody" v-show="poiSearch == 1">
           <ul>
                   <li v-bind:key="shop" v-for="shop in shops"
                        class="containerShopLi" style="margin: 30px">
@@ -98,17 +96,16 @@ export default {
         .catch(() => {
           this.isLoad = false
         })
-        this.$http.get(this.URL + 'c/myFavouriteShop?cID=' + this.getCookie('userId'))
-                        .then((data) => {
-                          console.log(data)
-                          this.isLoad = false
-                          const response = data.body
-                          this.shops = response.data.favourites
-
-                        })
-                        .catch(() => {
-                          this.isLoad = false
-                        })
+      this.$http.get(this.URL + 'c/myFavouriteShop?cID=' + this.getCookie('userId'))
+        .then((data) => {
+          console.log(data)
+          this.isLoad = false
+          const response = data.body
+          this.shops = response.data.favourites
+        })
+        .catch(() => {
+          this.isLoad = false
+        })
     },
     onClickRemove: function (id) {
       this.isLoad = true
@@ -123,29 +120,28 @@ export default {
         })
     },
     onClickRemoveShop: function (id) {
-                this.isLoad = true
-                this.$http.get(this.URL + 'c/unfavouriteShop?cID=' + this.getCookie('userId') + '&sID=' + id)
-                  .then((data) => {
-                    console.log(data)
-                    this.isLoad = false
-                    this.initLoad()
-                  })
-                  .catch(() => {
-                    this.isLoad = false
-                  })
-              },
+      this.isLoad = true
+      this.$http.get(this.URL + 'c/unfavouriteShop?cID=' + this.getCookie('userId') + '&sID=' + id)
+        .then((data) => {
+          console.log(data)
+          this.isLoad = false
+          this.initLoad()
+        })
+        .catch(() => {
+          this.isLoad = false
+        })
+    },
     checkPoiSearch: function (poi) {
-          this.poiSearch = poi
-       },
+      this.poiSearch = poi
+    },
 
     goGood: function (info) {
       this.$router.push({name: 'seller_good', params: {data: info}})
     },
     goShop: function (info) {
-                 console.log(info.id)
-                 this.$router.push({name: 'customer_shop', params: {data: info.id}})
-
-     },
+      console.log(info.id)
+      this.$router.push({name: 'customer_shop', params: {data: info.id}})
+    }
   },
 
   created: function () {
@@ -162,7 +158,7 @@ export default {
     display: block;
   }
 
-  #containerBody{
+  .containerBody{
     width: 850px;
     margin: 0px auto;
     clear: both;
