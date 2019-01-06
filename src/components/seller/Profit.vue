@@ -18,7 +18,7 @@
       </div>
     </div>
 
-    <p style="clear: both;font-size:12px;text-align:center; font-weight:700; color: #000000; padding: 3px 5px; height: 25px; line-height: 25px; background: rgb(63,127,206)">Profit</p>
+    <p style="clear: both;font-size:12px;text-align:center; font-weight:700; color: #000000; padding: 3px 5px; height: 25px; line-height: 25px; background: rgb(63,127,206)">PROFIT</p>
 
     <div style="height: 330px;width: 800px;margin-left:75px;margin-top:50px;float: left">
       <div id="myChart_day" :style="{width: '900px', height: '300px'}"></div>
