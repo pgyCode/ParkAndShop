@@ -51,6 +51,7 @@ import SellerAddGood from '@/components/seller/AddGood'
 import SellerInfo from '@/components/seller/Info'
 import SellerOrder from '@/components/seller/Order'
 import SellerGoodInformation from '@/components/seller/Good_info'
+import SellerOrderInformation from '@/components/seller/Order_info'
 import SellerProfit from '@/components/seller/Profit'
 
 Vue.use(Router)
@@ -68,6 +69,7 @@ export default new Router({
         {path: '/customer/favourite', component: CustomerFavourite},
         {path: '/customer/cart', component: CustomerCart},
         {path: '/customer/info', component: CustomerInfo},
+
         {
           path: '/customer/good',
           name: 'customer_good',
@@ -103,6 +105,7 @@ export default new Router({
               component: ManagerSellerRequest
             }
           ]},
+
         {
           path: '/manager/customer',
           component: ManagerCustomer,
@@ -186,6 +189,8 @@ export default new Router({
           ]
 
         },
+
+        {path: '/manager/ads', component: ManagerSeller},
         {path: '/manager/system', component: ManagerOwner},
         {path: '/seller',
           component: Seller,
@@ -196,13 +201,21 @@ export default new Router({
               component: SellerGood
             }
           ]},
+
         {path: '/seller/addGood', component: SellerAddGood},
         {
           path: '/seller/Good_info',
           name: 'seller_good_info',
           component: SellerGoodInformation},
-        {path: '/seller/info', component: SellerInfo},
-        {path: '/seller/order', component: SellerOrder},
+        {
+          path: '/seller/Order_info',
+          name: 'seller_order_info',
+          component: SellerOrderInformation},
+        {
+          path: '/seller/info', component: SellerInfo
+        },
+        {
+          path: '/seller/order', component: SellerOrder},
         {
           path: '/seller/shop',
           name: 'seller_shop',
