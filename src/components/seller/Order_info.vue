@@ -34,8 +34,6 @@
           <p style="float: left; height: 50px; width:800px;color: rgb(60, 60, 60); font-size: 15px; font-weight: 700; line-height: 50px">Purchase date:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&emsp;&emsp;&emsp;&emsp;{{data.Date}}</p>
         </div>
 
-
-
         <div style="float: left; height: 280px; width:800px;color: rgb(60, 60, 60); font-size: 15px; font-weight: 700; line-height: 50px">
           <div style="float: left; height: 40px; width:800px;color: rgb(60, 60, 60); font-size: 17px; font-weight: 700; line-height: 50px">
             Choose express&emsp;:
@@ -195,7 +193,6 @@
 
 </template>
 
-
 <script>/* eslint-disable indent,no-trailing-spaces,quotes,key-spacing */
 import Loading from '@/components/common/Loading'
 
@@ -211,7 +208,7 @@ export default {
 
  data () {
    return {
-     //el :"#app",
+     // el :"#app",
      data: {},
         isLoad: false,
  //     poiRegister: 0,

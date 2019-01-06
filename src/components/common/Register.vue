@@ -54,12 +54,16 @@
           <!--<input style="float: left; width: 150px; height: 100px; line-height: 100px;" id="photoFileUpload" type="file" v-on:change="onSellerImgChange($event)"/>-->
         </div>
         <div style="clear: both; padding-top: 20px; height: 37px;">
+          <p style="text-align: right; float: left; width: 150px; height: 35px; line-height: 35px; font-size: 14px; font-weight: 400; color: rgb(60, 60, 60);">ShopName:&nbsp;</p>
+          <input v-model="bShopName" style="float: left; width: 340px;  height: 35px; border: 1px solid #dfdfdf"/>
+        </div>
+        <div style="clear: both; padding-top: 20px; height: 37px;">
           <p style="text-align: right; float: left; width: 150px; height: 35px; line-height: 35px; font-size: 14px; font-weight: 400; color: rgb(60, 60, 60);">Telephone:&nbsp;</p>
           <input v-model="bTelephone" style="float: left; width: 340px;  height: 35px; border: 1px solid #dfdfdf"/>
         </div>
         <div style="clear: both; padding-top: 20px; height: 37px;">
-          <p style="text-align: right; float: left; width: 150px; height: 35px; line-height: 35px; font-size: 14px; font-weight: 400; color: rgb(60, 60, 60);">ShopName:&nbsp;</p>
-          <input v-model="bShopName" style="float: left; width: 340px;  height: 35px; border: 1px solid #dfdfdf"/>
+          <p style="text-align: right; float: left; width: 150px; height: 35px; line-height: 35px; font-size: 14px; font-weight: 400; color: rgb(60, 60, 60);">E-mail:&nbsp;</p>
+          <input v-model="bEmail" style="float: left; width: 340px;  height: 35px; border: 1px solid #dfdfdf"/>
         </div>
         <div style="clear: both; padding-top: 20px; height: 37px;">
           <p style="text-align: right; float: left; width: 150px; height: 35px; line-height: 35px; font-size: 14px; font-weight: 400; color: rgb(60, 60, 60);">Major Business:&nbsp;</p>
@@ -70,7 +74,7 @@
           <textarea v-model="bDescription" style="float: left; width: 340px; padding: 10px 0px;  height: 100px; border: 1px solid #dfdfdf"/>
         </div>
         <div style="clear: both; padding-top: 20px; height: 37px;">
-          <p style="text-align: right; float: left; width: 150px; height: 35px; line-height: 35px; font-size: 14px; font-weight: 400; color: rgb(60, 60, 60);">Nickname:&nbsp;</p>
+          <p style="text-align: right; float: left; width: 150px; height: 35px; line-height: 35px; font-size: 14px; font-weight: 400; color: rgb(60, 60, 60);">Contact:&nbsp;</p>
           <input v-model="bNickname" style="float: left; width: 340px;  height: 35px; border: 1px solid #dfdfdf"/>
         </div>
         <div style="clear: both; padding-top: 20px; height: 37px;">
@@ -118,6 +122,7 @@ export default {
 
       bUrl: '',
       bTelephone: '',
+      bEmail: '',
       bShopName: '',
       bMajor: '',
       bDescription: '',
@@ -169,6 +174,8 @@ export default {
           this.bUrl +
           '&telephone=' +
           this.bTelephone +
+          '&email=' +
+          this.bEmail +
           '&shopName=' +
           this.bShopName +
           '&major=' +

@@ -64,8 +64,10 @@ export default {
     return {
       isLoad: false,
       currentPage: 1,
-      name: 'sds',
-      orders: []
+      // name: 'sds',
+      orders: [],
+      status: '&nbsp',
+      status_num: 1 // 初始值：未发货
     }
   },
 
@@ -76,8 +78,20 @@ export default {
         .then((data) => {
           this.isLoad = false
           alert('refund Succeed')
-          this.initLoad()
         })
+      this.status = 'Failed'
+      this.initLoad()
+    },
+
+    send: function (id) {
+      this.isLoad = true
+      this.$http.get(this.URL + 'b/order/send?orderId=' + id)
+        .then((data) => {
+          this.isLoad = false
+          alert('send Succeed')
+        })
+      this.status = 'Sending'
+      this.initLoad()
     },
 
     initLoad: function () {
@@ -86,6 +100,9 @@ export default {
         .then((data) => {
           console.log(data)
           this.orders = data.body.data.order
+          /* if (this.orders.isFinish == 0) {
+
+          } */
           this.isLoad = false
         })
         .catch(() => {

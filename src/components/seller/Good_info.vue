@@ -1,10 +1,12 @@
 <template>
   <div style="width: 1000px; margin: 0px auto;">
     <div style="width: 1000px; min-width: 1000px; margin: 0px auto;">
-      <div style="width: 1000px; height: 83px; padding: 0px 0px; margin: 0px auto;  border-bottom: 2px solid #f40">
+
+      <div style="width: 1000px; height: 83px; padding: 0px 0px; margin: 0px auto;  border-bottom: 2px solid #5884ff">
         <img src="../../assets/logo.png" style="float: left" height="83px" width='210px'/>
         <p style="float: left; color: rgb(60, 60, 60); line-height: 83px; font-size: 22px; font-weight: 700; margin-left: 20px">Update Goods Information</p>
       </div>
+
       <div style="clear: both; width: 500px;margin: 0px auto;">
         <ul><!--v-bind:key="data" v-for="data in datas"-->
           <div style="clear: both; padding-top: 35px; height: 100px;">
@@ -19,12 +21,18 @@
             <input v-model="data.pName" style="float: left; width: 340px;  height: 35px; border: 1px solid #dfdfdf"/>
           </div>
           <div style="clear: both; padding-top: 20px; height: 37px;">
-            <p style="text-align: right; float: left; width: 150px; height: 35px; line-height: 35px; font-size: 14px; font-weight: 400; color: rgb(60, 60, 60);">Price:&nbsp;¥&nbsp;</p>
+            <p style="text-align: right; float: left; width: 150px; height: 35px; line-height: 35px; font-size: 14px; font-weight: 400; color: rgb(60, 60, 60);">Price&nbsp;¥:&nbsp;</p>
             <input v-model="data.price" style="float: left; width: 340px;  height: 35px; border: 1px solid #dfdfdf"/>
           </div>
           <div style="clear: both; padding-top: 20px; height: 37px;">
             <p style="text-align: right; float: left; width: 150px; height: 35px; line-height: 35px; font-size: 14px; font-weight: 400; color: rgb(60, 60, 60);">Count:</p>
-            <input v-model="data.num" style="float: left; width: 340px;  height: 35px; border: 1px solid #dfdfdf"/>
+            <div style="float: left; width: 340px;  height: 35px; border: 1px solid white">
+              <button v-on:click="add(100)" style="float:left; margin: 8px 5px 5px">&nbsp;+100&nbsp;</button>
+              <button v-on:click="add(1)" style="float:left; margin: 8px 5px 10px">&nbsp;+1&nbsp;</button>
+              <input v-model="data.num" style="float:left; width: 50px;  height: 35px; border: 1px solid #dfdfdf"/>
+              <button v-on:click="subtract(1)" style="float:left; margin: 8px 10px 5px">&nbsp;-1&nbsp;</button>
+              <button v-on:click="subtract(100)" style="float:left; margin: 8px 5px 5px">&nbsp;-100&nbsp;</button>
+            </div>
           </div>
           <div style="clear: both; padding-top: 20px; height: 37px;">
             <p style="text-align: right; float: left; width: 150px; height: 35px; line-height: 35px; font-size: 14px; font-weight: 400; color: rgb(60, 60, 60);">Description:&nbsp;</p>
@@ -59,7 +67,6 @@ function getFileUrl (obj) {
 
 export default {
   components: {Loading},
-
   data () {
     return {
       isLoad: false,
@@ -74,6 +81,13 @@ export default {
   },
 
   methods: {
+    add: function (inc) {
+      this.data.num += inc
+    },
+
+    subtract: function (inc) {
+      this.data.num -= inc
+    },
 
     selectFile: function () {
       JSselectFile()
