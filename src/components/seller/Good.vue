@@ -108,7 +108,7 @@ export default {
     console.log(this.data)
   },
 
-  data: function () {
+  data () {
     return {
       id: -1,
       data: {},
