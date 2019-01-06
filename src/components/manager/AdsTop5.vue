@@ -9,29 +9,25 @@
     <div id="containerShop">
       <ul>
         <li class="containerShopLi" v-bind:key="shop" v-for="shop in shops">
-          <div>
-            <div style="float: left; width: 400px; height: 160px;">
-              <img v-bind:src="shop.url" style="float:left; width: 120px; height: 120px; margin-top: 20px; margin-bottom: 20px; margin-right: 20px; border: 1px solid #b6b6b6;"/>
-              <div style="float: left; width: 250px;  height: 120px; margin-top: 20px">
-                <span style="font-size: 14px; font-weight: 700; line-height: 30px; color: rgb(0, 99, 200);">{{ shop.shopName }}</span>
+          <div style=" width: 100%; height: 100%">
+            <div style="float: left; width: 400px; height: 130px;vertical-align: middle; display: table-cell; padding: 4px; ">
+              <img v-bind:src="shop.url" style="float:left; width: 120px; height: 120px; margin-bottom: 20px; margin-right: 10px; border: 1px solid #b6b6b6;"/>
+              <div style="float: left; width: 250px;  height: 120px;">
+                <span style="display:block;font-size: 14px; font-weight: 700; line-height: 30px; color: rgb(0, 99, 200); overflow: hidden">{{ shop.shopName }}</span>
                 <span style="clear:both; float: left; font-size: 12px; font-weight: 400; line-height: 30px; color: rgb(102, 102, 102);"><b>Seller：</b></span>
-                <span style="float: left; font-size: 12px; font-weight: 400; line-height: 30px; color: rgb(0, 99, 200);">{{ shop.sellerName }}</span>
+                <span style="float: left; font-size: 12px; font-weight: 400; line-height: 30px; color: rgb(0, 99, 200); overflow: hidden">{{ shop.nickname }}</span>
                 <span style="clear:both; float: left; font-size: 12px; font-weight: 400; line-height: 30px; color: rgb(102, 102, 102);"><b>Major Business：</b></span>
-                <span style="float: left; font-size: 12px; font-weight: 400; line-height: 30px; color: rgb(0, 99, 200);">{{ shop.major }}</span>
+                <span style="float: left; font-size: 12px; font-weight: 400; line-height: 30px; color: rgb(0, 99, 200); overflow: hidden">{{ shop.major }}</span>
                 <span style="clear:both; float: left; font-size: 12px; font-weight: 400; line-height: 30px; color: rgb(102, 102, 102);"><b>Telephone：</b></span>
-                <span style="float: left; font-size: 12px; font-weight: 400; line-height: 30px; color: rgb(0, 99, 200);">{{ shop.telephone }}</span>
+                <span style="float: left; font-size: 12px; font-weight: 400; line-height: 30px; color: rgb(0, 99, 200); overflow: hidden">{{ shop.telephone }}</span>
               </div>
             </div>
+            <button v-on:click="cancel(shop)" style="width: 100px; text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; height: 26px; width: 60px; float: right; border: 1px solid rgb(220, 220, 220); border-radius: 5px; cursor: pointer; margin: 52px 13px;" >Cancel</button>
 
-            <div style="width: 350px; float: left; height: 120px; margin-top: 20px;">
-              <div style="width: 350px; background: rgb(237, 237, 237); height: 100px; padding: 10px;">
-                <p style=" font-size: 13px; font-weight: 400; line-height: 20px; overflow: hidden; color: #666;">{{ shop.description }}</p>
-              </div>
+            <div style="float:right; width: 350px; background: rgb(237, 237, 237); height: 100px; padding: 10px; margin: 5px 0px;">
+              <p style=" font-size: 13px; font-weight: 400; line-height: 20px; overflow: hidden; color: #666;">{{ shop.description }}</p>
             </div>
 
-            <div style="width: 86px; float: right; height: 120px; margin-top: 20px;">
-              <button v-on:click="cancel(shop)" style="text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; height: 26px; width: 60px; border: 1px solid rgb(220, 220, 220); border-radius: 5px; cursor: pointer; margin: 47px auto; margin-left: 13px;" >Cancel</button>
-            </div>
           </div>
         </li>
       </ul>
@@ -89,6 +85,10 @@ export default {
       .then((data) => {
         this.isLoad = false
         this.shops = data.body.data.top5
+        console.log(this.shops)
+      })
+      .catch(() => {
+        this.isLoad = false
       })
   }
 
@@ -105,7 +105,7 @@ export default {
   .containerShopLi {
     display: block;
     width: 866px;
-    height: 160px;
+    height: 130px;
     margin-left:  auto;
     margin-right:  auto;
     margin-bottom: 20px;
