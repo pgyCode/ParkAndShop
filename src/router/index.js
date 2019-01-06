@@ -83,6 +83,10 @@ export default new Router({
           component: ManagerSeller,
           children: [
             {
+              path: '/',
+              component: ManagerSellerRequest
+            },
+            {
               path: '/manager/sellers/request',
               component: ManagerSellerRequest
             },
@@ -117,6 +121,10 @@ export default new Router({
           component: ManagerOwner,
           children: [
             {
+              path: '/',
+              component: ManagerOwnerHistory
+            },
+            {
               path: '/manager/owner/history',
               component: ManagerOwnerHistory
             },
@@ -133,6 +141,10 @@ export default new Router({
           path: '/manager/ads',
           component: ManagerAds,
           children: [
+            {
+              path: '/',
+              component: ManagerAdsRequest
+            },
             {
               path: '/manager/ads/request',
               component: ManagerAdsRequest
