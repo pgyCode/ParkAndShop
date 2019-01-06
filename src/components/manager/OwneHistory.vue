@@ -45,7 +45,7 @@
       <p style="float:left;width: 95px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; line-height: 42px">Customer</p>
       <p style="float:left;width: 95px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; line-height: 42px">Money</p>
       <p style="float:left;width: 95px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; line-height: 42px">Income</p>
-      <p style="float:left;width: 95px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; line-height: 42px">Number</p>
+      <p style="float:left;width: 95px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; line-height: 42px">Amount</p>
       <p style="float:left;width: 90px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; line-height: 42px">State</p>
     </div>
 
@@ -53,10 +53,9 @@
 
       <li v-bind:key="order" v-for="order in orders">
         <div style="height: 42px;background: rgb(241, 241, 241); border-bottom: 1px solid #dfdfdf">
-          <p style="float: left; color: rgb(60, 60, 60); font-size: 12px; width: 160px; text-align: center; font-weight: 800; line-height: 42px ">{{ formatDate(order.createTime) }}</p>
-          <p style="float: left; color: rgb(60, 60, 60); font-size: 12px; width: 130px; text-align: center; font-weight: 400; line-height: 42px ">OrderNum: {{ order.orderID}}</p>
-          <p style="float: left; color: rgb(60, 60, 60); font-size: 12px; width: 300px; text-align: center; font-weight: 400; line-height: 42px ">{{ order.shopName }}</p>
-          <p style="float: right; color: rgb(60, 60, 60); font-size: 12px; width: 90px; text-align: center; font-weight: 400; line-height: 42px ">{{ order.sellerName }}</p>
+          <p style="float: left; color: rgb(60, 60, 60); font-size: 12px; width: 160px; text-align: center; font-weight: 800; line-height: 42px ">{{ order.createTime | formatDate }}</p>
+          <p style="float: left; color: rgb(60, 60, 60); font-size: 12px; width: 130px; text-align: center; font-weight: 400; line-height: 42px ">OrderID: {{ order.orderID}}</p>
+          <p style="float: right; color: rgb(60, 60, 60); font-size: 12px; width: 90px; text-align: center; font-weight: 400; line-height: 42px ">{{ order.shopName }}</p>
         </div>
         <div style="padding: 15px; clear: both;">
           <img style="float: left; width: 80px; height: 80px; padding-right: 15px" v-bind:src="order.portraitURL"/>
@@ -66,27 +65,27 @@
           </div>
           <p style="float: left; width: 100px; color: rgb(60, 60, 60); font-size: 12px; font-weight: 400; line-height: 80px">{{ order.sellerName }}</p>
           <p style="float: left; width: 100px; color: rgb(60, 60, 60); font-size: 12px; font-weight: 400; line-height: 80px">{{ order.cName }}</p>
-          <p style="float: left; width: 100px; color: rgb(60, 60, 60); font-size: 12px; font-weight: 400; line-height: 80px">¥{{ order.orderPrice }}</p>
-          <p style="float: left; width: 100px; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; line-height: 80px">¥{{ order.adminProfit }}</p>
-          <p style="float: left; width: 100px; color: rgb(60, 60, 60); font-size: 12px; font-weight: 400; line-height: 80px">{{ order.amount }}</p>
-          <p style="float: right; width: 20px; color: rgb(60, 60, 60); font-size: 12px; font-weight: 400; line-height: 80px">{{ order.isFinish }}</p>
+          <p style="float: left; width: 90px; color: rgb(60, 60, 60); font-size: 12px; font-weight: 400; line-height: 80px">¥{{ order.orderPrice }}</p>
+          <p style="float: left; width: 90px; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; line-height: 80px">¥{{ order.adminProfit }}</p>
+          <p style="float: left; width: 75px; color: rgb(60, 60, 60); font-size: 12px; font-weight: 400; line-height: 80px; margin-left: 10px">{{ order.amount }}</p>
+          <p style="float: left; width: 40px; color: rgb(60, 60, 60); font-size: 12px; font-weight: 400; line-height: 80px; text-align: center">{{ getState(order.isFinish) }}</p>
           <p style="float: left; width: 100px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; line-height: 80px"></p>
         </div>
       </li>
-      <!--<ul>-->
-      <!--<li class="inContainerOrder" v-bind:key="order.orderID" v-for="order in orders">-->
-      <!--<div>-->
-      <!--<div style="float: left; width: 500px; height: 160px;">-->
-      <!--<div style="float: left; width: 250px;  height: 120px; margin-top: 20px">-->
-      <!--<div style="float: left; width: 50px; font-size: 12px; font-weight: 400; line-height: 30px; color: rgb(0, 99, 200);">{{ order.isFinish }}</div>-->
-      <!--<div style="float: left; width: 50px; font-size: 12px; font-weight: 400; line-height: 30px; color: rgb(0, 99, 200);">{{ order.cID }}</div>-->
-      <!--<div style="float: left; width: 50px; font-size: 12px; font-weight: 400; line-height: 30px; color: rgb(0, 99, 200);">{{ order.orderPrice }}</div>-->
-      <!--<div style="float: left; width: 50px; font-size: 12px; font-weight: 400; line-height: 30px; color: rgb(0, 99, 200);">{{ order.adminProfit }}</div>-->
-      <!--</div>-->
-      <!--</div>-->
-      <!--</div>-->
-      <!--</li>-->
-      <!--</ul>-->
+<!--      <ul>
+      <li class="inContainerOrder" v-bind:key="order.orderID" v-for="order in orders">
+      <div>
+      <div style="float: left; width: 500px; height: 160px;">
+      <div style="float: left; width: 250px;  height: 120px; margin-top: 20px">
+      <div style="float: left; width: 50px; font-size: 12px; font-weight: 400; line-height: 30px; color: rgb(0, 99, 200);">{{ order.isFinish }}</div>
+      <div style="float: left; width: 50px; font-size: 12px; font-weight: 400; line-height: 30px; color: rgb(0, 99, 200);">{{ order.cID }}</div>
+      <div style="float: left; width: 50px; font-size: 12px; font-weight: 400; line-height: 30px; color: rgb(0, 99, 200);">{{ order.orderPrice }}</div>
+      <div style="float: left; width: 50px; font-size: 12px; font-weight: 400; line-height: 30px; color: rgb(0, 99, 200);">{{ order.adminProfit }}</div>
+      </div>
+      </div>
+      </div>
+      </li>
+      </ul>-->
     </div>
     <loading v-show="isLoad"/>
   </div>
@@ -137,6 +136,7 @@ export default {
           this.isLoad = false
         })
     },
+
     onCheckTab: function (poi) {
       this.date = new Date().getTime()
       this.currentTab = poi
@@ -166,6 +166,7 @@ export default {
       d = d < 10 ? ('0' + d) : d
       return y + '-' + MM + '-' + d
     },
+
     onClickPrevious: function () {
       switch (this.currentTab) {
         case 0:
@@ -183,6 +184,7 @@ export default {
       }
       this.initLoad()
     },
+
     onClickNext: function () {
       switch (this.currentTab) {
         case 0:
@@ -199,9 +201,21 @@ export default {
           break
       }
       this.initLoad()
+    },
+
+    getState: function (info) {
+      switch (info) {
+        case 0:
+          return 'Failed'
+        case 1:
+          return 'Sending'
+        case 2:
+          return 'Finished'
+        case 3:
+          return 'Receiving'
+      }
     }
   },
-
   filters: {
     formatDate: function (value) {
       let date = new Date(value)
@@ -210,7 +224,13 @@ export default {
       MM = MM < 10 ? ('0' + MM) : MM
       let d = date.getDate()
       d = d < 10 ? ('0' + d) : d
-      return y + '-' + MM + '-' + d
+      let h = date.getHours()
+      h = h < 10 ? ('0' + h) : h
+      let m = date.getMinutes()
+      m = m < 10 ? ('0' + m) : m
+      let s = date.getSeconds()
+      s = s < 10 ? ('0' + s) : s
+      return y + '-' + MM + '-' + d + ' ' + h + ':' + m + ':' + s
     }
   },
 

@@ -13,7 +13,7 @@
       <p style="float:left;width: 95px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; line-height: 42px">Customer</p>
       <p style="float:left;width: 95px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; line-height: 42px">Money</p>
       <p style="float:left;width: 95px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; line-height: 42px">Income</p>
-      <p style="float:left;width: 95px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; line-height: 42px">Number</p>
+      <p style="float:left;width: 95px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; line-height: 42px">Amount</p>
       <p style="float:left;width: 90px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; line-height: 42px">State</p>
     </div>
 
@@ -22,9 +22,8 @@
       <li v-bind:key="order" v-for="order in orders">
         <div style="height: 42px;background: rgb(241, 241, 241); border-bottom: 1px solid #dfdfdf">
           <p style="float: left; color: rgb(60, 60, 60); font-size: 12px; width: 160px; text-align: center; font-weight: 800; line-height: 42px ">{{order.createTime | formatDate }}</p>
-          <p style="float: left; color: rgb(60, 60, 60); font-size: 12px; width: 130px; text-align: center; font-weight: 400; line-height: 42px ">OrderNum: {{ order.orderID}}</p>
-          <p style="float: left; color: rgb(60, 60, 60); font-size: 12px; width: 300px; text-align: center; font-weight: 400; line-height: 42px ">{{ order.shopName }}</p>
-          <p style="float: right; color: rgb(60, 60, 60); font-size: 12px; width: 90px; text-align: center; font-weight: 400; line-height: 42px ">{{ order.sellerName }}</p>
+          <p style="float: left; color: rgb(60, 60, 60); font-size: 12px; width: 130px; text-align: center; font-weight: 400; line-height: 42px ">OrderID: {{ order.orderID}}</p>
+          <p style="float: right; color: rgb(60, 60, 60); font-size: 12px; width: 90px; text-align: center; font-weight: 400; line-height: 42px ">{{ order.shopName }}</p>
         </div>
         <div style="padding: 15px; clear: both;">
           <img style="float: left; width: 80px; height: 80px; padding-right: 15px" v-bind:src="order.portraitURL"/>
@@ -34,11 +33,10 @@
           </div>
           <p style="float: left; width: 100px; color: rgb(60, 60, 60); font-size: 12px; font-weight: 400; line-height: 80px">{{ order.sellerName }}</p>
           <p style="float: left; width: 100px; color: rgb(60, 60, 60); font-size: 12px; font-weight: 400; line-height: 80px">{{ order.cName }}</p>
-          <p style="float: left; width: 100px; color: rgb(60, 60, 60); font-size: 12px; font-weight: 400; line-height: 80px">¥{{ order.orderPrice }}</p>
-          <p style="float: left; width: 100px; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; line-height: 80px">¥{{ order.adminProfit }}</p>
-          <p style="float: left; width: 100px; color: rgb(60, 60, 60); font-size: 12px; font-weight: 400; line-height: 80px">{{ order.amount }}</p>
-          <p style="float: right; width: 20px; color: rgb(60, 60, 60); font-size: 12px; font-weight: 400; line-height: 80px">{{ order.isFinish }}</p>
-          <!--<p style="float: left; width: 100px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; line-height: 80px">Succeed</p>-->
+          <p style="float: left; width: 90px; color: rgb(60, 60, 60); font-size: 12px; font-weight: 400; line-height: 80px">¥{{ order.orderPrice }}</p>
+          <p style="float: left; width: 90px; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; line-height: 80px">¥{{ order.adminProfit }}</p>
+          <p style="float: left; width: 75px; color: rgb(60, 60, 60); font-size: 12px; font-weight: 400; line-height: 80px; margin-left: 10px">{{ order.amount }}</p>
+          <p style="float: left; width: 40px; color: rgb(60, 60, 60); font-size: 12px; font-weight: 400; line-height: 80px; text-align: center">{{ getState(order.isFinish) }}</p>
           <p style="float: left; width: 100px; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; line-height: 80px"></p>
         </div>
       </li>
@@ -97,6 +95,18 @@ export default {
         .catch(() => {
           this.isLoad = false
         })
+    },
+    getState: function (info) {
+      switch (info) {
+        case 0:
+          return 'Failed'
+        case 1:
+          return 'Sending'
+        case 2:
+          return 'Finished'
+        case 3:
+          return 'Receiving'
+      }
     }
   },
 

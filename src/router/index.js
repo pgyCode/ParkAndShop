@@ -97,6 +97,10 @@ export default new Router({
             {
               path: '/manager/sellers/search',
               component: ManagerSellerSearch
+            },
+            {
+              path: '/',
+              component: ManagerSellerRequest
             }
           ]},
         {
@@ -135,6 +139,10 @@ export default new Router({
             {
               path: '/manager/owner/income',
               component: ManagerOwnerIncome
+            },
+            {
+              path: '/',
+              component: ManagerOwnerHistory
             }
           ]},
         {
@@ -170,6 +178,10 @@ export default new Router({
               path: '/manager/ads/search/shop',
               name: 'admin_shop',
               component: ManagerAdminShop
+            },
+            {
+              path: '/',
+              component: ManagerAdsSearch
             }
           ]
 
