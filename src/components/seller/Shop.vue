@@ -16,8 +16,8 @@
         <p src="../../assets/logo.png" style="float:left; width: 880px; height: 120px; font-size: 30px; line-height: 120px; text-align: center; color: rgb(63,127,206);">{{ info.shopName }}</p>
       </div>
     </div>
-
-    <p style="clear: both;font-size:12px;text-align:center; font-weight:700; color: #000000; padding: 3px 5px; height: 25px; line-height: 25px; background: rgb(63,127,206)">All Goods</p>
+    <loading v-show="isLoad"/>
+    <p style="clear: both;font-size:12px;text-align:center; font-weight:700; color: #000000; padding: 3px 5px; height: 25px; line-height: 25px; background: rgb(63,127,206)">MANAGER All GOODS</p>
     <div id="containInfo">
       <ul>
         <li v-bind:key="data" v-for="data in datas" style="border-color:black;border-width: 1px;" >
@@ -31,9 +31,9 @@
               <p style="height: 140px; margin: 10px 30px 5px;text-align: center;float: left; line-height: 110px;font-weight: 900; font-size: 15px; color: forestgreen;">Count:{{ data.num }}</p>
             </div>
             <div style="width: 140px;height: 140px;margin: 5px auto;float: right;">
-              <button class='subTitle' v-on:click="goGoodInfo(data)" style="margin-top: 12px;margin-left: 20px;background: #f3476c;color: white;width: 70px;height: 25px;border: none"> Update </button>
-              <button class='subTitle' v-on:click="goodDelete(data.pID)" style="margin-top: 20px;margin-left: 20px;background: #f3476c;color: white;width: 70px;height: 25px;border: none">  Shelves </button>
-              <button class='subTitle' v-on:click="goAdvertise(data.pID)" style="margin-top: 20px;margin-left: 20px;background: #f3476c;color: white;width: 70px;height: 25px;border: none"> Advertising </button>
+              <button class='subTitle' v-on:click="goGoodInfo(data)" style="margin-top: 12px;margin-left: 20px;background: dodgerblue;color: white;width: 70px;height: 25px;border: none"> Update </button>
+              <button class='subTitle' v-on:click="goodDelete(data.pID)" style="margin-top: 20px;margin-left: 20px;background: dodgerblue;color: white;width: 70px;height: 25px;border: none">  Shelves </button>
+              <button class='subTitle' v-on:click="goAdvertise(data.pID)" style="margin-top: 20px;margin-left: 20px;background: dodgerblue;color: white;width: 70px;height: 25px;border: none"> Advertising </button>
             </div>
           </div>
         </li>
@@ -62,10 +62,6 @@ export default {
   methods: {
     initLoad: function () {
       this.isLoad = true
-      if (this.$route.params.data !== undefined) {
-        this.id = this.$route.params.data
-        this.$emit('childByValue', this.id)
-      }
       this.$http.get(this.URL + 'b/good/all?id=' +
         this.getCookie('userId'))
         .then((data) => {
@@ -82,12 +78,8 @@ export default {
     initInfo: function () {
       this.isLoad = true
       console.log(this.id)
-      if (this.$route.params.data !== undefined) {
-        this.id = this.$route.params.data
-        this.$emit('childByValue', this.id)
-      }
       this.$http.get(this.URL + 'b/info/get?id=' +
-        this.id)
+        this.getCookie('userId'))
         .then((data) => {
           console.log(data)
           this.isLoad = false
@@ -131,12 +123,19 @@ export default {
         .catch(() => {
           this.isLoad = false
         })
+    },
+    changePage: function () {
+      this.$nextTick(() => {
+        document.documentElement.scrollTop = 0
+      })
+      console.log(document.documentElement.scrollTop)
     }
   },
 
-  mounted () {
+  activated () {
     this.initLoad()
     this.initInfo()
+    this.changePage()
   }
 }
 </script>
