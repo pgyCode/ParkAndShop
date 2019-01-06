@@ -100,10 +100,6 @@ export default new Router({
             {
               path: '/manager/sellers/search',
               component: ManagerSellerSearch
-            },
-            {
-              path: '/',
-              component: ManagerSellerRequest
             }
           ]},
 
