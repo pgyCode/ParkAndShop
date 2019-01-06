@@ -1,10 +1,12 @@
 <template>
   <div>
-    <div style="width: 1000px; margin: 0px auto; text-align: center; height: 87px; background: #f40; display: table-cell; vertical-align: center">
-      <img style="float:left; width: 220px; height: 87px;" id="imgLogo" src="../../assets/logo.png"/>
-      <div style="float:left; width: 626px; height: 40px; padding: 23.5px ;">
-        <p style="width: 626px; height: 40px; background: #fff; border-radius: 5px; font-size: 24px; line-height: 40px; text-align: right; padding-right: 10px;">🔍</p>
-      </div>
+    <div style="width: 1000px; margin: 0px auto; text-align: center; height: 100px; display: table-cell; vertical-align: center">
+      <img style="margin-left:30px;float:left;width: 250px;height: 100px;" id="imgLogo" src="../../assets/logo.png"/>
+      <router-link to="/search" style="float: left">
+        <div style="float:left; width: 526px; height: 40px; padding: 30px; margin-left: 60px;">
+          <p style="width: 526px; height: 40px; background: #fff; border: 1px solid #b6b9bc; border-radius: 5px; font-size: 24px; line-height: 40px; text-align: right; padding-right: 10px;">🔍</p>
+        </div>
+      </router-link>
     </div>
     <!--<div id="containerSearch">-->
       <!--<button style="width: 70px; height: 30px; float: left;"-->
@@ -20,9 +22,9 @@
     <div>
       <div id="top5" style="width: 1000px;">
         <ul>
-          <li class="containerBodyLi">
-            <div style="width: 100%; height: 64px; : 1px solid #dfdfdf">
-              <p style="line-height: 64px; font-size: 24px; padding-left: 10px; color: #4eac66; font-weight: 500">123</p>
+          <li v-bind:key="shop" v-for="shop in shops" class="containerBodyLi">
+            <div style="width: 100%; height: 64px; background: #f0f0f0; border-radius: 10px 10px 0px 0px">
+              <p style="line-height: 64px; font-size: 24px; padding-left: 10px; color: #4eac66; font-weight: 500">{{ shop.shopName }}</p>
             </div>
             <div style="width: 100%; height: 230px;">
               <img src="https://img.alicdn.com/tfs/TB11eRDohrI8KJjy0FpXXb5hVXa-1014-720.png_720x720Q90s50.jpg_.webp"
@@ -30,176 +32,12 @@
 
               <!--<img v-bind:src="shop.url" style="float:left; height: 208px; width: 208px; margin: 11px 0px ; border: 1px solid #dfdfdf"/>-->
               <ul style="float:right;width: 600px; height: 230px">
-                <li style="width: 170px; height: 230px; margin-left: 20px; float: right;">
-                  <img style="width: 170px; height: 170px;" src="https://img.alicdn.com/bao/uploaded/i1/725677994/O1CN01EepLXL28vIdBrsRJZ_!!725677994.jpg_320x5000Q50s50.jpg_.webp"/>
-                  <p style="margin: 6px auto; text-align: center; line-height: 18px; font-size: 12px; color: rgba(0,0,0,0.87); font-weight: 500">三只松鼠</p>
+                <li v-bind:key="product" v-for="product in shop.products" style="width: 170px; height: 230px; margin-left: 20px; float: right;">
+                  <img style="width: 170px; height: 170px;" v-bind:src="product.portraitURL"/>
+                  <p style="margin: 6px auto; text-align: center; line-height: 18px; font-size: 12px; color: rgba(0,0,0,0.87); font-weight: 500">{{ product.pName }}</p>
                   <div style="width: 140px; height: 24px; margin: 0px 10px;">
-                    <p style="line-height: 24px; float: left; color: #f40; font-size: 16px; font-weight: 500;">¥123</p>
-                    <p style="float: right; font-size: 12px; color: rgba(0,0,0,0.38); line-height: 24px; font-weight: 500">已售：10100件</p>
-                  </div>
-                </li>
-                <li style="width: 170px; height: 230px; margin-left: 20px; float: right;">
-                  <img style="width: 170px; height: 170px;" src="https://img.alicdn.com/bao/uploaded/i1/725677994/O1CN01EepLXL28vIdBrsRJZ_!!725677994.jpg_320x5000Q50s50.jpg_.webp"/>
-                  <p style="margin: 6px auto; text-align: center; line-height: 18px; font-size: 12px; color: rgba(0,0,0,0.87); font-weight: 500">三只松鼠</p>
-                  <div style="width: 140px; height: 24px; margin: 0px 10px;">
-                    <p style="line-height: 24px; float: left; color: #f40; font-size: 16px; font-weight: 500;">¥123</p>
-                    <p style="float: right; font-size: 12px; color: rgba(0,0,0,0.38); line-height: 24px; font-weight: 500">已售：10100件</p>
-                  </div>
-                </li>
-                <li style="width: 170px; height: 230px; margin-left: 20px; float: right;">
-                  <img style="width: 170px; height: 170px;" src="https://img.alicdn.com/bao/uploaded/i1/725677994/O1CN01EepLXL28vIdBrsRJZ_!!725677994.jpg_320x5000Q50s50.jpg_.webp"/>
-                  <p style="margin: 6px auto; text-align: center; line-height: 18px; font-size: 12px; color: rgba(0,0,0,0.87); font-weight: 500">三只松鼠</p>
-                  <div style="width: 140px; height: 24px; margin: 0px 10px;">
-                    <p style="line-height: 24px; float: left; color: #f40; font-size: 16px; font-weight: 500;">¥123</p>
-                    <p style="float: right; font-size: 12px; color: rgba(0,0,0,0.38); line-height: 24px; font-weight: 500">已售：10100件</p>
-                  </div>
-                </li>
-              </ul>
-            </div>
-          </li>
-          <li class="containerBodyLi">
-            <div style="width: 100%; height: 64px; : 1px solid #dfdfdf">
-              <p style="line-height: 64px; font-size: 24px; padding-left: 10px; color: #4eac66; font-weight: 500">123</p>
-            </div>
-            <div style="width: 100%; height: 230px;">
-              <img src="https://img.alicdn.com/tfs/TB11eRDohrI8KJjy0FpXXb5hVXa-1014-720.png_720x720Q90s50.jpg_.webp"
-                style="width: 340px; height: 230px; float: left" />
-
-              <!--<img v-bind:src="shop.url" style="float:left; height: 208px; width: 208px; margin: 11px 0px ; border: 1px solid #dfdfdf"/>-->
-              <ul style="float:right;width: 600px; height: 230px">
-                <li style="width: 170px; height: 230px; margin-left: 20px; float: right;">
-                  <img style="width: 170px; height: 170px;" src="https://img.alicdn.com/bao/uploaded/i1/725677994/O1CN01EepLXL28vIdBrsRJZ_!!725677994.jpg_320x5000Q50s50.jpg_.webp"/>
-                  <p style="margin: 6px auto; text-align: center; line-height: 18px; font-size: 12px; color: rgba(0,0,0,0.87); font-weight: 500">三只松鼠</p>
-                  <div style="width: 140px; height: 24px; margin: 0px 10px;">
-                    <p style="line-height: 24px; float: left; color: #f40; font-size: 16px; font-weight: 500;">¥123</p>
-                    <p style="float: right; font-size: 12px; color: rgba(0,0,0,0.38); line-height: 24px; font-weight: 500">已售：10100件</p>
-                  </div>
-                </li>
-                <li style="width: 170px; height: 230px; margin-left: 20px; float: right;">
-                  <img style="width: 170px; height: 170px;" src="https://img.alicdn.com/bao/uploaded/i1/725677994/O1CN01EepLXL28vIdBrsRJZ_!!725677994.jpg_320x5000Q50s50.jpg_.webp"/>
-                  <p style="margin: 6px auto; text-align: center; line-height: 18px; font-size: 12px; color: rgba(0,0,0,0.87); font-weight: 500">三只松鼠</p>
-                  <div style="width: 140px; height: 24px; margin: 0px 10px;">
-                    <p style="line-height: 24px; float: left; color: #f40; font-size: 16px; font-weight: 500;">¥123</p>
-                    <p style="float: right; font-size: 12px; color: rgba(0,0,0,0.38); line-height: 24px; font-weight: 500">已售：10100件</p>
-                  </div>
-                </li>
-                <li style="width: 170px; height: 230px; margin-left: 20px; float: right;">
-                  <img style="width: 170px; height: 170px;" src="https://img.alicdn.com/bao/uploaded/i1/725677994/O1CN01EepLXL28vIdBrsRJZ_!!725677994.jpg_320x5000Q50s50.jpg_.webp"/>
-                  <p style="margin: 6px auto; text-align: center; line-height: 18px; font-size: 12px; color: rgba(0,0,0,0.87); font-weight: 500">三只松鼠</p>
-                  <div style="width: 140px; height: 24px; margin: 0px 10px;">
-                    <p style="line-height: 24px; float: left; color: #f40; font-size: 16px; font-weight: 500;">¥123</p>
-                    <p style="float: right; font-size: 12px; color: rgba(0,0,0,0.38); line-height: 24px; font-weight: 500">已售：10100件</p>
-                  </div>
-                </li>
-              </ul>
-            </div>
-          </li>
-          <li class="containerBodyLi">
-            <div style="width: 100%; height: 64px; : 1px solid #dfdfdf">
-              <p style="line-height: 64px; font-size: 24px; padding-left: 10px; color: #4eac66; font-weight: 500">123</p>
-            </div>
-            <div style="width: 100%; height: 230px;">
-              <img src="https://img.alicdn.com/tfs/TB1m9A6RpXXXXajaFXXXXXXXXXX-676-480.png_720x720Q50s50.jpg_.webp"
-                style="width: 340px; height: 230px; float: left" />
-
-              <!--<img v-bind:src="shop.url" style="float:left; height: 208px; width: 208px; margin: 11px 0px ; border: 1px solid #dfdfdf"/>-->
-              <ul style="float:right;width: 600px; height: 230px">
-                <li style="width: 170px; height: 230px; margin-left: 20px; float: right;">
-                  <img style="width: 170px; height: 170px;" src="https://img.alicdn.com/bao/uploaded/i1/725677994/O1CN01EepLXL28vIdBrsRJZ_!!725677994.jpg_320x5000Q50s50.jpg_.webp"/>
-                  <p style="margin: 6px auto; text-align: center; line-height: 18px; font-size: 12px; color: rgba(0,0,0,0.87); font-weight: 500">三只松鼠</p>
-                  <div style="width: 140px; height: 24px; margin: 0px 10px;">
-                    <p style="line-height: 24px; float: left; color: #f40; font-size: 16px; font-weight: 500;">¥123</p>
-                    <p style="float: right; font-size: 12px; color: rgba(0,0,0,0.38); line-height: 24px; font-weight: 500">已售：10100件</p>
-                  </div>
-                </li>
-                <li style="width: 170px; height: 230px; margin-left: 20px; float: right;">
-                  <img style="width: 170px; height: 170px;" src="https://img.alicdn.com/bao/uploaded/i1/725677994/O1CN01EepLXL28vIdBrsRJZ_!!725677994.jpg_320x5000Q50s50.jpg_.webp"/>
-                  <p style="margin: 6px auto; text-align: center; line-height: 18px; font-size: 12px; color: rgba(0,0,0,0.87); font-weight: 500">三只松鼠</p>
-                  <div style="width: 140px; height: 24px; margin: 0px 10px;">
-                    <p style="line-height: 24px; float: left; color: #f40; font-size: 16px; font-weight: 500;">¥123</p>
-                    <p style="float: right; font-size: 12px; color: rgba(0,0,0,0.38); line-height: 24px; font-weight: 500">已售：10100件</p>
-                  </div>
-                </li>
-                <li style="width: 170px; height: 230px; margin-left: 20px; float: right;">
-                  <img style="width: 170px; height: 170px;" src="https://img.alicdn.com/bao/uploaded/i1/725677994/O1CN01EepLXL28vIdBrsRJZ_!!725677994.jpg_320x5000Q50s50.jpg_.webp"/>
-                  <p style="margin: 6px auto; text-align: center; line-height: 18px; font-size: 12px; color: rgba(0,0,0,0.87); font-weight: 500">三只松鼠</p>
-                  <div style="width: 140px; height: 24px; margin: 0px 10px;">
-                    <p style="line-height: 24px; float: left; color: #f40; font-size: 16px; font-weight: 500;">¥123</p>
-                    <p style="float: right; font-size: 12px; color: rgba(0,0,0,0.38); line-height: 24px; font-weight: 500">已售：10100件</p>
-                  </div>
-                </li>
-              </ul>
-            </div>
-          </li>
-          <li class="containerBodyLi">
-            <div style="width: 100%; height: 64px; : 1px solid #dfdfdf">
-              <p style="line-height: 64px; font-size: 24px; padding-left: 10px; color: #4eac66; font-weight: 500">123</p>
-            </div>
-            <div style="width: 100%; height: 230px;">
-              <img src="https://img.alicdn.com/tfs/TB11eRDohrI8KJjy0FpXXb5hVXa-1014-720.png_720x720Q90s50.jpg_.webp"
-                style="width: 340px; height: 230px; float: left" />
-
-              <!--<img v-bind:src="shop.url" style="float:left; height: 208px; width: 208px; margin: 11px 0px ; border: 1px solid #dfdfdf"/>-->
-              <ul style="float:right;width: 600px; height: 230px">
-                <li style="width: 170px; height: 230px; margin-left: 20px; float: right;">
-                  <img style="width: 170px; height: 170px;" src="https://img.alicdn.com/bao/uploaded/i1/725677994/O1CN01EepLXL28vIdBrsRJZ_!!725677994.jpg_320x5000Q50s50.jpg_.webp"/>
-                  <p style="margin: 6px auto; text-align: center; line-height: 18px; font-size: 12px; color: rgba(0,0,0,0.87); font-weight: 500">三只松鼠</p>
-                  <div style="width: 140px; height: 24px; margin: 0px 10px;">
-                    <p style="line-height: 24px; float: left; color: #f40; font-size: 16px; font-weight: 500;">¥123</p>
-                    <p style="float: right; font-size: 12px; color: rgba(0,0,0,0.38); line-height: 24px; font-weight: 500">已售：10100件</p>
-                  </div>
-                </li>
-                <li style="width: 170px; height: 230px; margin-left: 20px; float: right;">
-                  <img style="width: 170px; height: 170px;" src="https://img.alicdn.com/bao/uploaded/i1/725677994/O1CN01EepLXL28vIdBrsRJZ_!!725677994.jpg_320x5000Q50s50.jpg_.webp"/>
-                  <p style="margin: 6px auto; text-align: center; line-height: 18px; font-size: 12px; color: rgba(0,0,0,0.87); font-weight: 500">三只松鼠</p>
-                  <div style="width: 140px; height: 24px; margin: 0px 10px;">
-                    <p style="line-height: 24px; float: left; color: #f40; font-size: 16px; font-weight: 500;">¥123</p>
-                    <p style="float: right; font-size: 12px; color: rgba(0,0,0,0.38); line-height: 24px; font-weight: 500">已售：10100件</p>
-                  </div>
-                </li>
-                <li style="width: 170px; height: 230px; margin-left: 20px; float: right;">
-                  <img style="width: 170px; height: 170px;" src="https://img.alicdn.com/bao/uploaded/i1/725677994/O1CN01EepLXL28vIdBrsRJZ_!!725677994.jpg_320x5000Q50s50.jpg_.webp"/>
-                  <p style="margin: 6px auto; text-align: center; line-height: 18px; font-size: 12px; color: rgba(0,0,0,0.87); font-weight: 500">三只松鼠</p>
-                  <div style="width: 140px; height: 24px; margin: 0px 10px;">
-                    <p style="line-height: 24px; float: left; color: #f40; font-size: 16px; font-weight: 500;">¥123</p>
-                    <p style="float: right; font-size: 12px; color: rgba(0,0,0,0.38); line-height: 24px; font-weight: 500">已售：10100件</p>
-                  </div>
-                </li>
-              </ul>
-            </div>
-          </li>
-          <li class="containerBodyLi">
-            <div style="width: 100%; height: 64px; : 1px solid #dfdfdf">
-              <p style="line-height: 64px; font-size: 24px; padding-left: 10px; color: #4eac66; font-weight: 500">123</p>
-            </div>
-            <div style="width: 100%; height: 230px;">
-              <img src="https://img.alicdn.com/tfs/TB11eRDohrI8KJjy0FpXXb5hVXa-1014-720.png_720x720Q90s50.jpg_.webp"
-                style="width: 340px; height: 230px; float: left" />
-
-              <!--<img v-bind:src="shop.url" style="float:left; height: 208px; width: 208px; margin: 11px 0px ; border: 1px solid #dfdfdf"/>-->
-              <ul style="float:right;width: 600px; height: 230px">
-                <li style="width: 170px; height: 230px; margin-left: 20px; float: right;">
-                  <img style="width: 170px; height: 170px;" src="https://img.alicdn.com/bao/uploaded/i1/725677994/O1CN01EepLXL28vIdBrsRJZ_!!725677994.jpg_320x5000Q50s50.jpg_.webp"/>
-                  <p style="margin: 6px auto; text-align: center; line-height: 18px; font-size: 12px; color: rgba(0,0,0,0.87); font-weight: 500">三只松鼠</p>
-                  <div style="width: 140px; height: 24px; margin: 0px 10px;">
-                    <p style="line-height: 24px; float: left; color: #f40; font-size: 16px; font-weight: 500;">¥123</p>
-                    <p style="float: right; font-size: 12px; color: rgba(0,0,0,0.38); line-height: 24px; font-weight: 500">已售：10100件</p>
-                  </div>
-                </li>
-                <li style="width: 170px; height: 230px; margin-left: 20px; float: right;">
-                  <img style="width: 170px; height: 170px;" src="https://img.alicdn.com/bao/uploaded/i1/725677994/O1CN01EepLXL28vIdBrsRJZ_!!725677994.jpg_320x5000Q50s50.jpg_.webp"/>
-                  <p style="margin: 6px auto; text-align: center; line-height: 18px; font-size: 12px; color: rgba(0,0,0,0.87); font-weight: 500">三只松鼠</p>
-                  <div style="width: 140px; height: 24px; margin: 0px 10px;">
-                    <p style="line-height: 24px; float: left; color: #f40; font-size: 16px; font-weight: 500;">¥123</p>
-                    <p style="float: right; font-size: 12px; color: rgba(0,0,0,0.38); line-height: 24px; font-weight: 500">已售：10100件</p>
-                  </div>
-                </li>
-                <li style="width: 170px; height: 230px; margin-left: 20px; float: right;">
-                  <img style="width: 170px; height: 170px;" src="https://img.alicdn.com/bao/uploaded/i1/725677994/O1CN01EepLXL28vIdBrsRJZ_!!725677994.jpg_320x5000Q50s50.jpg_.webp"/>
-                  <p style="margin: 6px auto; text-align: center; line-height: 18px; font-size: 12px; color: rgba(0,0,0,0.87); font-weight: 500">三只松鼠</p>
-                  <div style="width: 140px; height: 24px; margin: 0px 10px;">
-                    <p style="line-height: 24px; float: left; color: #f40; font-size: 16px; font-weight: 500;">¥123</p>
-                    <p style="float: right; font-size: 12px; color: rgba(0,0,0,0.38); line-height: 24px; font-weight: 500">已售：10100件</p>
+                    <p style="line-height: 24px; float: left; color: #f40; font-size: 16px; font-weight: 500;">¥{{ product.price }}</p>
+                    <p style="float: right; font-size: 12px; color: rgba(0,0,0,0.38); line-height: 24px; font-weight: 500">Count:{{ product.count }}</p>
                   </div>
                 </li>
               </ul>
@@ -304,19 +142,7 @@
 import Loading from '@/components/common/Loading'
 export default {
 
-  created () {
-    if (name === '') {
-      this.welcomeMsg = 'Dear,Please Login'
-    } else {
-      if (this.getCookie('usertype') === '0') {
-        this.welcomeMsg = 'Manager:' + name
-      } else if (this.getCookie('usertype') === '1') {
-        this.welcomeMsg = 'Customer:' + name
-      } else if (this.getCookie('usertype') === '2') {
-        this.welcomeMsg = 'Seller:' + name
-      }
-      console.log('12323')
-    }
+  activated () {
     // 加载top10产品
     this.isLoad = true
     this.$http.get(this.URL + 'm/product_top10_info')
@@ -335,6 +161,60 @@ export default {
       .then((data) => {
         this.isLoad = false
         this.shops = data.body.data.top5
+        this.shops = [
+          {
+            shopName: 'hua wei',
+            major: 'Phone',
+            products: [
+              {
+                portraitURL: 'https://img.alicdn.com/bao/uploaded/i1/725677994/O1CN01EepLXL28vIdBrsRJZ_!!725677994.jpg_320x5000Q50s50.jpg_.webp',
+                pName: '三只松鼠',
+                price: '123',
+                count: 999
+              },
+              {
+                portraitURL: 'https://img.alicdn.com/bao/uploaded/i1/725677994/O1CN01EepLXL28vIdBrsRJZ_!!725677994.jpg_320x5000Q50s50.jpg_.webp',
+                pName: '三只松鼠',
+                price: '123',
+                count: 999
+              },
+              {
+                portraitURL: 'https://img.alicdn.com/bao/uploaded/i1/725677994/O1CN01EepLXL28vIdBrsRJZ_!!725677994.jpg_320x5000Q50s50.jpg_.webp',
+                pName: '三只松鼠',
+                price: '123',
+                count: 999
+              }
+            ]
+          },
+
+          {
+            shopName: 'hua wei',
+            major: 'Phone',
+            products: [
+              {
+                portraitURL: 'https://img.alicdn.com/bao/uploaded/i1/725677994/O1CN01EepLXL28vIdBrsRJZ_!!725677994.jpg_320x5000Q50s50.jpg_.webp',
+                pName: '三只松鼠',
+                price: '123',
+                count: 999
+              },
+              {
+                portraitURL: 'https://img.alicdn.com/bao/uploaded/i1/725677994/O1CN01EepLXL28vIdBrsRJZ_!!725677994.jpg_320x5000Q50s50.jpg_.webp',
+                pName: '三只松鼠',
+                price: '123',
+                count: 999
+              },
+              {
+                portraitURL: 'https://img.alicdn.com/bao/uploaded/i1/725677994/O1CN01EepLXL28vIdBrsRJZ_!!725677994.jpg_320x5000Q50s50.jpg_.webp',
+                pName: '三只松鼠',
+                price: '123',
+                count: 999
+              }
+            ]
+          }
+        ]
+      })
+      .catch(() => {
+        this.isLoad = false
       })
   },
 
@@ -521,7 +401,7 @@ export default {
     width: 998px;
     height: 285px;
     float: left;
-    margin-top: 10px;
+    margin-bottom: 30px;
   }
 
   .containerShopLi {
