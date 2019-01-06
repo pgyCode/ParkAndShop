@@ -6,9 +6,11 @@
         <img src="../../assets/logo.png" style="float: left" height="83px" width='210px'/>
         <p style="float: left; color: rgb(60, 60, 60); line-height: 83px; font-size: 22px; font-weight: 700; margin-left: 20px">Update Goods Information</p>
       </div>
-
+      <button style="padding-left: 10px;float: left; margin-top: 20px; width: 200px; margin-right: 10px; height: 20px; border: none; background: white; border-radius: 0px; font-weight: 700; font-size: 16px; color: gray;"
+              v-on:click="goGood(data)"> 👈&nbsp;BACK&nbsp;TO&nbsp;GOOD
+      </button>
       <div style="clear: both; width: 500px;margin: 0px auto;">
-        <ul><!--v-bind:key="data" v-for="data in datas"-->
+        <ul>
           <div style="clear: both; padding-top: 35px; height: 100px;">
             <p style="text-align: right; float: left;  width: 150px; height: 100px; line-height: 100px; font-size: 14px; font-weight: 400; color: rgb(60, 60, 60);">Shop Photo:&nbsp;</p>
             <img v-bind:src="localUrl" style="float:left; width: 100px; height: 100px; border: 1px solid #dfdfdf;"
@@ -95,6 +97,10 @@ export default {
 
     checkRegister: function (poi) {
       this.poiRegister = poi
+    },
+
+    goGood: function (info) {
+      this.$router.push({name: 'seller_good', params: {data: info}})
     },
 
     onClickUpdate: function (pID) {
