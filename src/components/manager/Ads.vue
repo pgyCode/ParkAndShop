@@ -36,10 +36,6 @@ export default {
     }
   },
 
-  created () {
-    this.$router.push('/manager/ads/request')
-  },
-
   methods: {
     checkFrame: function (position) {
       this.currentFrame = position
