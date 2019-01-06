@@ -38,6 +38,11 @@
 <script>
 import Loading from '@/components/common/Loading'
 export default {
+ activated () {
+    this.initInfo()
+    this.initLoad()
+  },
+
   components: {Loading},
 
   data () {
@@ -49,6 +54,7 @@ export default {
       info: {}
     }
   },
+
 
   methods: {
     initLoad: function () {
@@ -98,16 +104,12 @@ export default {
           alert('Add to FavouriteShop Failed!')
         })
     },
-
     goGood: function (info) {
       this.$router.push({name: 'seller_good', params: {data: info}})
     }
   },
 
-  mounted () {
-    this.initInfo()
-    this.initLoad()
-  }
+
 
   // mounted () {
   //   this.intent = this.$route.params.data
