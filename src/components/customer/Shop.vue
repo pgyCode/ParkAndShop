@@ -38,7 +38,7 @@
 <script>
 import Loading from '@/components/common/Loading'
 export default {
- activated () {
+  activated () {
     this.initInfo()
     this.initLoad()
   },
@@ -54,7 +54,6 @@ export default {
       info: {}
     }
   },
-
 
   methods: {
     initLoad: function () {
@@ -107,9 +106,7 @@ export default {
     goGood: function (info) {
       this.$router.push({name: 'seller_good', params: {data: info}})
     }
-  },
-
-
+  }
 
   // mounted () {
   //   this.intent = this.$route.params.data

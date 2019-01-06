@@ -3,7 +3,7 @@
 
     <div id="containerSearch">
       <div style="clear: both">
-        <input id="inputSearch" v-model="value" placeholder="Please input seller info"/>
+        <input id="inputSearch" v-model="value"/>
         <button id="btnSearch" v-on:click="onClickSearch()">Search</button>
       </div>
     </div>
