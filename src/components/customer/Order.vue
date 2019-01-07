@@ -98,7 +98,7 @@ export default {
 
   methods: {
     initLoad: function () {
-      // this.isLoad = true
+      this.isLoad = true
       var start = this.date
       switch (this.currentTab) {
         case 0:
@@ -330,6 +330,7 @@ export default {
   },
 
   activated: function () {
+    this.date = new Date().getTime()
     this.initLoad()
   },
 

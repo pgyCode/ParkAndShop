@@ -13,19 +13,23 @@
       <div v-bind:src="qrcode" id="qrcode" style="float:left; width: 150px; height: 150px; margin-right: 20px;"/>
       <p style="float:left;font-size: 20px; font-weight: 600; line-height: 150px; border-left: 2px solid #000; display: block; width: 228px; color: #48bfff;">&nbsp;&nbsp;Sweep code payment</p>
     </div>
-
+    <loading v-show="isLoad"/>
   </div>
 </template>
 
 <script>
+import Loading from '@/components/common/Loading'
+
 import QRCode from 'qrcodejs2'
 import $ from 'jquery'
 export default {
+  components: { Loading },
   name: 'Pay',
   data () {
     return {
       data: {},
-      id: 0
+      id: 0,
+      isLoad: false
     }
   },
   methods: {
@@ -39,10 +43,11 @@ export default {
     }
   },
   activated () {
+    this.isLoad = true
     this.data = this.$route.params.info
     this.id = this.$route.params.data
     console.log(this.data)
-    this.$http.get(this.URL + 'common/pay?name=' +
+    this.$http.get('http://127.0.0.1:8080/api/' + 'common/pay?name=' +
       this.data.pName +
       '&price=' +
       this.data.price +
@@ -51,12 +56,13 @@ export default {
       '&id=' +
       this.id)
       .then((data) => {
+        this.isLoad = false
         console.log(data)
         $('#qrcode').html('')
         this.qrcodee(data.body.payData.qrCode)
       })
       .catch(() => {
-
+        this.isLoad = false
       })
   }
 }

@@ -40,6 +40,9 @@ export default {
   activated () {
     this.initInfo()
     this.initLoad()
+    this.$router.afterEach((to, from, next) => {
+      window.scrollTo(0, 0)
+    })
   },
 
   components: {Loading},

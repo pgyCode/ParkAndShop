@@ -234,7 +234,8 @@ export default {
     }
   },
 
-  activated () {
+  mounted () {
+    this.date = new Date().getTime()
     this.initLoad()
   }
 }
