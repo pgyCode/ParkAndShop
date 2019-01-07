@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Login from '@/components/common/Login'
 import Index from '@/components/common/Index'
 import Search from '@/components/common/Search'
+import Ads from '@/components/common/Ads'
 import Register from '@/components/common/Register'
 import Customer from '@/components/customer/Customer'
 import CustomerOwner from '@/components/customer/Owner'
@@ -62,7 +63,7 @@ export default new Router({
       path: '/',
       component: Index,
       children: [
-        {path: '/', component: Search},
+        {path: '/', component: Ads},
         {path: '/search', component: Search},
         {path: '/register', component: Register},
         {path: '/customer/order', component: CustomerOrder},
@@ -99,10 +100,6 @@ export default new Router({
             {
               path: '/manager/sellers/search',
               component: ManagerSellerSearch
-            },
-            {
-              path: '/',
-              component: ManagerSellerRequest
             }
           ]},
 
