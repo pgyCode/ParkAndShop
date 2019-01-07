@@ -1,24 +1,7 @@
 <template xmlns:style="http://www.w3.org/1999/xhtml">
   <div style="width: 1000px; margin: 0px auto;">
 
-    <div style="width: 1000px; min-width: 1000px; margin: 0px auto;">
-
-      <div style="width: 1000px; height: 83px; padding: 0px 0px; margin: 0px auto;">
-        <img src="../../assets/logo.png" style="float: left;" height="83px" width='210px'/>
-        <p style="float: left; color: rgb(60, 60, 60); line-height: 83px; font-size: 22px; font-weight: 700; margin-left: 20px">Profit</p>
-      </div>
-      <div style=" width: 1000px;height: 19px; padding: 6px 0px; border-bottom: 2px solid #5884ff">
-        <p style="float:left; font-size: 15px;   font-weight: 500; color: rgb(0,0,0);border-radius: 3px;background: #2a56d7">&nbsp;&nbsp;Shop Name:&nbsp;&nbsp;</p>
-        <p>&nbsp;&nbsp;{{info.shopName }}</p>
-      </div>
-
-      <div style="height: 120px; width: 1000px;">
-        <img v-bind:src="info.url" v-on:click="initLoad()" style="float: left; width: 118px; height: 118px; border: 1px solid rgb(212,215,220)"/>
-        <p src="../../assets/logo.png" style="float:left; width: 880px; height: 120px; font-size: 30px; line-height: 120px; text-align: center; color: rgb(63,127,206);">{{ info.shopName }}</p>
-      </div>
-    </div>
-
-    <p style="clear: both;font-size:12px;text-align:center; font-weight:700; color: #000000; padding: 3px 5px; height: 25px; line-height: 25px; background: rgb(63,127,206)">PROFIT</p>
+    <p style="clear: both;margin-top: 20px;font-size:12px;text-align:center; font-weight:700; color: #000000; padding: 3px 5px; height: 25px; line-height: 25px; background: dodgerblue">PROFIT</p>
 
     <div style="height: 330px;width: 800px;margin-left:75px;margin-top:50px;float: left">
       <div id="myChart_day" :style="{width: '900px', height: '300px'}"></div>
