@@ -151,7 +151,7 @@ export default {
     },
 
     goGood: function (info) {
-      this.$router.push({name: 'seller_good', params: {data: info}})
+      this.$router.push({name: 'customer_good', params: {data: info}})
     },
     onClickYearly: function () {
       this.isLoad = true

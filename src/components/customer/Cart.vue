@@ -19,8 +19,8 @@
       <ul>
         <li v-bind:key="order.pID" v-for="order in orders">
           <div style="padding: 15px; clear: both;">
-            <img style="float: left; width: 80px; height: 80px; padding-right: 15px" v-bind:src="order.portraitURL"/>
-            <div style="width: 220px; float: left; height: 80px;">
+            <img style="float: left; width: 80px; height: 80px; padding-right: 15px" v-bind:src="order.portraitURL" v-on:click="goGood(order)"/>
+            <div style="width: 220px; float: left; height: 80px;"v-on:click="goGood(order)">
               <p style=" color: rgb(60, 60, 60); font-size: 13px; font-weight: 500; line-height: 25px; height: 55px; ">{{ order.pName }}</p>
               <span style="clear:both; width: 100px; text-align: center; display: block; color: #fff; background: #f40; font-size: 12px;padding: 1px 3px; margin-top: 3px">Authenticated</span>
             </div>
@@ -108,7 +108,7 @@ export default {
     },
 
     goGood: function (info) {
-      this.$router.push({name: 'seller_good', params: {data: info}})
+      this.$router.push({name: 'customer_good', params: {data: info}})
     }
   },
 
