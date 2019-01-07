@@ -25,7 +25,7 @@
       </div>
     </div>
     <loading v-show="isLoad"/>
-    <p style="clear: both;font-size:12px;text-align:center; font-weight:700; color: #000000; padding: 3px 5px; height: 25px; line-height: 25px; background: rgb(63,127,206)">MANAGER All GOODS</p>
+    <p style="clear: both;font-size:12px;text-align:center; font-weight:700; color: #000000; padding: 3px 5px; height: 25px; line-height: 25px; background: dodgerblue">MANAGER All GOODS</p>
     <div id="containInfo">
       <ul>
         <p style="height: 5px;width: 990px"></p>

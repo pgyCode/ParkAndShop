@@ -9,9 +9,8 @@
       <router-link style="float: left; margin-left: 10px" class='subTitle' v-show="this.getCookie('userName') == ''" to="/register">Register</router-link>
       <router-link class='subTitle' v-show="this.getCookie('userType') == '1'" to="/seller/info">Info</router-link>
       <router-link class='subTitle' v-show="this.getCookie('userType') == '1'" to="/seller/addGood">Add Goods</router-link>
-      <router-link class='subTitle' v-show="this.getCookie('userType') == '1'" to="/seller/order">Order</router-link>
-      <router-link class='subTitle' v-show="this.getCookie('userType') == '1'" to="/seller/profit">Profit</router-link>
-      <span class='subTitle' v-show="this.getCookie('userType') == '1'" v-on:click="goShop()" to ='/seller/'>Shop</span>
+      <router-link class='subTitle' v-show="this.getCookie('userType') == '1'" to="/seller/owner">Order</router-link>
+      <span class='subTitle' v-show="this.getCookie('userType') == '1'" v-on:click="goShop()">Shop</span>
       <router-link class='subTitle' v-show="this.getCookie('userType') == '2'" to="/manager/owner">Orders</router-link>
       <router-link class='subTitle' v-show="this.getCookie('userType') == '2'" to="/manager/ads">Ads</router-link>
       <router-link class='subTitle' v-show="this.getCookie('userType') == '2'" to="/manager/customer">Customers</router-link>
