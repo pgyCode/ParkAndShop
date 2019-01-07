@@ -234,7 +234,7 @@ export default {
     }
   },
 
-  mounted () {
+  activated () {
     this.initLoad()
   }
 }
