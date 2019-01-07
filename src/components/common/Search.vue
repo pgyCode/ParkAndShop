@@ -1,7 +1,7 @@
 <template>
   <div>
-    <!--<div style="padding-top:80px; padding-bottom: 30px; text-align: center" v-show="(poiSearch == 0 && datas.length <= 0) || (poiSearch == 1 && shops.length <= 0)">-->
-    <div style="padding-top:80px; padding-bottom: 30px; text-align: center" v-show="isAd == true">
+    <div style="padding-top:80px; padding-bottom: 30px; text-align: center" v-show="(poiSearch == 0 && datas.length <= 0) || (poiSearch == 1 && shops.length <= 0)">
+    <!--<div style="padding-top:80px; padding-bottom: 30px; text-align: center" v-show="isAd == true">-->
       <img id="imgLogo" src="../../assets/logo.png"/>
     </div>
     <div id="containerSearch">
@@ -15,67 +15,8 @@
         <button id="btnSearch" v-on:click="onClickSearch()">Search</button>
       </div>
     </div>
-    <div v-show="isAd == true">
-      <div style="clear: left; float: left; width: 950px; border-bottom: 2px solid #f40; margin-left: 30px; margin-top: 25px;">
-        <div style="clear: left; float: left; margin-top: 30px; ">
-          <h2 style="color: #f40; float: left">TOP 5 STORES</h2>
-        </div>
-      </div>
-      <div id="top5" style="width: 1200px;">
-        <ul>
-          <li v-bind:key="shop" v-for="shop in shops"
-              v-on:click="goShop(shop)"  class="containerBodyLi">
-            <div style="padding-bottom:5px; border: 1px solid #dfdfdf;" v-on:mouseenter="onLiEnter($event)" v-on:mouseleave="onLiLeave($event)">
-              <img style="width: 178px; height: 180px;" v-bind:src="shop.url"/>
-              <h4 style="color: #f40; font-weight: 600; float: left; height: 22px; line-height:17px; margin-top: 11px; padding-left: 10px">{{ shop.shopName }}</h4>
-              <p style="display: block;margin-top: 6px; padding: 0px 10px; color: #3d3d3d; height: 18px; font-size: 14px; font-weight: 500; clear: both"> {{ shop.telephone }} </p>
-              <p style="overflow:hidden; display: block;margin-top: 6px; padding: 0px 10px; color: #808285; height: 36px; font-size: 12px; font-weight: 400; clear: both"> {{ shop.major }} </p>
-              <div>
-                <div style="float: left; padding-left: 10px">
-                  <span style="display: block; margin: 2px 0px; width: 10px; height: 3px; background: #f40"></span>
-                  <span style="display: block; margin: 2px 0px; width: 10px; height: 3px;  background: #f40"></span>
-                  <span style="display: block; margin: 2px 0px; width: 10px; height: 3px;  background: #f40"></span>
-                </div>
-                <span style="display: block; color: #888; font-size: 12px; padding-left:3px;float: left"> {{ shop.nickname }} </span>
-              </div>
-              <span style="clear:both; width: 100px; margin-left:10px; text-align: center; display: block; color: #fff; background: #f40; font-size: 12px;padding: 1px 3px; margin-top: 3px">Authenticated</span>
-            </div>
-          </li>
-        </ul>
-      </div>
 
-      <div style="clear: left; float: left; width: 950px; border-bottom: 2px solid #f40; margin-left: 30px; margin-top: 25px;">
-        <div style="clear: left; float: left; margin-top: 30px; ">
-          <h2 style="color: #f40; float: left">TOP 10 PRODUCTS</h2>
-        </div>
-      </div>
-
-      <div id="top10" style="width: 1200px">
-        <ul>
-          <li v-bind:key="top10" v-for="top10 in top10s"
-              v-on:click="goGood(top10)"  class="containerBodyLi">
-            <div style="padding-bottom:5px; border: 1px solid #dfdfdf;" v-on:mouseenter="onLiEnter($event)" v-on:mouseleave="onLiLeave($event)">
-              <img style="width: 178px; height: 180px;" v-bind:src="top10.portraitURL"/>
-              <h4 style="color: #f40; font-weight: 600; float: left; height: 22px; line-height:17px; margin-top: 11px; padding-left: 10px">¥{{ top10.price }}</h4>
-              <p style="display: block;margin-top: 6px; padding: 0px 10px; color: #3d3d3d; height: 18px; font-size: 14px; font-weight: 500; clear: both">{{ top10.pName }}</p>
-              <p style="overflow:hidden; display: block;margin-top: 6px; padding: 0px 10px; color: #808285; height: 36px; font-size: 12px; font-weight: 400; clear: both">{{ top10.description }}</p>
-              <div>
-                <div style="float: left; padding-left: 10px">
-                  <span style="display: block; margin: 2px 0px; width: 10px; height: 3px; background: #f40"></span>
-                  <span style="display: block; margin: 2px 0px; width: 10px; height: 3px;  background: #f40"></span>
-                  <span style="display: block; margin: 2px 0px; width: 10px; height: 3px;  background: #f40"></span>
-                </div>
-                <span style="display: block; color: #888; font-size: 12px; padding-left:3px;float: left">{{ top10.shopName }}</span>
-                <span  style="display: block; color: #888; font-size: 12px; padding-left: 10px; text-align: right; padding-right: 10px; white-space:nowrap;overflow:hidden; text-overflow:ellipsis;">Remain:{{ top10.num }} pieces</span>
-              </div>
-              <span style="clear:both; width: 100px; margin-left:10px; text-align: center; display: block; color: #fff; background: #f40; font-size: 12px;padding: 1px 3px; margin-top: 3px">Authenticated</span>
-            </div>
-          </li>
-        </ul>
-      </div>
-    </div>
-
-    <div id="containerBody" v-show="(poiSearch == 0) && (isAd == false)">
+    <div id="containerBody" v-show="poiSearch == 0">
       <ul>
         <li v-bind:key="data" v-for="data in datas"
             v-on:click="goGood(data)"  class="containerBodyLi">
@@ -98,7 +39,7 @@
         </li>
       </ul>
     </div>
-    <div id="containerShop" v-show="(poiSearch == 1) && (isAd == false)">
+    <div id="containerShop" v-show="poiSearch == 1">
       <ul>
         <li v-bind:key="shop" v-for="shop in shops"
             v-on:click="goShop(shop)"  class="containerShopLi">

@@ -36,9 +36,13 @@
             </div>
             <div style="float: left; width: 80px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; line-height: 50px">
               <p>{{ order.Date}}</p>
-            </div>
-            <p style="float: left; width: 160px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; line-height: 96px">Succeed</p>
-            <!--<div style="float:left; width: 100px;text-align: center; color: rgb(60, 60, 60); font-size: 12px;-->
+            </div >
+               <div style="float: left; width: 160px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; line-height: 50px">
+            <p v-if="order.isFinish === 3" style="float: left; width: 160px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; line-height: 96px">&nbsp;&nbsp;&nbsp;&nbsp;Unshipped</p>
+               <p v-else-if="order.isFinish ===1" style="float: left; width: 160px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; line-height: 96px">&nbsp;&nbsp;&nbsp;&nbsp;Sending</p>
+               <p v-else-if="order.isFinish ===0" style="float: left; width: 160px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; line-height: 96px">&nbsp;&nbsp;&nbsp;&nbsp;Failed</p>
+               <p v-else-if="order.isFinish ===2" style="float: left; width: 160px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; line-height: 96px">&nbsp;&nbsp;&nbsp;&nbsp;Succeed</p>
+               </div><!--<div style="float:left; width: 100px;text-align: center; color: rgb(60, 60, 60); font-size: 12px;-->
              <!--font-weight: 600;border-radius: 5px;-->
              <!--cursor: pointer">-->
               <!--<button style="margin:0px auto;margin-top: 15px;border: none;text-align: center;background: #f3476c;color: white;" v-on:click="refund(order.orderID)">Refund</button>-->
@@ -65,14 +69,14 @@ export default {
       isLoad: false,
       currentPage: 1,
       // name: 'sds',
-      orders: [],
-      status: '&nbsp',
-      status_num: 1 // 初始值：未发货
+      orders: []
+//      status: 'unshipped',
+//      status_num: 1    // 初始值：未发货
     }
   },
 
   methods: {
-    refund: function (id) {
+/*   refund: function (id) {
       this.isLoad = true
       this.$http.get(this.URL + 'b/order/refund?orderId=' + id)
         .then((data) => {
@@ -82,8 +86,8 @@ export default {
       this.status = 'Failed'
       this.initLoad()
     },
-
-    send: function (id) {
+*/
+ /*   send: function (id) {
       this.isLoad = true
       this.$http.get(this.URL + 'b/order/send?orderId=' + id)
         .then((data) => {
@@ -93,7 +97,7 @@ export default {
       this.status = 'Sending'
       this.initLoad()
     },
-
+*/
     initLoad: function () {
       this.isLoad = true
       this.$http.get(this.URL + 'b/order/all?id=' + this.getCookie('userId'))

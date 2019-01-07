@@ -20,7 +20,7 @@
       <router-link class='subTitle' v-show="this.getCookie('userType') == '0'"  to="/customer/cart">Cart</router-link>
       <router-link class='subTitle' v-show="this.getCookie('userType') == '0'"  to="/customer/favourite">Favorite</router-link>
       <router-link class='subTitle' v-show="this.getCookie('userType') == '0'"  to="/customer/order">Order</router-link>
-      <router-link class='subTitle' to="/search">Index</router-link>
+      <router-link class='subTitle' to="/">Index</router-link>
 
     </div>
 
@@ -37,6 +37,7 @@
 
 <script>
 import Loading from '@/components/common/Loading'
+import $ from 'jquery'
 export default {
 
   components: {Loading},
@@ -49,7 +50,8 @@ export default {
       shops: [],
       poiMouseEnter: -1,
       welcomeMsg: '',
-      poiSearch: 0
+      poiSearch: 0,
+      childPath: ''
     }
   },
 
@@ -99,6 +101,13 @@ export default {
 
     goShop: function () {
       this.$router.push({name: 'seller_shop', params: {data: this.getCookie('userId')}})
+    },
+
+    goRouter: function (path) {
+      let routeUrl = this.$router.resolve({
+        path: path
+      })
+      window.open(routeUrl.href, '_self')
     }
   },
 
@@ -109,11 +118,14 @@ export default {
   mounted () {
     console.log(this.getCookie('userName'))
     this.init()
+    $('body').css('width', $(window).width())
   }
 }
 </script>
 
 <style scoped>
+
+  body{ overflow-x: hidden;}
 
   *{
     padding: 0px;
