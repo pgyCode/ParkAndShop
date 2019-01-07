@@ -237,12 +237,13 @@ export default {
 
     onClickApproveProduct: function (shopInfo) {
       this.isLoad = true
+      console.log(shopInfo)
       this.$http.get(this.URL + 'm/product_to_top10?id=' +
-        shopInfo.id)
+        shopInfo.pID)
         .then((data) => {
           console.log(data)
           this.isLoad = false
-          this.initLoad()
+          this.initLoad1()
         })
         .catch(() => {
           this.isLoad = false
