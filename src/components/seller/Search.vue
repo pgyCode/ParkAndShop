@@ -7,7 +7,7 @@
     </div>
     <div>
    </div>
-  <div style="height: 42px; width: 1000px; margin: 10px auto;background: dodgerblue; border: 1px solid dodgerblue;">
+  <div style="height: 42px; width: 1000px; margin: 10px auto;background: #094fa4; border: 1px solid #094fa4;">
     <p style="float: left; width: 250px;text-align: center;color: rgb(60, 60, 60); font-size: 15px; font-weight: 600; line-height: 42px">Good</p>
     <p style="float: left; width: 80px;text-align: center; color: rgb(60, 60, 60); font-size: 15px; font-weight: 600; line-height: 42px">Price</p>
     <p style="float: left; width: 150px;text-align: center; color: rgb(60, 60, 60); font-size: 15px; font-weight: 600; line-height: 42px">Number</p>
@@ -217,7 +217,7 @@ export default {
     display: block;
     float: left;
     padding-left: 10px;
-    border: 2px solid dodgerblue;
+    border: 2px solid #094fa4;
     outline: none;
   }
 
@@ -231,7 +231,7 @@ export default {
     height: 34px;
     border: none;
     color: #fff;
-    background: dodgerblue;
+    background: #094fa4;
     outline: none;
   }
 

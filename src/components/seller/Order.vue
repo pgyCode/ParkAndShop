@@ -23,7 +23,7 @@
              :class="{checkTab:currentTab == 4}"
              v-on:click="initLoad()">All</p>
         </div>
-    <div style="height: 42px; width: 1000px; margin: 10px auto;background: dodgerblue; border: 1px solid dodgerblue;">
+    <div style="height: 42px; width: 1000px; margin: 10px auto;background: #094fa4; border: 1px solid #094fa4;">
       <p style="float: left; width: 250px;text-align: center;color: rgb(60, 60, 60); font-size: 15px; font-weight: 600; line-height: 42px">Good</p>
       <p style="float: left; width: 80px;text-align: center; color: rgb(60, 60, 60); font-size: 15px; font-weight: 600; line-height: 42px">Price</p>
       <p style="float: left; width: 150px;text-align: center; color: rgb(60, 60, 60); font-size: 15px; font-weight: 600; line-height: 42px">Number</p>
@@ -55,7 +55,7 @@
               <p>{{ order.Date}}</p>
             </div >
                <div style="float: left; width: 160px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; line-height: 50px">
-                <p v-if="order.isFinish === 1" style="float: left; width: 160px;text-align: center; color: dodgerblue; font-size: 12px; font-weight: 600; line-height: 96px">&nbsp;&nbsp;&nbsp;&nbsp;Unshipped</p>
+                <p v-if="order.isFinish === 1" style="float: left; width: 160px;text-align: center; color: #094fa4; font-size: 12px; font-weight: 600; line-height: 96px">&nbsp;&nbsp;&nbsp;&nbsp;Unshipped</p>
                 <p v-else-if="order.isFinish ===3" style="float: left; width: 160px;text-align: center; color: forestgreen; font-size: 12px; font-weight: 600; line-height: 96px">&nbsp;&nbsp;&nbsp;&nbsp;Sending</p>
                  <p v-else-if="order.isFinish ===0" style="float: left; width: 160px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; line-height: 96px">&nbsp;&nbsp;&nbsp;&nbsp;Failed</p>
                  <p v-else-if="order.isFinish ===2" style="float: left; width: 160px;text-align: center; color: red; font-size: 12px; font-weight: 600; line-height: 96px">&nbsp;&nbsp;&nbsp;&nbsp;Succeed</p>
@@ -209,7 +209,7 @@ export default {
 
   .checkTab{
     color: #fff;
-    background: dodgerblue;
+    background: #094fa4;
   }
 
 </style>
