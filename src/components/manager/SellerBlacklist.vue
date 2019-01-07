@@ -30,7 +30,8 @@
             </div>
 
             <div style="width: 86px; float: right; height: 120px; margin-top: 20px;">
-              <button v-on:click="onClickCancel(shop)" style="text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; height: 26px; width: 60px; border: 1px solid rgb(220, 220, 220); border-radius: 5px; cursor: pointer; margin: 47px auto;" >Cancel</button>
+              <button v-on:click="onClickCancel(shop)" style="text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; height: 26px; width: 60px; border: 1px solid rgb(220, 220, 220); border-radius: 5px; cursor: pointer; margin: 22px auto;" >Cancel</button>
+              <button v-on:click="onClickDelete(shop)" style="text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; height: 26px; width: 60px; border: 1px solid rgb(220, 220, 220); border-radius: 5px; cursor: pointer; margin: 22px auto;" >Delete</button>
             </div>
           </div>
         </li>
@@ -62,6 +63,19 @@ export default {
     onClickCancel: function (info) {
       this.isLoad = true
       this.$http.get(this.URL + 'm/seller_black_cancel?id=' +
+        info.id)
+        .then((data) => {
+          this.isLoad = false
+          this.initLoad()
+        })
+        .catch(() => {
+          this.isLoad = false
+        })
+    },
+
+    onClickDelete: function (info) {
+      this.isLoad = true
+      this.$http.get(this.URL + 'm/delete_seller?id=' +
         info.id)
         .then((data) => {
           this.isLoad = false

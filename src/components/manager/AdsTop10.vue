@@ -23,7 +23,7 @@
             <div style="float: left; width: 280px; height: 130px;vertical-align: middle; display: table-cell; padding: 4px; ">
               <img v-bind:src="data.portraitURL" style="float:left; width: 120px; height: 120px; margin-bottom: 20px; margin-right: 10px; border: 1px solid #b6b6b6;"/>
               <div style="float: left; width: 140px;  height: 120px;">
-                <span style="display:block;font-size: 15px; font-weight: 700; line-height: 40px; color: rgb(0, 99, 200); overflow: hidden">{{ data.pName }}</span>
+                <span style="display:block;font-size: 15px; font-weight: 700; line-height: 40px; width: 140px; overflow: hidden; height: 40px; color: rgb(0, 99, 200); overflow: hidden">{{ data.pName }}</span>
                 <span style="float: left; font-size: 14px; font-weight: 400; line-height: 40px; color: rgb(0, 99, 200); overflow: hidden; color: #f40; font-weight: 600">¥{{ data.price }}</span>
                 <span style="clear:both; float: left; font-size: 12px; font-weight: 400; line-height: 40px; color: rgb(102, 102, 102);"><b>Count：</b></span>
                 <span style="float: left; font-size: 12px; font-weight: 600; line-height: 40px; color: rgb(102, 102, 102); overflow: hidden">{{ data.num }}</span>

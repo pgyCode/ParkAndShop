@@ -51,10 +51,14 @@ import SellerShop from '@/components/seller/Shop'
 import SellerGood from '@/components/seller/Good'
 import SellerAddGood from '@/components/seller/AddGood'
 import SellerInfo from '@/components/seller/Info'
-import SellerOrder from '@/components/seller/Order'
+/* import SellerOrder from '@/components/seller/Order' */
 import SellerGoodInformation from '@/components/seller/Good_info'
 import SellerOrderInformation from '@/components/seller/Order_info'
-import SellerProfit from '@/components/seller/Profit'
+/* import SellerProfit from '@/components/seller/' */
+import SellerOwner from '@/components/seller/Owner'
+import SellerOwnerHistory from '@/components/seller/Order'
+import SellerOwnerIncome from '@/components/seller/Profit'
+import SellerOwnerSearch from '@/components/seller/Search'
 
 Vue.use(Router)
 
@@ -207,7 +211,31 @@ export default new Router({
               component: SellerGood
             }
           ]},
-
+        {
+          path: '/seller/owner',
+          component: SellerOwner,
+          children: [
+            {
+              path: '/',
+              component: SellerOwnerHistory
+            },
+            {
+              path: '/seller/owner/order',
+              component: SellerOwnerHistory
+            },
+            {
+              path: '/seller/owner/search',
+              component: SellerOwnerSearch
+            },
+            {
+              path: '/seller/owner/profit',
+              component: SellerOwnerIncome
+            },
+            {
+              path: '/',
+              component: SellerOwnerHistory
+            }
+          ]},
         {path: '/seller/addGood', component: SellerAddGood},
         {
           path: '/seller/Good_info',
@@ -217,18 +245,18 @@ export default new Router({
         {
           path: '/seller/info', component: SellerInfo
         },
-        {
-          path: '/seller/order', component: SellerOrder},
+        /* {
+          path: '/seller/order', component: SellerOrder}, */
         {
           path: '/seller/shop',
           name: 'seller_shop',
           component: SellerShop
-        },
-        {
+        }
+        /* {
           path: '/seller/profit',
           name: 'seller_profit',
           component: SellerProfit
-        }
+        } */
       ]
     },
     {
