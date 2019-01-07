@@ -203,11 +203,8 @@ export default new Router({
         {
           path: '/seller/Good_info',
           name: 'seller_good_info',
-          component: SellerGoodInformation},
-        {
-          path: '/seller/Order_info',
-          name: 'seller_order_info',
-          component: SellerOrderInformation},
+          component: SellerGoodInformation
+        },
         {
           path: '/seller/info', component: SellerInfo
         },
@@ -256,7 +253,11 @@ export default new Router({
     {
       path: '/manager/owner',
       component: ManagerOwner
-    }
+    },
+    {
+      path: '/seller/Order_info',
+      name: 'seller_order_info',
+      component: SellerOrderInformation}
   ],
 
   mode: 'history'
