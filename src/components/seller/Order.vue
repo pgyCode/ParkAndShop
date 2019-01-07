@@ -23,37 +23,42 @@
              :class="{checkTab:currentTab == 4}"
              v-on:click="initLoad()">All</p>
         </div>
-    <div style="height: 42px; width: 1000px; margin: 10px auto;background: #094fa4; border: 1px solid #094fa4;">
-      <p style="float: left; width: 250px;text-align: center;color: rgb(60, 60, 60); font-size: 15px; font-weight: 600; line-height: 42px">Good</p>
-      <p style="float: left; width: 80px;text-align: center; color: rgb(60, 60, 60); font-size: 15px; font-weight: 600; line-height: 42px">Price</p>
-      <p style="float: left; width: 150px;text-align: center; color: rgb(60, 60, 60); font-size: 15px; font-weight: 600; line-height: 42px">Number</p>
-      <p style="float: left; width: 150px;text-align: center; color: rgb(60, 60, 60); font-size: 15px; font-weight: 600; line-height: 42px">Information</p>
-      <p style="float: left; width: 150px;text-align: center; color: rgb(60, 60, 60); font-size: 15px; font-weight: 600; line-height: 42px">Time</p>
-      <p style="float: left; width: 130px;text-align: center; color: rgb(60, 60, 60); font-size: 15px; font-weight: 600; line-height: 42px">Trading Status</p>
+    <div style="height: 42px; width: 866px; margin: 10px auto;background: #094fa4; border: 1px solid #094fa4;">
+      <p style="float: left; width: 210px;text-align: center;color: rgb(60, 60, 60); font-size: 15px; font-weight: 600; line-height: 42px">Good</p>
+      <p style="float: left; width: 210px;text-align: center; color: rgb(60, 60, 60); font-size: 15px; font-weight: 600; line-height: 42px">Price</p>
+      <p style="float: left; width: 210px;text-align: center; color: rgb(60, 60, 60); font-size: 15px; font-weight: 600; line-height: 42px">Number</p>
+      <!--<p style="float: left; width: 150px;text-align: center; color: rgb(60, 60, 60); font-size: 15px; font-weight: 600; line-height: 42px">Information</p>-->
+      <!--<p style="float: left; width: 150px;text-align: center; color: rgb(60, 60, 60); font-size: 15px; font-weight: 600; line-height: 42px">Time</p>-->
+      <p style="float: left; width: 210px;text-align: center; color: rgb(60, 60, 60); font-size: 15px; font-weight: 600; line-height: 42px">Trading Status</p>
     </div>
     <div id="containerBody">
       <ul>
-        <li v-bind:key="order" v-for="order in orders" style="border:1px solid gray;" >
+        <li v-bind:key="order" v-for="order in orders" style="border:1px solid gray;margin: 10px auto;" >
+
           <div style="height: 42px;background: rgb(241, 241, 241); border-bottom: none;border-color: black; solid: #dfdfdf">
-            <p style="float: left; color: rgb(60, 60, 60); font-size: 12px; width: 1000px; font-weight: 700; line-height: 42px ">&nbsp;&nbsp;&nbsp;OrderID: &nbsp;&nbsp;&nbsp;&nbsp;{{ order.orderID}}
-             </p>
+            <p style="float: left; color: rgb(60, 60, 60); overflow: hidden;font-size: 12px; width: 150px; font-weight: 900; line-height: 42px ;padding-left: 20px;">{{ order.Date}}</p>
+            <p style="float: left; color: rgb(60, 60, 60); overflow: hidden;font-size: 12px; width: 180px; font-weight: 500; line-height: 42px;text-align: left; ">OrderID:&nbsp;{{order.orderID}}</p>
+            <p style="float: left; color: rgb(60, 60, 60); overflow: hidden;font-size: 12px; width: 120px; font-weight: 500; line-height: 42px;text-align: left; ">Name:&nbsp;{{order.nickname}}</p>
+            <p style="float: left; color: rgb(60, 60, 60); overflow: hidden;font-size: 12px; width: 120px; font-weight: 500; line-height: 42px ;padding-left: 20px;">Tel:&nbsp;{{ order.username}}</p>
+            <p style="float: left; color: rgb(60, 60, 60);overflow: hidden; font-size: 12px; width: 200px; font-weight: 500; line-height: 42px;text-align: left; ">Address:&nbsp;{{order.address}}</p>
           </div>
+
             <div style="height: 108px; width: 1000px;">
              <img v-bind:src="order.portraitURL"
                style="float: left; width: 105px; height: 108px; border:none;"  v-on:click="goOrder(order)"/>
 
-          <div style="width: 880px;height: 108px;margin: 0px auto;">
-             <div style="width: 800px;height: 108px;margin: 0px auto;float: left" v-on:click="goOrder(order)">
-              <p style="float: left; width: 100px;height: 110px;text-align:center;color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; line-height:50px">{{ order.pName }}</p>
-            <p style="float: left; width: 160px;text-align:center;color: rgb(60, 60, 60); font-size: 12px; font-weight: 700; line-height: 96px">¥{{ order.orderPrice }}</p>
-            <p style="float: left; width: 80px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 700; line-height: 96px">{{  order.amount }}</p>
-            <div style="float: left; width: 220px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; line-height: 50px">
-              <p>{{ order.username}}</p>
-              <p>{{order.address}}</p>
-            </div>
-            <div style="float: left; width: 80px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; line-height: 50px">
-              <p>{{ order.Date}}</p>
-            </div >
+          <div style="width: 880px;height: 108px;margin: 0px auto;float: left;">
+             <div style="width: 800px;height: 108px;margin: 0px auto;float: left;" v-on:click="goOrder(order)">
+              <p style="float: left; overflow: hidden;width: 100px;height: 110px;text-align:center;color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; line-height:96px">{{ order.pName }}</p>
+            <p style="float: left; width: 210px;text-align:center;color: rgb(60, 60, 60); font-size: 12px; font-weight: 700; line-height: 96px">¥{{ order.orderPrice }}</p>
+            <p style="float: left; width: 210px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 700; line-height: 96px">{{  order.amount }}</p>
+            <!--<div style="float: left; width: 220px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; line-height: 50px">-->
+              <!--<p>{{ order.username}}</p>-->
+              <!--<p>{{order.address}}</p>-->
+            <!--</div>-->
+            <!--<div style="float: left; width: 80px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; line-height: 50px">-->
+              <!--<p>{{ order.Date}}</p>-->
+            <!--</div >-->
                <div style="float: left; width: 160px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; line-height: 50px">
                 <p v-if="order.isFinish === 1" style="float: left; width: 160px;text-align: center; color: #094fa4; font-size: 12px; font-weight: 600; line-height: 96px">&nbsp;&nbsp;&nbsp;&nbsp;Unshipped</p>
                 <p v-else-if="order.isFinish ===3" style="float: left; width: 160px;text-align: center; color: forestgreen; font-size: 12px; font-weight: 600; line-height: 96px">&nbsp;&nbsp;&nbsp;&nbsp;Sending</p>
@@ -195,7 +200,7 @@ export default {
   }
 
   li{
-    width: 1000px;
+    width: 866px;
     height: 150px;
     margin-top: 5px;
     display: block;
