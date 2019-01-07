@@ -304,7 +304,7 @@
     <div id="containInfo">
       <ul>
         <li v-bind:key="income" v-for="income in incomes">
-          <div style="height: 130px; margin-left: 40px">
+          <div style="height: 130px; margin-left: 80px">
             <p style="height: 30px; float: left;text-align:left; line-height: 130px; vertical-align: center; font-weight: 600; font-size: 20px; color: black;"> Profit ( ￥ ) : &nbsp;&nbsp;&nbsp;&nbsp; </p>
             <p style="height: 30px; float: left;text-align:left; line-height: 130px; vertical-align: center; font-weight: 700; font-size: 30px; color: red;"> {{ income.income_all }} </p>
           </div>
@@ -312,11 +312,11 @@
       </ul>
     </div>
 
-    <div style="clear:both; margin: 50px auto; width: 700px; background: rgb(237, 237, 237); height: 150px;">
-      <h3 align="left" style="padding-left:40px;line-height: 75px">The current commission rate is :{{value}}</h3>
-      <h3 align="left" style="padding-left:40px;float:left;line-height: 75px">Change:</h3>
-      <input style="float: left; height: 35px; margin-top: 20px; border: 1px solid rgb(237, 237, 237);margin-left: 20px; border-radius: 5px; outline: none;" id="inputSearch" v-model="value"/>
-      <p style="float:left;line-height: 35px; margin-top: 20px; background: red; color: white; width: 100px; margin-left: 20px; border-radius: 5px; text-align: center" id="btnSearch" v-on:click="onClickChangeProfit()">Submit</p>
+    <div style="clear:both; margin: 50px auto; width: 700px; background: rgb(237, 237, 237); height: 170px;">
+      <h3 align="left" style="padding-left:80px;line-height: 75px">The current commission rate is :{{value}}</h3>
+      <h3 align="left" style="padding-left:80px;float:left;line-height: 75px">Change:</h3>
+      <input style="float: left; height: 35px; margin-top: 20px; border: 1px solid rgb(237, 237, 237);margin-left: 20px; outline: none;" id="inputSearch" v-model="value"/>
+      <p style="float:left;line-height: 35px; margin-top: 20px; background: #d42e23; color: white; width: 100px; margin-left: 20px; text-align: center" id="btnSearch" v-on:click="onClickChangeProfit()">Submit</p>
     </div>
   </div>
 </template>

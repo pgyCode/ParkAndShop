@@ -101,25 +101,6 @@ export default {
       }
       console.log('12323')
     }
-    // 加载top10产品
-    this.isLoad = true
-    this.$http.get(this.URL + 'm/product_top10_info')
-      .then((data) => {
-        console.log(data)
-        this.isLoad = false
-        this.top10s = data.body.data.top10
-      })
-      .catch((error) => {
-        console.log(error)
-        this.isLoad = false
-      })
-    // 加载top5店铺
-    this.isLoad = true
-    this.$http.get(this.URL + 'm/seller_top5_info')
-      .then((data) => {
-        this.isLoad = false
-        this.shops = data.body.data.top5
-      })
   },
 
   components: {Loading},

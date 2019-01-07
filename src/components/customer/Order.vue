@@ -43,7 +43,7 @@
             <p style="float: left; width: 100px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; line-height: 80px">{{ getStatus(order.isFinish) }}</p>
             <div style="display:table-cell; vertical-align:middle; float: right; width: 100px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; line-height: 80px">
               <button v-show="order.isFinish === 3" class="content" style="float: right; width: 100px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; height: 26px; width: 60px; border: 1px solid rgb(220, 220, 220); border-radius: 5px; cursor: pointer" v-on:click="onClickConfirm(order.orderID)">Confirm</button>
-              <button v-show="order.isFinish === 2 && order.commented === 0" style="float: right; width: 100px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; height: 26px; width: 60px; border: 1px solid rgb(220, 220, 220); border-radius: 5px; cursor: pointer" v-on:click="onClickComment(order.orderID)">comment</button>
+              <button v-show="order.isFinish === 2 && order.commented === 0" style="float: right; width: 100px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; height: 26px; width: 60px; border: 1px solid rgb(220, 220, 220); border-radius: 5px; cursor: pointer" v-on:click="onClickComment(order)">comment</button>
               <button v-show="order.isFinish === 1||order.isFinish === 2||order.isFinish === 3" class="content" style="float: right; width: 100px;text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; height: 26px; width: 60px; border: 1px solid rgb(220, 220, 220); border-radius: 5px; margin-top: 27px; cursor: pointer" v-on:click="onClickRefund(order.orderID)">Refund</button>
             </div>
           </div>
@@ -65,7 +65,7 @@ export default {
       name: 'sds',
       orders: [],
       isComment: false,
-      currentCommentId: -1,
+      currentOrder: {},
       comment: ''
     }
   },
@@ -113,9 +113,9 @@ export default {
         })
     },
 
-    onClickComment: function (id) {
+    onClickComment: function (order) {
       this.isComment = true
-      this.currentCommentId = id
+      this.currentOrder = order
       // 阻止点击事件向上传递，防止影响到父容器的点击事件
       event.stopPropagation()
     },
@@ -124,14 +124,14 @@ export default {
       this.isComment = false
       this.isLoad = true
       this.$http.get(this.URL + 'c/comment?orderID=' +
-        this.currentCommentId +
+        this.currentOrder.orderID +
         '&message=' +
         this.comment)
         .then((data) => {
           console.log(data)
-          alert('Comment Succeed')
           this.comment = ''
           this.isLoad = false
+          this.initLoad()
         })
         .catch(() => {
           this.isLoad = false
@@ -219,7 +219,7 @@ export default {
     }
   },
 
-  created: function () {
+  activated: function () {
     this.initLoad()
   },
 

@@ -13,6 +13,7 @@ import CustomerCart from '@/components/customer/Cart'
 import CustomerInfo from '@/components/customer/Info'
 import CustomerShop from '@/components/customer/Shop'
 import CustomerGood from '@/components/customer/Good'
+import CustomerPay from '@/components/customer/Pay'
 
 // import Saler from '@/components/seller/Saler'
 // import SalerOwner from '@/components/seller/Owner'
@@ -70,6 +71,14 @@ export default new Router({
         {path: '/customer/favourite', component: CustomerFavourite},
         {path: '/customer/cart', component: CustomerCart},
         {path: '/customer/info', component: CustomerInfo},
+        {
+          path: '/customer/pay',
+          name: 'customer_pay',
+          component: CustomerPay,
+          meta: {
+            keepAlive: false
+          }
+        },
 
         {
           path: '/customer/good',
