@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p style="font-size:15px; font-weight:700; color: #fff; padding: 3px 5px; line-height: 40px; background: rgb(63,127,206);height: 40px;">The Details of Order</p>
+    <p style="font-size:15px; font-weight:700; color: #fff; padding: 3px 5px; line-height: 40px; background: rgb(9,79,164);height: 40px;">The Details of Order</p>
     <div style="width: 1000px; height: 700px; margin: 0px auto;">
       <img style="float: left; width: 250px; height: 250px; padding-right: 15px" v-bind:src="data.portraitURL"/>
       <div style="float: left; margin:80px auto;margin-left:50px; width: 200px;height:600px">
@@ -178,7 +178,7 @@
 
         <div style="float: left; height: 100px; width:800px;color: rgb(60, 60, 60); font-size: 15px; font-weight: 700; line-height: 400px">
           <div style="float: left; height: 100px; width:200px;color: rgb(60, 60, 60); font-size: 15px; font-weight: 700; line-height: 50px">
-            <button style="margin-left:100px;border:1px;text-align: center;background: #2a56d7;color: white;width:60px;height:30px;" v-on:click="refund(data.orderID)">Refund</button>
+            <button style="margin-left:100px;border:1px;text-align: center;background: #094fa4;color: white;width:60px;height:30px;" v-on:click="refund(data.orderID)">Refund</button>
           </div>
           <div style="float: left; height: 100px; width:200px;color: rgb(60, 60, 60); font-size: 15px; font-weight: 700; line-height: 50px">
             <span v-if="data.isFinish === 3">
@@ -191,7 +191,7 @@
               <button style="margin-left:100px;border: 1px;background: #2a56d7;color: white;width:60px;height:30px;" v-on:click="send(data.orderID)">&nbsp;&nbsp;Send &nbsp;</button>
             </span>
             <span v-else-if="data.isFinish === 2">
-              <button style="margin-left:100px;border: 1px;background: red;color: white;width:60px;height:30px;" >&nbsp;Succeed &nbsp;</button>
+              <button style="margin-left:100px;border: 1px;background: #ffd41b;color: white;line-height:10px;width:60px;height:30px;" >&nbsp;Succeed &nbsp;</button>
             </span>
             <span v-else>
               <button style="margin-left:100px;border: 1px;background: gray;color: white;width:60px;height:30px;" >&nbsp;&nbsp;Failed &nbsp;</button>

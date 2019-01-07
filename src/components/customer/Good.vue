@@ -140,12 +140,8 @@ export default {
     },
     initLoad: function () {
       this.isLoad = true
-      if (this.$route.params.data !== undefined) {
-        this.data = this.$route.params.data
-        console.log(this.data)
-        this.$emit('childByValue', this.data.sID)
-      }
-
+      this.data = this.$route.params.data
+      console.log(this.data)
       this.$http.get(this.URL + 'b/comment?pId=' +
          this.data.pID)
         .then((data) => {
@@ -161,10 +157,9 @@ export default {
     },
     initInfo: function () {
       this.isLoad = true
-      console.log(111)
       if (this.$route.params.data !== undefined) {
         this.id = this.$route.params.data
-        this.$emit('childByValue', this.id)
+        console.log(this.id)
       }
 
       this.$http.get(this.URL + 'b/info/get?id=' +
@@ -179,9 +174,7 @@ export default {
           this.isLoad = false
         })
     }
-
   }
-
 }
 
 </script>

@@ -63,7 +63,7 @@ export default {
   }
 
   .title{
-    border-bottom: 5px solid #003aff;
+    border-bottom: 5px solid #094fa4;
 
   }
 
@@ -83,7 +83,7 @@ export default {
   }
 
   .checkTab{
-    color: cornflowerblue;
-    border-bottom: 2px solid dodgerblue;
+    color: #094fa4;
+    border-bottom: 2px solid #094fa4;
   }
 </style>

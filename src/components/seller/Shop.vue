@@ -1,55 +1,57 @@
 <template xmlns:style="http://www.w3.org/1999/xhtml">
-  <div style="width: 1000px; margin: 0px auto;">
-    <div style="width: 1000px; min-width: 1000px; margin: 0px auto;">
+  <div style="width: 866px; margin: 0px auto;">
+    <div style="width: 866px; min-width: 866px; margin: 0px auto;">
 
-      <div style="width: 1000px; height: 83px; padding: 0px 0px; margin: 0px auto;">
+      <div style="width: 866px; height: 83px; padding: 0px 0px; margin: 0px auto;">
         <img src="../../assets/logo.png" style="float: left;" height="83px" width='210px'/>
         <p style="float: left; color: rgb(60, 60, 60); line-height: 83px; font-size: 22px; font-weight: 700; margin-left: 20px">Shop</p>
         <span v-if="info.isTop5 === 0 || info.isTop5 === -2">
-          <button v-on:click="goAdvertise(-1)" style="margin-top: 53px;background: blue;color: white;width: 70px;line-height:25px;border: none;float: right"> Advertising </button>
+          <button v-on:click="goAdvertise(-1)" style="margin-top: 53px;background: rgb(220,220,220);color: white;width: 70px;line-height:25px;border: none;float: right;border-radius: 5px;cursor: pointer"> Advertising </button>
         </span>
         <span v-else-if="info.isTop5 === -1">
-          <button  style="margin-top: 53px;background: forestgreen;color: white;width: 70px;line-height:25px;border: none;float: right"> Loading... </button>
+          <button  style="margin-top: 53px;background: lightgreen;color: white;width: 70px;line-height:25px;border: none;float: right;border-radius: 5px;cursor: pointer"> Loading... </button>
         </span>
         <span v-else-if="info.isTop5 === 1">
-          <button  style="margin-top: 53px;background: red;color: white;width: 70px;line-height:25px;border: none;float: right"> Advertised </button>
+          <button  style="margin-top: 53px;background: #ffd41b;color: white;width: 70px;line-height:25px;border: none;float: right;border-radius: 5px;cursor: pointer"> Advertised </button>
         </span>
       </div>
-      <div style=" width: 1000px;height: 19px; padding: 6px 0px; border-bottom: 2px solid #5884ff;float: left;">
-        <p style="float:left;font-size: 15px;   font-weight: 500; color: rgb(0,0,0);border-radius: 3px;background: #2a56d7">&nbsp;&nbsp;Shop Name:&nbsp;&nbsp;</p>
+      <div style=" width: 866px;height: 19px; padding: 6px 0px; border-bottom: 2px solid #094fa4;float: left;">
+        <p style="float:left;font-size: 15px;   font-weight: 500; color: rgb(0,0,0);border-radius: 3px;background: #094fa4">&nbsp;&nbsp;Shop Name:&nbsp;&nbsp;</p>
         <p>&nbsp;&nbsp;{{info.shopName }}</p>
       </div>
-      <div style="height: 120px; width: 1000px;">
+      <div style="height: 120px; width: 866px;">
         <img v-bind:src="info.url" v-on:click="initLoad()" style="float: left; width: 118px; height: 118px; border: 1px solid rgb(212,215,220)"/>
-        <p src="../../assets/logo.png" style="float:left; width: 880px; height: 120px; font-size: 30px; line-height: 120px; text-align: center; color: rgb(63,127,206);">{{ info.shopName }}</p>
+        <p src="../../assets/logo.png" style="float:left; width: 680px; height: 120px; font-size: 30px; line-height: 120px; text-align: center; color: rgb(9,79,164);">{{ info.shopName }}</p>
       </div>
     </div>
     <loading v-show="isLoad"/>
-    <p style="clear: both;font-size:12px;text-align:center; font-weight:700; color: #000000; padding: 3px 5px; height: 25px; line-height: 25px; background: dodgerblue">MANAGER All GOODS</p>
+    <p style="clear: both;margin-left: 67px;width: 860px;font-size:12px;text-align:center; font-weight:700; color: #000000; padding: 3px 5px; height: 25px; line-height: 25px; background: #094fa4">MANAGER All GOODS</p>
     <div id="containInfo">
       <ul>
-        <p style="height: 5px;width: 990px"></p>
         <li v-bind:key="data" v-for="data in datas" style="border-color:darkgrey;border-width: 1px;" >
           <div style="width: 140px;height: 140px;margin: 5px;float: left;border:none;" v-on:click="goGood(data)">
-            <img v-bind:src="data.portraitURL" style="width: 140px; height: 140px; margin: 0px auto; border: none;"/>
+            <img v-bind:src="data.portraitURL" style="width: 120px; height: 120px; margin-top:10px;margin-left:10px; border: none;"/>
           </div>
-          <div style="width: 840px;height: 150px;margin: 0px;float: right;">
-            <div style="width: 680px;height: 140px;margin: 5px auto;float: left" v-on:click="goGood(data)">
-              <p style="width: 250px;height: 55px; margin: 10px 5px 5px;float: left;text-align: center; vertical-align: center; line-height: 110px; font-weight: 700; font-size: 15px; color: black;">{{ data.pName }}</p>
-              <p style="width: 150px;height: 140px; margin: 10px 30px 5px;text-align: center;float: left; line-height: 110px;font-weight: 900; font-size: 15px; color: #d71216;">💰¥{{ data.price }}</p>
-              <p style="height: 140px; margin: 10px 30px 5px;text-align: center;float: left; line-height: 110px;font-weight: 900; font-size: 15px; color: forestgreen;">Count:{{ data.num }}</p>
+          <div style="width: 860px;height: 150px;margin: 0;">
+            <div style="width: 200px;height: 140px;margin: 5px auto;float: left" v-on:click="goGood(data)">
+              <p style="height: 45px; width: 180px; overflow: hidden; vertical-align: center; line-height: 60px; font-weight: 700; font-size: 15px; color: black;">{{ data.pName }}</p>
+              <p style="width:180px;height: 45px; line-height: 50px;float: left; font-weight: 600; font-size: 14px; color: #ff171f;">💰¥{{ data.price }}</p>
+              <p style="height: 45px; text-align: center;line-height: 40px;float: left; font-weight: 600; font-size: 12px; color: grey;">Count:{{ data.num }}</p>
             </div>
-            <div style="width: 140px;height: 140px;margin: 5px auto;float: right;">
-              <button class='subTitle' v-on:click="goGoodInfo(data)" style="margin-top: 12px;margin-left: 20px;background: dodgerblue;color: white;width: 70px;height: 25px;border: none"> Update </button>
-              <button class='subTitle' v-on:click="goodDelete(data.pID)" style="margin-top: 20px;margin-left: 20px;background: dodgerblue;color: white;width: 70px;height: 25px;border: none">  Shelves </button>
+            <div style="float:left; width: 380px; background: rgb(237, 237, 237); height: 140px;padding-left: 5px;  margin-top: 5px;margin-bottom: 5px;">
+              <p style=" font-size: 13px; font-weight: 400; line-height: 30px; overflow: hidden; color: #666;">{{ data.description }}</p>
+            </div>
+            <div style="width: 125px;height: 140px;margin: 5px auto;float: right;">
+              <button class='subTitle' v-on:click="goGoodInfo(data)" style="margin-top: 12px;margin-left: 20px;background: rgb(220,220,220);color: black;width: 70px;height: 25px;border: none;border-radius: 5px;cursor: pointer"> Update </button>
+              <button class='subTitle' v-on:click="goodDelete(data.pID)" style="margin-top: 20px;margin-left: 20px;background: rgb(220,220,220);color: black;width: 70px;height: 25px;border: none;border-radius: 5px;cursor: pointer">  Shelves </button>
               <span v-if="data.isTop10 === 0 || data.isTop10 === -2 ">
-                <button class='subTitle' v-on:click="goAdvertise(data.pID)" style="margin-top: 20px;margin-left: 20px;background: dodgerblue;color: white;width: 70px;height: 25px;border: none"> Advertising </button>
+                <button class='subTitle' v-on:click="goAdvertise(data.pID)" style="margin-top: 20px;margin-left: 20px;background: rgb(220,220,220);color: black;width: 70px;height: 25px;border: none;border-radius: 5px;cursor: pointer"> Advertising </button>
               </span>
               <span v-else-if="data.isTop10 === -1 ">
-                <button class='subTitle'  style="margin-top: 20px;margin-left: 20px;background: forestgreen;color: white;width: 70px;height: 25px;border: none"> Loading... </button>
+                <button class='subTitle'  style="margin-top: 20px;margin-left: 20px;background: lightgreen;color: black;width: 70px;height: 25px;border: none;border-radius: 5px;cursor: pointer"> Loading... </button>
               </span>
               <span v-else-if="data.isTop10 === 1 ">
-                <button class='subTitle'  style="margin-top: 20px;margin-left: 20px;background: red;color: white;width: 70px;height: 25px;border: none"> Advertised </button>
+                <button class='subTitle'  style="margin-top: 20px;margin-left: 20px;background: rgb(255,212,27);color: black;width: 70px;height: 25px;border: none;border-radius: 5px;cursor: pointer"> Advertised </button>
               </span>
             </div>
           </div>
@@ -159,16 +161,16 @@ export default {
     margin: 0px auto;
   }
   li{
-    width: 990px;
-    margin-left: 5px;
-    margin-right: 5px;
+    width: 860px;
+    margin-left: 1px;
+    margin-top: 20px;
     height: 150px;
     float: left;
     display: block;
     border: 1px solid #dfdfdf;
   }
   #containInfo{
-    width: 1000px;
+    width: 860px;
     margin: 0px auto;
     /*clear: both;*/
   }

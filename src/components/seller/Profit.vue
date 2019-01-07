@@ -1,19 +1,19 @@
 <template xmlns:style="http://www.w3.org/1999/xhtml">
-  <div style="width: 1000px; margin: 0px auto;">
+  <div style="width: 866px; margin: 0px auto;">
 
-    <p style="clear: both;margin-top: 20px;font-size:12px;text-align:center; font-weight:700; color: #000000; padding: 3px 5px; height: 25px; line-height: 25px; background: dodgerblue">PROFIT</p>
+    <p style="clear: both;margin-top: 20px;font-size:12px;text-align:center; font-weight:700; color: #000000; padding: 3px 5px; height: 25px; line-height: 25px; background: #094fa4">PROFIT</p>
 
-    <div style="height: 330px;width: 800px;margin-left:75px;margin-top:50px;float: left">
-      <div id="myChart_day" :style="{width: '900px', height: '300px'}"></div>
+    <div style="height: 330px;width: 800px;margin-left:40px;margin-top:50px;float: left">
+      <div id="myChart_day" :style="{width: '800px', height: '300px'}"></div>
     </div>
-    <div style="height: 330px;width: 800px;margin-left:75px;float: left">
-      <div id="myChart_week" :style="{width: '900px', height: '300px'}"></div>
+    <div style="height: 330px;width: 800px;margin-left:40px;float: left">
+      <div id="myChart_week" :style="{width: '800px', height: '300px'}"></div>
     </div>
-    <div style="height: 330px;width: 800px;margin-left:75px;float: left">
-      <div id="myChart_month" :style="{width: '900px', height: '300px'}"></div>
+    <div style="height: 330px;width: 800px;margin-left:40px;float: left">
+      <div id="myChart_month" :style="{width: '800px', height: '300px'}"></div>
     </div>
-    <div style="height: 330px;width: 800px;margin-left:75px;float: left">
-      <div id="myChart_year" :style="{width: '900px', height: '300px'}"></div>
+    <div style="height: 330px;width: 800px;margin-left:40px;float: left">
+      <div id="myChart_year" :style="{width: '800px', height: '300px'}"></div>
     </div>
 
       <div id="containInfo">
@@ -255,17 +255,16 @@ export default {
   }
 
   li{
-    width: 800px;
+    width: 650px;
     margin-top: 10px;
-    margin-left: 100px;
-    margin-right: 100px;
+    margin-left: 23px;
     height: 130px;
     float: left;
     display: block;
     background: rgb(237, 237, 237);
   }
   #containInfo{
-    width: 1000px;
+    width: 700px;
     margin: 0 auto;
   }
 </style>
