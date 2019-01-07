@@ -22,12 +22,13 @@
     <div>
       <div id="top5" style="width: 1000px;">
         <ul>
-          <li v-bind:key="shop" v-for="shop in shops" class="containerBodyLi">
+          <li v-bind:key="shop" v-for="(shop,index) in shops" class="containerBodyLi">
             <div style="width: 100%; height: 64px; background: #f0f0f0; border-radius: 10px 10px 0px 0px">
-              <p style="line-height: 64px; font-size: 24px; padding-left: 10px; color: #4eac66; font-weight: 500">{{ shop.shopName }}</p>
+              <p style="float:left; line-height: 64px; font-size: 24px; padding-left: 20px; color: #808285; font-weight: 400">{{ shop.shopName }}</p>
+              <p style="float:right; line-height: 64px; font-size: 16px; padding-right: 20px; color: #808285; font-weight: 400;">major：{{ shop.major }}</p>
             </div>
             <div style="width: 100%; height: 230px;">
-              <img src="https://img.alicdn.com/tfs/TB11eRDohrI8KJjy0FpXXb5hVXa-1014-720.png_720x720Q90s50.jpg_.webp"
+              <img v-bind:src="imgs[index]"
                 style="width: 340px; height: 230px; float: left" />
 
               <!--<img v-bind:src="shop.url" style="float:left; height: 208px; width: 208px; margin: 11px 0px ; border: 1px solid #dfdfdf"/>-->
@@ -157,61 +158,10 @@ export default {
       })
     // 加载top5店铺
     this.isLoad = true
-    this.$http.get(this.URL + 'm/seller_top5_info')
+    this.$http.get(this.URL + 'm/seller_top5_info_ads')
       .then((data) => {
         this.isLoad = false
-        this.shops = data.body.data.top5
-        this.shops = [
-          {
-            shopName: 'hua wei',
-            major: 'Phone',
-            products: [
-              {
-                portraitURL: 'https://img.alicdn.com/bao/uploaded/i1/725677994/O1CN01EepLXL28vIdBrsRJZ_!!725677994.jpg_320x5000Q50s50.jpg_.webp',
-                pName: '三只松鼠',
-                price: '123',
-                count: 999
-              },
-              {
-                portraitURL: 'https://img.alicdn.com/bao/uploaded/i1/725677994/O1CN01EepLXL28vIdBrsRJZ_!!725677994.jpg_320x5000Q50s50.jpg_.webp',
-                pName: '三只松鼠',
-                price: '123',
-                count: 999
-              },
-              {
-                portraitURL: 'https://img.alicdn.com/bao/uploaded/i1/725677994/O1CN01EepLXL28vIdBrsRJZ_!!725677994.jpg_320x5000Q50s50.jpg_.webp',
-                pName: '三只松鼠',
-                price: '123',
-                count: 999
-              }
-            ]
-          },
-
-          {
-            shopName: 'hua wei',
-            major: 'Phone',
-            products: [
-              {
-                portraitURL: 'https://img.alicdn.com/bao/uploaded/i1/725677994/O1CN01EepLXL28vIdBrsRJZ_!!725677994.jpg_320x5000Q50s50.jpg_.webp',
-                pName: '三只松鼠',
-                price: '123',
-                count: 999
-              },
-              {
-                portraitURL: 'https://img.alicdn.com/bao/uploaded/i1/725677994/O1CN01EepLXL28vIdBrsRJZ_!!725677994.jpg_320x5000Q50s50.jpg_.webp',
-                pName: '三只松鼠',
-                price: '123',
-                count: 999
-              },
-              {
-                portraitURL: 'https://img.alicdn.com/bao/uploaded/i1/725677994/O1CN01EepLXL28vIdBrsRJZ_!!725677994.jpg_320x5000Q50s50.jpg_.webp',
-                pName: '三只松鼠',
-                price: '123',
-                count: 999
-              }
-            ]
-          }
-        ]
+        this.shops = data.body.data.top5_ads
       })
       .catch(() => {
         this.isLoad = false
@@ -230,7 +180,8 @@ export default {
       top10s: [],
       poiMouseEnter: -1,
       welcomeMsg: '',
-      poiSearch: 0
+      poiSearch: 0,
+      imgs: [ '/static/ad0.png', '/static/ad1.png', '/static/ad2.png', '/static/ad3.png', '/static/ad4.png' ]
     }
   },
 
@@ -274,6 +225,11 @@ export default {
 
     onLiLeave: function ($event) {
       $event.currentTarget.style.border = '1px solid #dfdfdf'
+    },
+
+    getImg: function (poi) {
+      console.log(poi + ' ' + this.imgs[poi])
+      return this.imgs[poi]
     },
 
     onClickSearch: function () {
