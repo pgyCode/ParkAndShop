@@ -1,123 +1,81 @@
 <template>
   <div>
+    <div style="width: 1000px; margin: 0px auto;">
+         <div style="width: 1000px; min-width: 1000px; margin: 0px auto;">
+
+             <div style="width: 1000px; height: 83px; padding: 0px 0px; margin: 0px auto;">
+               <img src="../../assets/logo.png" style="float: left;" height="83px" width='210px'/>
+               <p style="float: left; color: rgb(60, 60, 60); line-height: 83px; font-size: 22px; font-weight: 700; margin-left: 20px">Shop</p>
+             </div>
+
+             <div style=" width: 1000px;height: 19px; padding: 6px 0px; border-bottom: 2px solid #5884ff">
+               <p style="float:left; font-size: 15px;   font-weight: 500; color: rgb(0,0,0);border-radius: 3px;background: #2a56d7">&nbsp;&nbsp;Shop Name:&nbsp;&nbsp;</p>
+               <p >&nbsp;&nbsp; {{ info.shopName }}</p>
+             </div>
+
+             <div style="height: 120px; width: 1000px;">
+               <img v-bind:src="info.url" v-on:click="goShop(info.sID)"
+                    style="float: left; width: 118px; height: 118px; border: 1px solid rgb(212,215,220)"/>
+               <p src="../../assets/logo.png"  style="float:left; width: 880px; height: 120px; font-size: 30px; line-height: 120px; text-align: center; color: rgb(63,127,206);">{{ info.shopName }}</p>
+             </div>
+
+         </div>
+    </div>
+
     <p style="font-size:12px; font-weight:700; color: #fff; padding: 3px 5px; height: 25px; line-height: 25px; background: rgb(63,127,206)">The Goods</p>
 
-    <div style="width: 1000px; height: 590px; margin: 0px auto;">
+    <div style="width: 1000px; height: 430px; margin: 0px auto;">
       <img v-bind:src="data.portraitURL" style="float: left; width: 418px; height: 418px"/>
       <div style="float: left; margin-left: 20px; width: 552px;">
-        <p style="color: #000; font-size: 20px; font-weight: 700;  padding: 20px 0px;">{{ data.pName }}</p>
-        <div style="background-image: url(data:image/png;base64,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);
-                width: 552px; height: 70px;">
-          <p style="float: left; line-height: 70px; color: rgb(153, 153, 153); font-size: 12px; font-weight: 400; margin-left: 10px">Price：</p>
-          <p  style="line-height: 70px;color: rgb(255, 0, 54); font-size: 30px; font-weight: 700;">¥{{ data.price }}</p>
+        <div style="width: 552px; height: 60px;">
+          <p style="width: 300px;color: #000; line-height: 60px;font-size: 20px; font-weight: 700;  float: left;">{{ data.pName }}</p>
         </div>
-        <div style="width: 552px; margin-top: 20px; float: right; height: 162px;">
+        <div style="width: 552px; height: 70px;background: rgb(237, 237, 237);">
+          <p style="float: left; line-height: 70px; color: rgb(153, 153, 153); font-size: 16px; font-weight: 400;color: black; margin-left: 10px; margin-right: 10px">Price:</p>
+          <p style="line-height: 70px;color: rgb(255, 0, 54); font-size: 35px; font-weight: 700;">¥{{ data.price }}</p>
+        </div>
+        <div style="width: 552px; margin-top: 20px; float: right; height: 142px;">
           <div style="width: 552px; background: rgb(237, 237, 237); height: 132px; border-radius: 5px">
-            <p style="padding-top: 15px; margin-bottom: 10px; margin-left: 20px; font-size: 14px; font-weight: 600; color: #666;">Good Description:</p>
-            <p style="margin-top: 10px; margin-left: 20px; margin-right: 20px; font-size: 13px; font-weight: 400; color: #666;">{{ data.description }}</p>
+            <p style="padding-top: 15px; margin-bottom: 10px; margin-left: 10px; font-size: 16px; font-weight: 400; color: black;">Good Description:</p>
+            <p style="margin-top: 10px; margin-left: 20px; margin-right: 20px; font-size: 14px; font-weight: 400; color: #666;">{{ data.description }}</p>
           </div>
         </div>
-        <p>Number：{{ data.num }}</p>
-        <div style="margin-top: 20px">
-          <button style="float: right; width: 178px; height: 38px; margin-left: 5px; border: none; background: rgb(255, 0, 54); color: #fff; font-weight: 400; font-size: 16px" v-on:click="addCart()">Add to cart</button>
-          <button style="float: right; width: 178px; height: 38px; margin-left: 5px;border: none; background: rgb(255,90,44); color: #fff; font-weight: 400; font-size: 16px" v-on:click="addFavourite()">Favourite</button>
-          <!--<button style="float: left; width: 178px; height: 38px; margin-left: 5px; border: 2px solid rgb(255, 0, 54); background: rgb(255, 237, 237); color: rgb(255, 0, 54); font-weight: 400; font-size: 16px">Buy Now</button>-->
+        <div style="width: 552px; margin-top: 16px; float: right; height: 92px;">
+          <div style="width: 552px; background: rgb(237, 237, 237); height: 82px; border-radius: 5px">
+
+            <p style="float: left; line-height: 70px; color: black; font-size: 16px; font-weight: 400; margin-left: 10px; margin-right: 10px">Count:</p>
+            <p style="line-height: 70px; font-size: 25px; font-weight: 700;color: forestgreen;">{{ data.num }}</p>
+
+            <div style="margin-top: 20px">
+              <button style="float: right; width: 178px; height: 38px; margin-left: 5px; border: none; background: rgb(255, 0, 54); color: #fff; font-weight: 400; font-size: 16px" v-on:click="addCart()">Add to cart</button>
+              <button style="float: right; width: 178px; height: 38px; margin-left: 5px;border: none; background: rgb(255,90,44); color: #fff; font-weight: 400; font-size: 16px" v-on:click="addFavourite()">Favourite</button>
+            </div>
+
+          </div>
         </div>
-        <loading v-show="isLoad"/>
       </div>
     </div>
-    <div v-on:scroll.native=handleScroll; style="width: 1000px; height: 1100px; margin: 0px auto;">
-      <p style="font-size:12px; font-weight:700; color: #fff; padding: 3px 5px; height: 25px; line-height: 25px; background: rgb(63,127,206)">Buyers comments</p>
-      <div id="orderFullScreen" style="width: 998px; height: 1068px; border: 1px solid dodgerblue;">
-        <p style="width: 998px;height:20px" v-on:click="getComment(data.pID)"></p>
-        <div style="width: 936px;height: 300px;margin: 20px 30px 30px;border: 1px solid black;">
-          <div style="width: 130px;height:278px;margin: 10px 20px 10px auto;border: 1px ;float: left;">
-            <img v-bind:src="comments.portraitURL" style="float: right; width: 120px; height: 120px"/><!--获取顾客头像-->
-          </div>
-          <div style="width: 762px;height:278px;margin: 10px 10px 10px auto;border: 1px ;float: left;">
-            <div style="width: 300px;height: 30px;margin-left:10px;">
-              <p style="color: gray; font-size: 20px; font-weight: 700;  padding: 10px 0px;">Nickname:&nbsp;&nbsp;</p>
-              <p style="color: #000; font-size: 20px; font-weight: 700;  padding: 10px 0px;">{{comments.nickname}} </p>
-            </div> <!--返回顾客评论-->
-            <textarea v-model="comments.message" readonly style="padding:10px 0px;font-size: 15px; font-weight: 500; float: left; width: 740px;  height: 210px;margin-top: 10px;margin-left: 10px; border: 1px solid #dfdfdf"/>
-          </div>
-        </div>
+    <p style="font-size:12px; font-weight:700; color: #fff; padding: 3px 5px; height: 25px; line-height: 25px; background: rgb(63,127,206); margin-top: 20px">Buyers comments</p>
 
-        <div style="width: 936px;height: 300px;margin: 20px 30px 30px;border: 1px solid black;">
-          <div style="width: 130px;height:278px;margin: 10px 20px 10px auto;border: 1px ;float: left;">
-            <img v-bind:src="data.portraitURL" style="float: right; width: 120px; height: 120px"/><!--获取顾客头像-->
-          </div>
-          <div style="width: 762px;height:278px;margin: 10px 10px 10px auto;border: 1px ;float: left;">
-            <div style="width: 300px;height: 30px;margin-left:10px;">
-              <p style="color: gray; font-size: 20px; font-weight: 700;  padding: 10px 0px;">Nickname:&nbsp;&nbsp;</p>
-              <p style="color: #000; font-size: 20px; font-weight: 700;  padding: 10px 0px;"><!--返回评论人的姓名--> </p>
-            </div> <!--返回顾客评论-->
-            <textarea v-model="data.description" style="padding:10px 0px; float: left; width: 740px;  height: 210px;margin-top: 10px;margin-left: 10px; border: 1px solid #dfdfdf"/>
-          </div>
-        </div>
-        <div style="width: 936px;height: 300px;margin: 20px 30px 30px;border: 1px solid black;">
-          <div style="width: 130px;height:278px;margin: 10px 20px 10px auto;border: 1px ;float: left;">
-            <img v-bind:src="data.portraitURL" style="float: right; width: 120px; height: 120px"/><!--获取顾客头像-->
-          </div>
-          <div style="width: 762px;height:278px;margin: 10px 10px 10px auto;border: 1px ;float: left;">
-            <div style="width: 300px;height: 30px;margin-left:10px;">
-              <p style="color: gray; font-size: 20px; font-weight: 700;  padding: 10px 0px;">Nickname:&nbsp;&nbsp;</p>
-              <p style="color: #000; font-size: 20px; font-weight: 700;  padding: 10px 0px;"><!--返回评论人的姓名--> </p>
-            </div> <!--返回顾客评论-->
-            <textarea v-model="data.description" style="padding:10px 0px; float: left; width: 740px;  height: 210px;margin-top: 10px;margin-left: 10px; border: 1px solid #dfdfdf"/>
-          </div>
-        </div>
-        <div style="width: 936px;height: 300px;margin: 20px 30px 30px;border: 1px solid black;">
-          <div style="width: 130px;height:278px;margin: 10px 20px 10px auto;border: 1px ;float: left;">
-            <img v-bind:src="data.portraitURL" style="float: right; width: 120px; height: 120px"/><!--获取顾客头像-->
-          </div>
-          <div style="width: 762px;height:278px;margin: 10px 10px 10px auto;border: 1px ;float: left;">
-            <div style="width: 300px;height: 30px;margin-left:10px;">
-              <p style="color: gray; font-size: 20px; font-weight: 700;  padding: 10px 0px;">Nickname:&nbsp;&nbsp;</p>
-              <p style="color: #000; font-size: 20px; font-weight: 700;  padding: 10px 0px;"><!--返回评论人的姓名--> </p>
-            </div> <!--返回顾客评论-->
-            <textarea v-model="data.description" style="padding:10px 0px; float: left; width: 740px;  height: 210px;margin-top: 10px;margin-left: 10px; border: 1px solid #dfdfdf"/>
-          </div>
-        </div>
+    <div style="width: 1000px;  margin: 0px auto;">
+        <ul>
+          <li v-bind:key="comment" v-for="comment in comments" style="border-bottom: 1px solid gray;width: 990px;height:134px ; margin-top: 20px; margin-left:10px;margin-bottom: 10px">
 
-      </div>
+                <div style="margin: 10px 20px 20px 20px;border: 1px;float: left;">
+                  <img v-bind:src="getHeadImg(comment.portraitURL)" style="  width: 70px; height: 70px;"/>
+                  <div style=" margin: 10px auto 10px">
+                     <p style="color: black; font-size: 14px; font-weight: 500;line-height: 1.5;  text-align: center;">{{comment.nickname}}</p>
+                  </div>
+                </div>
+
+                <div style="margin: 10px 10px 10px auto;border: 1px ;float: left;">
+                      <textarea v-model="comment.message" readonly style="outline: none;padding-left: 20px; padding-top: 10px; font-size: 18px; font-weight: 600; float: left; width: 580px;  height: 88px;border: 1px"/>
+                      <p style="width: 600px;height: 18px; border: 1px;color: darkgrey; font-size: 13px; font-weight: 500;text-align: left">&nbsp;&nbsp;{{comment.Date}}&nbsp;&nbsp;</p>
+                </div>
+          </li>
+        </ul>
     </div>
-    <!--<div style="width: 936px;height: 300px;margin: 20px 30px 30px;border: 1px solid black;">-->
-      <!--<div style="width: 130px;height:278px;margin: 10px 20px 10px auto;border: 1px ;float: left;">-->
-        <!--<img v-bind:src="data.portraitURL" style="float: right; width: 120px; height: 120px"/>&lt;!&ndash;获取顾客头像&ndash;&gt;-->
-      <!--</div>-->
-      <!--<div style="width: 762px;height:278px;margin: 10px 10px 10px auto;border: 1px ;float: left;">-->
-        <!--<div style="width: 300px;height: 30px;margin-left:10px;">-->
-          <!--<p style="color: gray; font-size: 20px; font-weight: 700;  padding: 10px 0px;">Nickname:&nbsp;&nbsp;</p>-->
-          <!--<p style="color: #000; font-size: 20px; font-weight: 700;  padding: 10px 0px;">&lt;!&ndash;返回评论人的姓名&ndash;&gt; </p>-->
-        <!--&lt;!&ndash;</div> &lt;!&ndash;返回顾客评论&ndash;&gt;&ndash;&gt;-->
-        <!--<textarea v-model="data.description" style="padding:10px 0px; float: left; width: 740px;  height: 210px;margin-top: 10px;margin-left: 10px; border: 1px solid #dfdfdf"/>-->
-      <!--</div>-->
-    <!--</div>-->
-    <!--<div style="width: 936px;height: 300px;margin: 20px 30px 30px;border: 1px solid black;">-->
-      <!--<div style="width: 130px;height:278px;margin: 10px 20px 10px auto;border: 1px ;float: left;">-->
-        <!--<img v-bind:src="data.portraitURL" style="float: right; width: 120px; height: 120px"/>&lt;!&ndash;获取顾客头像&ndash;&gt;-->
-      <!--</div>-->
-      <!--<div style="width: 762px;height:278px;margin: 10px 10px 10px auto;border: 1px ;float: left;">-->
-        <!--<div style="width: 300px;height: 30px;margin-left:10px;">-->
-          <!--<p style="color: gray; font-size: 20px; font-weight: 700;  padding: 10px 0px;">Nickname:&nbsp;&nbsp;</p>-->
-          <!--<p style="color: #000; font-size: 20px; font-weight: 700;  padding: 10px 0px;">&lt;!&ndash;返回评论人的姓名&ndash;&gt; </p>-->
-        <!--</div> &lt;!&ndash;返回顾客评论&ndash;&gt;-->
-        <!--<textarea v-model="data.description" style="padding:10px 0px; float: left; width: 740px;  height: 210px;margin-top: 10px;margin-left: 10px; border: 1px solid #dfdfdf"/>-->
-      <!--</div>-->
-    <!--</div>-->
-    <!--<div style="width: 936px;height: 300px;margin: 20px 30px 30px;border: 1px solid black;">-->
-      <!--<div style="width: 130px;height:278px;margin: 10px 20px 10px auto;border: 1px ;float: left;">-->
-        <!--<img v-bind:src="data.portraitURL" style="float: right; width: 120px; height: 120px"/>&lt;!&ndash;获取顾客头像&ndash;&gt;-->
-      <!--</div>-->
-      <!--<div style="width: 762px;height:278px;margin: 10px 10px 10px auto;border: 1px ;float: left;">-->
-        <!--<div style="width: 300px;height: 30px;margin-left:10px;">-->
-          <!--<p style="color: gray; font-size: 20px; font-weight: 700;  padding: 10px 0px;">Nickname:&nbsp;&nbsp;</p>-->
-          <!--<p style="color: #000; font-size: 20px; font-weight: 700;  padding: 10px 0px;">&lt;!&ndash;返回评论人的姓名&ndash;&gt; </p>-->
-        <!--</div> &lt;!&ndash;返回顾客评论&ndash;&gt;-->
-        <!--<textarea v-model="data.description" style="padding:10px 0px; float: left; width: 740px;  height: 210px;margin-top: 10px;margin-left: 10px; border: 1px solid #dfdfdf"/>-->
-      <!--</div>-->
-    <!--</div>-->
+    <loading v-show="isLoad"/>
   </div>
 </template>
 
@@ -125,31 +83,19 @@
 import Loading from '@/components/common/Loading'
 
 export default {
-  components: {Loading},
-
-  mounted () {
-    document.getElementById('orderFullScreen').addEventListener('scroll', this.handleScroll, true)
-    this.data = this.$route.params.data
-    this.$emit('childByValue', this.data.sID)
-    this.$http.get(this.URL + 'b/comment?pId=' +
-      this.data.pID)
-      .then((data) => {
-        this.isLoad = false
-        this.comments = data.body.data.comment
-        console.log(this.comments)
-      })
-      .catch(() => {
-        this.isLoad = false
-      })
-    console.log(this.data)
+  activated () {
+    this.initLoad()
+    this.initInfo()
+    console.log(this.id)
   },
-
+  components: {Loading},
   data: function () {
     return {
       id: -1,
       data: {},
-      comments: {},
-      isLoad: false
+      comments: [],
+      isLoad: false,
+      info: {}
     }
   },
 
@@ -184,59 +130,60 @@ export default {
     },
     handleScroll: function () {
       console.log(document.getElementById('orderFullScreen').scrollTop)
+    },
+    getHeadImg: function (info) {
+      if (info === '') {
+        return '/static/headimg.jpg'
+      } else {
+        return info
+      }
+    },
+    initLoad: function () {
+      this.isLoad = true
+      if (this.$route.params.data !== undefined) {
+        this.data = this.$route.params.data
+        console.log(this.data)
+        this.$emit('childByValue', this.data.sID)
+      }
+
+      this.$http.get(this.URL + 'b/comment?pId=' +
+         this.data.pID)
+        .then((data) => {
+          console.log(data)
+          this.isLoad = false
+          this.comments = data.body.data.comment
+          console.log(this.comments)
+        })
+        .catch((error) => {
+          console.log(error)
+          this.isLoad = false
+        })
+    },
+    initInfo: function () {
+      this.isLoad = true
+      console.log(111)
+      if (this.$route.params.data !== undefined) {
+        this.id = this.$route.params.data
+        this.$emit('childByValue', this.id)
+      }
+
+      this.$http.get(this.URL + 'b/info/get?id=' +
+             this.id.sID)
+        .then((data) => {
+          console.log(data)
+          this.isLoad = false
+          const response = data.body
+          this.info = response.data.data
+        })
+        .catch(() => {
+          this.isLoad = false
+        })
     }
-  },
-  getComment: function (id) {
-    this.isLoad = true
-    this.$http.get(this.URL + 'b/comment?pId=' +
-      id +
-      '&portraitURL=' +
-      this.comments.portraitURL +
-      '&nickname=' +
-      this.comments[0].nickname +
-      '&message=' +
-      this.comments.message)
-      .then((data) => {
-        this.isLoad = false
-      })
-      .catch((error) => {
-        console.log(error)
-        this.isLoad = false
-      })
-  },
-  // getComment: function (id) {
-  //   this.isLoad = true
-  //   this.$http.get(this.URL + 'c/lookupComments?pId=' +
-  //     id +
-  //     '&portraitURL=' +
-  //     this.comments.portraitURL +
-  //     '&nickname=' +
-  //     this.comments[0].nickname +
-  //     '&message=' +
-  //     this.comments.message)
-  //     .then((data) => {
-  //       this.isLoad = false
-  //     })
-  //     .catch((error) => {
-  //       console.log(error)
-  //       this.isLoad = false
-  //     })
-  // },
-  initLoad: function () {
-    this.isLoad = true
-    this.$http.get(this.URL + 'b/good/all?pID=' +
-      this.id)
-      .then((data) => {
-        console.log(data)
-        this.isLoad = false
-        this.datas = data.body.data.array
-      })
-      .catch((error) => {
-        console.log(error)
-        this.isLoad = false
-      })
+
   }
+
 }
+
 </script>
 
 <style scoped>

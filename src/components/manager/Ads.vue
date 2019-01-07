@@ -36,10 +36,6 @@ export default {
     }
   },
 
-  created () {
-    this.$router.push('/manager/ads/request')
-  },
-
   methods: {
     checkFrame: function (position) {
       this.currentFrame = position
@@ -47,6 +43,15 @@ export default {
 
     onCheckTab: function (poi) {
       this.poiTab = poi
+    }
+  },
+  watch: {
+    // 如果路由有变化，会再次执行该方法
+    '$route': function (to, from) {
+      console.log(to)
+      if (to.path === '/manager/ads') {
+        this.poiTab = 0
+      }
     }
   }
 }

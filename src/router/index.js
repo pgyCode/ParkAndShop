@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Login from '@/components/common/Login'
 import Index from '@/components/common/Index'
 import Search from '@/components/common/Search'
+import Ads from '@/components/common/Ads'
 import Register from '@/components/common/Register'
 import Customer from '@/components/customer/Customer'
 import CustomerOwner from '@/components/customer/Owner'
@@ -12,6 +13,7 @@ import CustomerCart from '@/components/customer/Cart'
 import CustomerInfo from '@/components/customer/Info'
 import CustomerShop from '@/components/customer/Shop'
 import CustomerGood from '@/components/customer/Good'
+import CustomerPay from '@/components/customer/Pay'
 
 // import Saler from '@/components/seller/Saler'
 // import SalerOwner from '@/components/seller/Owner'
@@ -62,13 +64,21 @@ export default new Router({
       path: '/',
       component: Index,
       children: [
-        {path: '/', component: Search},
+        {path: '/', component: Ads},
         {path: '/search', component: Search},
         {path: '/register', component: Register},
         {path: '/customer/order', component: CustomerOrder},
         {path: '/customer/favourite', component: CustomerFavourite},
         {path: '/customer/cart', component: CustomerCart},
         {path: '/customer/info', component: CustomerInfo},
+        {
+          path: '/customer/pay',
+          name: 'customer_pay',
+          component: CustomerPay,
+          meta: {
+            keepAlive: false
+          }
+        },
 
         {
           path: '/customer/good',
@@ -99,10 +109,6 @@ export default new Router({
             {
               path: '/manager/sellers/search',
               component: ManagerSellerSearch
-            },
-            {
-              path: '/',
-              component: ManagerSellerRequest
             }
           ]},
 
@@ -206,11 +212,8 @@ export default new Router({
         {
           path: '/seller/Good_info',
           name: 'seller_good_info',
-          component: SellerGoodInformation},
-        {
-          path: '/seller/Order_info',
-          name: 'seller_order_info',
-          component: SellerOrderInformation},
+          component: SellerGoodInformation
+        },
         {
           path: '/seller/info', component: SellerInfo
         },
@@ -259,7 +262,11 @@ export default new Router({
     {
       path: '/manager/owner',
       component: ManagerOwner
-    }
+    },
+    {
+      path: '/seller/Order_info',
+      name: 'seller_order_info',
+      component: SellerOrderInformation}
   ],
 
   mode: 'history'

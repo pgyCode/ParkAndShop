@@ -139,7 +139,7 @@ export default {
     }
   },
 
-  created: function () {
+  activated: function () {
     this.isLoad = true
     this.$http.get(this.URL + 'b/info/get?id=' +
       this.getCookie('userId'))

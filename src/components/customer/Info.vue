@@ -10,7 +10,7 @@
       <div style="clear: both; width: 500px;margin: 0px auto;">
         <div style="clear: both; padding-top: 35px; height: 100px;">
           <p style="text-align: right; float: left;  width: 150px; height: 100px; line-height: 100px; font-size: 14px; font-weight: 400; color: rgb(60, 60, 60);">profile photo:&nbsp;</p>
-          <img v-bind:src="data.portraitURL" style="float:left; width: 100px; height: 100px; border: 1px solid #dfdfdf;"
+          <img v-bind:src="getHeadImg(data.portraitURL)" style="float:left; width: 100px; height: 100px; border: 1px solid #dfdfdf;"
                v-on:click="selectFile()"/>
           <input type="file" id="photoFileUpload" v-on:change="onSellerImgChange($event)"
                  style="filter:alpha(opacity=0);opacity:0;width: 0;height: 0;"/></div>
@@ -112,6 +112,13 @@ export default {
         // 异常处理
         console.log(error)
       })
+    },
+    getHeadImg: function (info) {
+      if (info === '') {
+        return '/static/headimg.jpg'
+      } else {
+        return info
+      }
     }
   },
 
