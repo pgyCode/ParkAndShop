@@ -31,19 +31,19 @@
           <p style="width: 300px;color: #000; line-height: 60px;font-size: 20px; font-weight: 700;  float: left;">{{ data.pName }}</p>
         </div>
         <div style="width: 552px; height: 70px;background: rgb(237, 237, 237);">
-          <p style="float: left; line-height: 70px; color: rgb(153, 153, 153); font-size: 20px; font-weight: 400;color: black; margin-left: 10px; margin-right: 10px">Price:</p>
+          <p style="float: left; line-height: 70px; color: rgb(153, 153, 153); font-size: 16px; font-weight: 400;color: black; margin-left: 10px; margin-right: 10px">Price:</p>
           <p style="line-height: 70px;color: rgb(255, 0, 54); font-size: 35px; font-weight: 700;">¥{{ data.price }}</p>
         </div>
         <div style="width: 552px; margin-top: 20px; float: right; height: 142px;">
           <div style="width: 552px; background: rgb(237, 237, 237); height: 132px; border-radius: 5px">
-            <p style="padding-top: 15px; margin-bottom: 10px; margin-left: 10px; font-size: 20px; font-weight: 400; color: black;">Good Description:</p>
-            <p style="margin-top: 10px; margin-left: 20px; margin-right: 20px; font-size: 16px; font-weight: 400; color: #666;">{{ data.description }}</p>
+            <p style="padding-top: 15px; margin-bottom: 10px; margin-left: 10px; font-size: 16px; font-weight: 400; color: black;">Good Description:</p>
+            <p style="margin-top: 10px; margin-left: 20px; margin-right: 20px; font-size: 14px; font-weight: 400; color: #666;">{{ data.description }}</p>
           </div>
         </div>
         <div style="width: 552px; margin-top: 16px; float: right; height: 92px;">
           <div style="width: 552px; background: rgb(237, 237, 237); height: 82px; border-radius: 5px">
 
-            <p style="float: left; line-height: 70px; color: black; font-size: 20px; font-weight: 400; margin-left: 10px; margin-right: 10px">Count:</p>
+            <p style="float: left; line-height: 70px; color: black; font-size: 16px; font-weight: 400; margin-left: 10px; margin-right: 10px">Count:</p>
             <p style="line-height: 70px; font-size: 25px; font-weight: 700;color: forestgreen;">{{ data.num }}</p>
 
             <div style="margin-top: 20px">
@@ -62,14 +62,14 @@
           <li v-bind:key="comment" v-for="comment in comments" style="border-bottom: 1px solid gray;width: 990px;height:134px ; margin-top: 20px; margin-left:10px;margin-bottom: 10px">
 
                 <div style="margin: 10px 20px 20px 20px;border: 1px;float: left;">
-                  <img v-bind:src="comment.portraitURL" style="  width: 70px; height: 70px;"/>
+                  <img v-bind:src="getHeadImg(comment.portraitURL)" style="  width: 70px; height: 70px;"/>
                   <div style=" margin: 10px auto 10px">
                      <p style="color: black; font-size: 14px; font-weight: 500;line-height: 1.5;  text-align: center;">{{comment.nickname}}</p>
                   </div>
                 </div>
 
                 <div style="margin: 10px 10px 10px auto;border: 1px ;float: left;">
-                      <textarea v-model="comment.message" readonly style="outline: none;padding-left: 20px; padding-top: 10px; font-size: 18px; font-weight: 550; float: left; width: 580px;  height: 88px;border: 1px"/>
+                      <textarea v-model="comment.message" readonly style="outline: none;padding-left: 20px; padding-top: 10px; font-size: 18px; font-weight: 600; float: left; width: 580px;  height: 88px;border: 1px"/>
                       <p style="width: 600px;height: 18px; border: 1px;color: darkgrey; font-size: 13px; font-weight: 500;text-align: left">&nbsp;&nbsp;{{comment.Date}}&nbsp;&nbsp;</p>
                 </div>
           </li>
@@ -84,12 +84,10 @@ import Loading from '@/components/common/Loading'
 
 export default {
   activated () {
-      this.initLoad()
-      this.initInfo()
-      console.log(t555)
-
-      console.log(this.id)
-    },
+    this.initLoad()
+    this.initInfo()
+    console.log(this.id)
+  },
   components: {Loading},
   data: function () {
     return {
@@ -132,52 +130,59 @@ export default {
     },
     handleScroll: function () {
       console.log(document.getElementById('orderFullScreen').scrollTop)
-    } ,
+    },
+    getHeadImg: function (info) {
+      if (info === '') {
+        return '/static/headimg.jpg'
+      } else {
+        return info
+      }
+    },
     initLoad: function () {
-       this.isLoad = true
-       if (this.$route.params.data !== undefined) {
-         this.data = this.$route.params.data
-         console.log(this.data)
-         this.$emit('childByValue', this.data.sID)
-       }
+      this.isLoad = true
+      if (this.$route.params.data !== undefined) {
+        this.data = this.$route.params.data
+        console.log(this.data)
+        this.$emit('childByValue', this.data.sID)
+      }
 
-       this.$http.get(this.URL + 'b/comment?pId=' +
+      this.$http.get(this.URL + 'b/comment?pId=' +
          this.data.pID)
-         .then((data) => {
-           console.log(data)
-           this.isLoad = false
-           this.comments = data.body.data.comment
-           console.log(this.comments)
-         })
-         .catch((error) => {
-           console.log(error)
-           this.isLoad = false
-         })
-     },
-     initInfo: function () {
-       this.isLoad = true
-       console.log(111)
-       if (this.$route.params.data !== undefined) {
-         this.id = this.$route.params.data
-         this.$emit('childByValue', this.id)
-       }
+        .then((data) => {
+          console.log(data)
+          this.isLoad = false
+          this.comments = data.body.data.comment
+          console.log(this.comments)
+        })
+        .catch((error) => {
+          console.log(error)
+          this.isLoad = false
+        })
+    },
+    initInfo: function () {
+      this.isLoad = true
+      console.log(111)
+      if (this.$route.params.data !== undefined) {
+        this.id = this.$route.params.data
+        this.$emit('childByValue', this.id)
+      }
 
-       this.$http.get(this.URL + 'b/info/get?id=' +
+      this.$http.get(this.URL + 'b/info/get?id=' +
              this.id.sID)
-         .then((data) => {
-           console.log(data)
-           this.isLoad = false
-           const response = data.body
-           this.info = response.data.data
-         })
-         .catch(() => {
-           this.isLoad = false
-         })
-     },
-
+        .then((data) => {
+          console.log(data)
+          this.isLoad = false
+          const response = data.body
+          this.info = response.data.data
+        })
+        .catch(() => {
+          this.isLoad = false
+        })
     }
 
   }
+
+}
 
 </script>
 
