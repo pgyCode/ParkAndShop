@@ -1,26 +1,28 @@
 <template>
-  <div>
     <div id="containerHistory">
       <div style="clear: both">
         <div style="clear: both; height: 36px; width: 500px; margin: 20px auto;">
           <p style="float:left; width: 100px; text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; line-height: 35px"
              class="basicTab"
+             :class="{checkTab:currentTab == 0}"
              v-on:click="onClickDaily()">Day</p>
           <p style="float:left; width: 100px; text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; line-height: 35px"
              class="basicTab"
+             :class="{checkTab:currentTab == 1}"
              v-on:click="onClickWeekly()">Week</p>
           <p style="float:left; width: 100px; text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; line-height: 35px"
              class="basicTab"
+             :class="{checkTab:currentTab == 2}"
              v-on:click="onClickMonthly()">Month</p>
           <p style="float:left; width: 100px; text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; line-height: 35px"
              class="basicTab"
+             :class="{checkTab:currentTab == 3}"
              v-on:click="onClickYearly()">Year</p>
           <p style="float:left; width: 100px; text-align: center; color: rgb(60, 60, 60); font-size: 12px; font-weight: 600; line-height: 35px"
              class="basicTab"
+             :class="{checkTab:currentTab == 4}"
              v-on:click="initLoad()">All</p>
         </div>
-      </div>
-    </div>
     <div style="height: 42px; width: 1000px; margin: 10px auto;background: dodgerblue; border: 1px solid dodgerblue;">
       <p style="float: left; width: 250px;text-align: center;color: rgb(60, 60, 60); font-size: 15px; font-weight: 600; line-height: 42px">Good</p>
       <p style="float: left; width: 80px;text-align: center; color: rgb(60, 60, 60); font-size: 15px; font-weight: 600; line-height: 42px">Price</p>
@@ -67,10 +69,10 @@
 
     <Loading v-show="isLoad"/>
   </div>
+  </div>
 </template>
 
 <script>
-/* eslint-disable no-trailing-spaces,indent */
 import Loading from '@/components/common/Loading'
 export default {
   components: {Loading},
@@ -78,7 +80,8 @@ export default {
     return {
       isLoad: false,
       currentPage: 1,
-      orders: []
+      orders: [],
+      value: ''
     }
   },
 
@@ -95,9 +98,8 @@ export default {
           this.isLoad = false
         })
     },
-
     goOrder: function (order) {
-       console.log(order)
+      console.log(order)
       this.$router.push({name: 'seller_order_info', params: {data: order}})
     },
 
@@ -207,7 +209,7 @@ export default {
 
   .checkTab{
     color: #fff;
-    background: #f40;
+    background: dodgerblue;
   }
 
 </style>

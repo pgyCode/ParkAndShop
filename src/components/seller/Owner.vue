@@ -13,7 +13,7 @@
       <router-link style="line-height: 40px; float: left; font-size: 14px; text-align: center; font-weight: 700; padding:0px 20px"
                    @click.native="onCheckTab(2)"
                    class="basicTab"
-                   :class="{checkTab:poiTab == 2}" to="/seller/owner/search">Search</router-link>
+                   :class="{checkTab:poiTab == 2}" to="/seller/owner/search">Calendar</router-link>
     </div>
     <router-view/>
 
