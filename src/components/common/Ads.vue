@@ -38,7 +38,7 @@
                   <p style="margin: 6px auto; text-align: center; line-height: 18px; font-size: 12px; color: rgba(0,0,0,0.87); font-weight: 500">{{ product.pName }}</p>
                   <div style="width: 140px; height: 24px; margin: 0px 10px;">
                     <p style="line-height: 24px; float: left; color: #f40; font-size: 16px; font-weight: 500;">¥{{ product.price }}</p>
-                    <p style="float: right; font-size: 12px; color: rgba(0,0,0,0.38); line-height: 24px; font-weight: 500">Count:{{ product.count }}</p>
+                    <p style="float: right; font-size: 12px; color: rgba(0,0,0,0.38); line-height: 24px; font-weight: 500">Count:{{ product.num}}</p>
                   </div>
                 </li>
               </ul>
@@ -59,10 +59,10 @@
         <p style="line-height: 36px; float:left; font-size: 24px; padding-left: 20px; font-weight: 500; color: rgba(0,0,0,0.87); margin-top: 24px">Recommended Goods</p>
       </div>
 
-      <div id="top10" style="width: 1000px">
+      <div id="top10" style="width: 1050px;">
         <ul>
           <li v-bind:key="top10" v-for="top10 in top10s"
-              v-on:click="goGood(top10)"  style="display: block;width: 180px; height: 254px;float: left;margin: 10px 7px;">
+              v-on:click="goGood(top10)"  style="display: block;width: 180px; height: 254px;float: left;padding-bottom: 15px; padding-top: 15px; padding-right: 27px;">
             <img v-bind:src="top10.portraitURL" style="width: 180px; height: 180px; border: 1px solid #dfdfdf;" v-on:click="goGood(data.product)"/>
             <p style="height: 32px; text-align: center; line-height: 30px; line-height: 16px; margin-top: 8px; font-weight: 500; font-size: 13px; color: rgb(60, 60, 60);">{{ top10.pName }}</p>
             <p style="height: 20px; text-align: center; line-height: 20px; font-weight: 900; font-size: 18px; color: #f40;">💰¥{{ top10.price }}</p>
