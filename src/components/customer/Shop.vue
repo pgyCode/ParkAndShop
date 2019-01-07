@@ -5,8 +5,6 @@
        <div style="width: 1000px; height: 83px; padding: 0px 0px; margin: 0px auto;">
          <img src="../../assets/logo.png" style="float: left;" height="83px" width='210px'/>
          <p style="float: left; color: rgb(60, 60, 60); line-height: 83px; font-size: 22px; font-weight: 700; margin-left: 20px">Shop</p>
-         <button style="float: right; width: 178px; height: 38px; margin-top:40px; margin-left: 5px;border: none; background: blue; color: #fff; font-weight: 400; font-size: 16px" v-on:click="addFavouriteShop()">Favourite</button>
-
        </div>
        <div style=" width: 1000px;height: 19px; padding: 6px 0px; border-bottom: 2px solid #5884ff">
          <p style="float:left; font-size: 15px;   font-weight: 500; color: rgb(0,0,0);border-radius: 3px;background: #2a56d7">&nbsp;&nbsp;Shop Name:&nbsp;&nbsp;</p>
@@ -104,7 +102,7 @@ export default {
         })
     },
     goGood: function (info) {
-      this.$router.push({name: 'seller_good', params: {data: info}})
+      this.$router.push({name: 'customer_good', params: {data: info}})
     }
   }
 
