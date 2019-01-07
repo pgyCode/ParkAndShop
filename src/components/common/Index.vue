@@ -11,6 +11,7 @@
       <router-link class='subTitle' v-show="this.getCookie('userType') == '1'" to="/seller/addGood">Add Goods</router-link>
       <router-link class='subTitle' v-show="this.getCookie('userType') == '1'" to="/seller/owner">Order</router-link>
       <span class='subTitle' v-show="this.getCookie('userType') == '1'" v-on:click="goShop()">Shop</span>
+      <a class='subTitle' v-show="this.getCookie('userType') == '2'" v-on:click.native="backup()" href="http://47.106.11.120:8080/MysqlBackup.sql">Backup Database</a>
       <router-link class='subTitle' v-show="this.getCookie('userType') == '2'" to="/manager/owner">Orders</router-link>
       <router-link class='subTitle' v-show="this.getCookie('userType') == '2'" to="/manager/ads">Ads</router-link>
       <router-link class='subTitle' v-show="this.getCookie('userType') == '2'" to="/manager/customer">Customers</router-link>
@@ -107,6 +108,12 @@ export default {
         path: path
       })
       window.open(routeUrl.href, '_self')
+    },
+    backup: function () {
+      let routeData = this.$router.resolve({
+        path: 'http://47.106.11.120:8080/MysqlBackup.sql'
+      })
+      window.open(routeData.href, '_blank')
     }
   },
 

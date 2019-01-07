@@ -119,20 +119,24 @@ export default {
     },
 
     onSellerImgChange: function (e) {
+      this.isLoad = true
       this.data.url = getFileUrl(e.srcElement)
       const AV = require('leancloud-storage')
       var fileUploadControl = $('#photoFileUpload')[0]
       if (fileUploadControl.files.length <= 0) {
+        this.isLoad = false
         return
       }
       var localFile = fileUploadControl.files[0]
       var name = 'avatar.jpg'
       var file = new AV.File(name, localFile)
       file.save().then((file) => {
+        this.isLoad = false
         // 文件保存成功
         this.data.url = file.url()
         console.log(this.data.url)
       }, function (error) {
+        this.isLoad = false
         // 异常处理
         console.log(error)
       })

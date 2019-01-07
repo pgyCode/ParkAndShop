@@ -67,7 +67,7 @@ new Vue({
   components: { App },
   template: '<App/>',
 
-  beforeCreate () {
+  beforeCreate: function () {
     const AV = require('leancloud-storage')
     AV.init('tP28gntmmps4RIuolfhYdStx-gzGzoHsz', '32U3ir7VusNxHsqsmbgGIzIB')
   }
