@@ -34,7 +34,7 @@
           </div>
           <div style="width: 860px;height: 150px;margin: 0;">
             <div style="width: 200px;height: 140px;margin: 5px auto;float: left" v-on:click="goGood(data)">
-              <p style="height: 45px; float: left;text-align: center; vertical-align: center; line-height: 60px; font-weight: 700; font-size: 15px; color: black;">{{ data.pName }}</p>
+              <p style="height: 45px; width: 180px; overflow: hidden; vertical-align: center; line-height: 60px; font-weight: 700; font-size: 15px; color: black;">{{ data.pName }}</p>
               <p style="width:180px;height: 45px; line-height: 50px;float: left; font-weight: 600; font-size: 14px; color: #ff171f;">💰¥{{ data.price }}</p>
               <p style="height: 45px; text-align: center;line-height: 40px;float: left; font-weight: 600; font-size: 12px; color: grey;">Count:{{ data.num }}</p>
             </div>
