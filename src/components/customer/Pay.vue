@@ -42,7 +42,7 @@ export default {
     this.data = this.$route.params.info
     this.id = this.$route.params.data
     console.log(this.data)
-    this.$http.get('http://127.0.0.1:8080/api/common/pay?name=' +
+    this.$http.get(this.URL + 'common/pay?name=' +
       this.data.pName +
       '&price=' +
       this.data.price +
